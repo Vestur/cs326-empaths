@@ -1,6 +1,7 @@
 # Data Interactions
 
-    Although search engines such as Google can be used to find charities, our web app aims to centralize the search for charities. Since milestone 0, we have weeded out some features and clarified our vision for the Charitable app. We have our features list and then a separate “stretch goals” list. 
+   Although search engines such as Google can be used to find charities, our web app aims to centralize the search for charities. Since milestone 0, we have weeded out some features and clarified our vision for the Charitable app. We have our features list and then a separate “stretch goals” list. 
+   
   Features: 
   * A search engine for charities 
     - We will be using a charity API (or database) for this. 
@@ -19,6 +20,11 @@
   * Written reviews 
     - “upvote” written reviews of other users??
   * User Posts: users can create curated lists of charities (ex: a list of cat-related charities)
+    
+  Stretch goals: 
+  * verification for charities
+  * recommended charities
+  * Visual themes (Eid, Ukraine, etc)
 
 # Wireframes
 
