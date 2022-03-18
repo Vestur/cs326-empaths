@@ -1,11 +1,24 @@
 # Data Interactions
 
-Our idea is to construct a charity searching app. There are many search engines that can be used to search for charities (e.g. google) but few of them are specific to only charities. Our site will be specific to charities and therefore have a lot of available information about them immediately available. More specifically, we will provide information regarding how much money the charities take in and spend each year, as well as how long they have existed and other factors to contribute to some sort score regarding how "good" (to be defined) a particular charity is.
-
-The few charity searchers that do exist are not very personalized. Given this, we will include functionality that allows users to favorite charities, creating lists of their prefered charities. We will also add a "for you" type page which based on past searches and favorited charities lists some charities that may appeal to that particular user. We will also try and include local charities (amherst) that may not otherwise get attention.
-
-Important Components:
-Since the main function of this website is to search for charities, we will include a seach bar that will use a charity API to retrieve its results. We will also have other features such as: personalized for you page/recommended, likes, favorites, star and written reviews, badges/verification for charities, charity information profiles, share charities (kinda like a retweet and or share to other platforms, themes for events (like eid).
+  Although search engines such as Google can be used to find charities, our web app aims to centralize the search for charities. Since milestone 0, we have weeded out some features and clarified our vision for the Charitable app. We have our features list and then a separate “stretch goals” list. 
+  Features: 
+  * A search engine for charities 
+    - We will be using a charity API (or database) for this. 
+  * Search filters to narrow down a user’s search 
+    - Fields (based on the API) may include: charity name, street address, state, zip code, rating, IRS information, etc
+  * Information profiles about charities
+    - Our search result will return multiple information profiles?
+    - Profiles include information such as location, rating (if available), financial information, etc 
+  * User Accounts 
+    - Username and password 
+    - First and last name 
+    - Age, gender, profile picture, contact information, location 
+  * Favoriting 
+  * Likes 
+   - Users can like posts of other users 
+  * Written reviews 
+    - “upvote” written reviews of other users??
+  * User Posts: users can create curated lists of charities (ex: a list of cat-related charities)
 
 # Wireframes
 
