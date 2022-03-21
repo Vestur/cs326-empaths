@@ -1,6 +1,6 @@
 # Data Interactions
 
-   Although search engines such as Google can be used to find charities, our web app aims to centralize the search for charities. Since milestone 0, we have weeded out some features and clarified our vision for the Charitable app. We have our features list and then a separate “stretch goals” list. 
+   Although search engines such as Google can be used to find charities, our web app aims to centralize the search for charities. Since milestone 0, we have weeded out some features and clarified our vision for the Charitable app. We have our features list and then a separate “stretch goals” list (features that are beyond the requirements of this project but we want to explore if we have time). 
    
   Features: 
   * A search engine for charities 
