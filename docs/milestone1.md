@@ -29,3 +29,10 @@
 # Wireframes
 
 # HTML and CSS
+
+
+## Milestone 1 Release (Message)
+* Outlined interactions between users and data.
+* Designed and drew wireframes for proposed website.
+* Created a polished web interface with HTML and CSS code. 
+
