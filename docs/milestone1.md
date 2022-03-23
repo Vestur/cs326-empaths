@@ -27,6 +27,20 @@
   * Visual themes (Eid, Ukraine, etc)
 
 # Wireframes
+<img width="836" alt="Screen Shot 2022-03-23 at 1 57 56 PM" src="https://user-images.githubusercontent.com/77020125/159766040-1d332064-c81b-4f38-9677-41d09b9aac30.png">
+
+<img width="669" alt="Screen Shot 2022-03-23 at 1 59 15 PM" src="https://user-images.githubusercontent.com/77020125/159766057-318bba06-e496-4e20-9843-83736578500c.png">
+
+<img width="675" alt="Screen Shot 2022-03-23 at 2 00 18 PM" src="https://user-images.githubusercontent.com/77020125/159766083-04cf74e0-baad-477c-a607-eefe8f3b7a39.png">
+
+<img width="674" alt="Screen Shot 2022-03-23 at 1 59 41 PM" src="https://user-images.githubusercontent.com/77020125/159766124-1c0cb2eb-ee4c-41af-8e2e-abb8a1b3eed5.png">
+
+<img width="676" alt="Screen Shot 2022-03-23 at 1 59 53 PM" src="https://user-images.githubusercontent.com/77020125/159766146-2318338f-2adc-4c96-abe6-3195d65bd470.png">
+
+<img width="677" alt="Screen Shot 2022-03-23 at 2 01 10 PM" src="https://user-images.githubusercontent.com/77020125/159766272-2db9bc44-cb12-4fbe-8b24-758fdb16263e.png">
+
+<img width="670" alt="Screen Shot 2022-03-23 at 2 00 50 PM" src="https://user-images.githubusercontent.com/77020125/159766290-2acc94a3-55c3-42b1-b9f0-d07fd68bc2a2.png">
+
 
 # HTML and CSS
 
