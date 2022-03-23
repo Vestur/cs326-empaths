@@ -1,0 +1,55 @@
+/********Profile Page CSS***************/
+.background-image {
+    background: url("../images/IMG_0762.PNG") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.profile-image-bio-container {
+    margin-bottom: 1%;
+}
+
+.profile-image-container {
+    position: relative;
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.profile-image {
+    margin-top: 15%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    max-width: 90%;
+    max-height: fit-content;
+}
+
+.bottom-right {
+    bottom: 0%;
+    right: 0%;
+    position: absolute;
+}
+
+.bio-text-container {
+    margin-top: 10%;
+    margin-bottom: 0%;
+    margin-left: 5%;
+}
+
+.bio-text-box {
+    resize: none;
+}
+
+.profile-form-label {
+    border-radius: 10px;
+    padding: 0px 5px;
+    margin: 5% 0% 1% 0%
+}
+
+.my-reviews-container {
+    padding-top: 3%;
+    padding-left: 5%;
+    font-weight: bold;
+}
+/*****End of Profile Page CSS****/
