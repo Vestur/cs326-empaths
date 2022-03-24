@@ -27,8 +27,13 @@
   * Visual themes (Eid, Ukraine, etc)
 
 # Wireframes
+For constructing our wireframes, we primarily used Whimsical. The background for our web app was drawn digitally using a generic, ipad drawing app. Whimsical was quite limited in certain formatting options, colors, fonts, etc and thus restricted what we could do with our wireframes. These wireframes are more like a guideline for our actual User Interface and we mostly focused on placement of text boxes, buttons, etc. It is a rough draft of our vision for our application. 
+Back to the background, since our application is charity centered, we chose colors that are often (psychologically) associated with good faith and giving. The blue and yellow color combination is commonly used for social justice, according to a quick Google search. Also, Blue represents peace, reliability, and wisdom while yellow represents optimism and hope. Our background is an abstract rising sun, which is another symbol of hope. 
+First, we have the login page. It is pretty standard. We have user's profile picture displayed, input text boxes for the user's username and password (with a submit mechanism embedded), a sign up button and a link to reset your username or password if forgotten.
+
 <img width="836" alt="Screen Shot 2022-03-23 at 1 57 56 PM" src="https://user-images.githubusercontent.com/77020125/159766040-1d332064-c81b-4f38-9677-41d09b9aac30.png">
 
+Once the user has logged in, they will be redirected to the page below. This is our search page, where the user can search for charities and sift through the results. We have a typical search bar at the top middle of the page. Below are placeholders for charity results. In our actual application the charity name will be displayed with more information such as a mission statement, location etc so they will be bigger boxes. There is a little plus sign on the side where a user can click and add the charity to their favorites. After the charity is added to favorites, the plus sign becomes a check mark. Also, all of our pages (except login and profile) have a sidebar. This side bar displays the user's profile picture and two dropdown menus. The first leading to the profile page, where the account's settings can be edited. Then there is a manage dropdown menu with options to access their liked posts, favorite charities, charity lists and donation-tracker. Lastly, there is a sign out button at the bottom. 
 <img width="669" alt="Screen Shot 2022-03-23 at 1 59 15 PM" src="https://user-images.githubusercontent.com/77020125/159766057-318bba06-e496-4e20-9843-83736578500c.png">
 
 <img width="675" alt="Screen Shot 2022-03-23 at 2 00 18 PM" src="https://user-images.githubusercontent.com/77020125/159766083-04cf74e0-baad-477c-a607-eefe8f3b7a39.png">
