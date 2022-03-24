@@ -41,14 +41,22 @@ Next, we have the profile/account settings page. This page is accessed by clicki
 
 <img width="675" alt="Screen Shot 2022-03-23 at 2 00 18 PM" src="https://user-images.githubusercontent.com/77020125/159766083-04cf74e0-baad-477c-a607-eefe8f3b7a39.png">
 
-All the following pages can be accessed from the Manage dropdown menu. 
-First
+All the following pages can be accessed from the Manage dropdown menu:
+
+The favorites page will list all the user's favorited charities. This is where users can access their favorited charities to review charity information or remove a charity from their favorites. Users can unfavorite a charity by clicking the check mark, which will become a minus sign, and it will be gone from their favorites upon refresh. We may add a separate vertical scroll bar so when the user is going through their favorited charities only the charitiy information pages move while the favorites title, icon and sidebar do not.
 
 <img width="674" alt="Screen Shot 2022-03-23 at 1 59 41 PM" src="https://user-images.githubusercontent.com/77020125/159766124-1c0cb2eb-ee4c-41af-8e2e-abb8a1b3eed5.png">
 
+The likes page is similar to the favorites page except it displays the posted charity lists of other users that the user has liked. The posts will be displayed by most recently like and have a little heart icon with the amount of likes the post has received. The user can aloso unlike posts from here. 
+
 <img width="676" alt="Screen Shot 2022-03-23 at 1 59 53 PM" src="https://user-images.githubusercontent.com/77020125/159766146-2318338f-2adc-4c96-abe6-3195d65bd470.png">
 
+The lists page is where the user can create and post a new charity list. Lists are posts users can make that list charities by a sepcific category. For example, a user can create a list of animal related charities that they find reliable, close to them in location, agree with their mission, etc. Users can edit or delete their lists. 
+((how will people like other's posts? Can we have lists appear in searches too? filter the search for most popular lists))
+
 <img width="677" alt="Screen Shot 2022-03-23 at 2 01 10 PM" src="https://user-images.githubusercontent.com/77020125/159766272-2db9bc44-cb12-4fbe-8b24-758fdb16263e.png">
+
+Lastly, we have a donations page. This page will have an embedded spreadsheet that the user can edit and manually keep track of their donations for tax return purposes. The user can add more rows and scroll through their donations. 
 
 <img width="670" alt="Screen Shot 2022-03-23 at 2 00 50 PM" src="https://user-images.githubusercontent.com/77020125/159766290-2acc94a3-55c3-42b1-b9f0-d07fd68bc2a2.png">
 
