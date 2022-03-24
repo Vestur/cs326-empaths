@@ -52,6 +52,20 @@
     padding-left: 5%;
     font-weight: bold;
 }
+
+.star-rating {
+    color: gold;
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+.a-review {
+    margin-bottom: 2%;
+}
+
+#manage-reviews-label {
+    margin-bottom: 1.5%;
+}
 /*****End of Profile Page CSS****/
 
 .a-favorite > textarea {
@@ -84,6 +98,7 @@
 .no-border {
     border-style: hidden;
     resize: none;
+    border-radius: 0%;
 }
 
 .no-border:focus {
@@ -101,9 +116,8 @@
     cursor: default;
 }
 
-.state-button {
+.background-white {
     background-color: white;
-    border-radius: 0%;
 }
 
 .button-at-end {
