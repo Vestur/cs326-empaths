@@ -185,6 +185,61 @@
 
 /****Login Page CSS****/
 
+.btn_login{
+    background-color:rgb(250, 193, 48);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white !important;
+    text-shadow: 2px 2px rgb(235, 173, 17);
+    font-size: 1.5em;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.btn-signup{
+    background-color:cornflowerblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white !important;
+    text-shadow: 2px 2px rgb(82, 135, 233);
+    font-size: 1.5em;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.btn:hover{
+    opacity: 0.7 !important;
+}
+
+.remember{
+    color: white;
+    text-shadow: 2px 2px cornflowerblue;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.container {
+    padding: 16px;
+    color: white;
+    text-shadow: 2px 2px cornflowerblue;
+    font-size: 1.5em;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.box{
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 12px 20px;
+    color: white;
+    font-size:large;
+    font-family: 'Oswald', sans-serif;
+}
+
+
 /****End of Login Page CSS****/
 
 /****My Donations CSS****/
