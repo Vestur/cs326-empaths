@@ -53,3 +53,63 @@
     font-weight: bold;
 }
 /*****End of Profile Page CSS****/
+
+.a-favorite > textarea {
+    background-color: white;
+}
+
+.a-favorite > input {
+    background-color: white;
+}
+
+.favorites-container {
+    margin-top: 5%;
+}
+
+.favorites-title {
+    font-size: xx-large;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 2%;
+}
+
+.charity-info-container {
+    margin-top: 3%;
+}
+
+#favorites-logo {
+    color: gold;
+}
+
+.no-border {
+    border-style: hidden;
+    resize: none;
+}
+
+.no-border:focus {
+    border-style: hidden;
+    outline: none;
+}
+
+.no-border > input {
+    border-style: hidden;
+    resize: none;
+    border-radius: 0%;
+}
+
+.default-cursor {
+    cursor: default;
+}
+
+.state-button {
+    background-color: white;
+    border-radius: 0%;
+}
+
+.button-at-end {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+}
+
+/****End of Favorites CSS****/
