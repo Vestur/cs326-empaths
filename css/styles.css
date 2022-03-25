@@ -271,6 +271,51 @@ img.avatar {
 /****End of Login Page CSS****/
 
 /****My Donations CSS****/
+.sidebar_profile{
+    margin-top: 0px;
+    margin-bottom: 30px;
+    margin-left: 70px;
+}
+
+.side-labels{
+    color: white;
+    text-shadow: 1px 1px rgb(79, 126, 212);
+    font-weight: bolder;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 100px;
+}
+
+.btn-sidebar{
+    background-color: whitesmoke;
+    margin-bottom: 1px;
+    color: gray;
+    font-size: 1em;
+    text-align: left;
+    font-family: 'Oswald', sans-serif;
+    width: 120px;
+    margin-left: 100px;
+}
+
+.signout{
+    background-color: cornflowerblue;
+    text-shadow: 1px 1px rgb(79, 126, 212);
+    color: white;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.donations_h{
+    font-size: 5ch;
+    font-weight: bold;
+    color: white;
+    margin-top: -20px;
+    margin-left: 400px;
+}
+
+#donations-logo {
+    color: gold;
+}
+
 table{
     border-collapse: collapse;
     font-size: medium;
@@ -284,7 +329,32 @@ td, th{
     height: 40px;
     width: 300px;
 }
+thead, tbody { display: block; }
 
+tbody {
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.table-wrapper{
+    position: relative;
+    max-width: 900px;
+    overflow: auto;
+    margin-top: -10px;
+    margin-left: 400px;
+}   
+
+#table-scroll {
+    height:500px;
+    overflow:auto;  
+    margin-top:20px;
+}
+
+.addrow {
+    margin-left: 815px;
+}
+ 
 /****My Donations CSS****/
 
 
