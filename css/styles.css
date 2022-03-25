@@ -362,4 +362,11 @@ tbody {
  
 /****My Donations CSS****/
 
+/****Search CSS****/
 
+#searchbar {
+	margin: 10px;
+	width: 75%;
+}
+
+/****End Search CSS****/
