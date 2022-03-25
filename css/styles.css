@@ -364,7 +364,18 @@ tbody {
 
 #searchbar {
 	margin: 10px;
-	width: 75%;
+	width: 98%;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+#searchbar::placeholder {
+	font-size: 18pt;
+	line-height: 100%;
+}
+
+#searchdiv {
+	padding-bottom: 20px;
 }
 
 /****End Search CSS****/
