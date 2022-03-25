@@ -272,12 +272,13 @@ img.avatar {
 
 /****My Donations CSS****/
 .sidebar_profile{
-    margin-top: 0px;
-    margin-bottom: 30px;
-    margin-left: 70px;
+    position: fixed;
+    top: -30px;
+    left: 100px;
 }
 
 .side-labels{
+    position: fixed;
     color: white;
     text-shadow: 1px 1px rgb(79, 126, 212);
     font-weight: bolder;
@@ -286,6 +287,7 @@ img.avatar {
 }
 
 .btn-sidebar{
+    position: fixed;
     background-color: whitesmoke;
     margin-bottom: 1px;
     color: gray;
@@ -297,18 +299,20 @@ img.avatar {
 }
 
 .signout{
+    position: fixed;
     background-color: cornflowerblue;
     text-shadow: 1px 1px rgb(79, 126, 212);
     color: white;
-    margin-top: 30px;
+    margin-top: 50px;
     text-align: center;
 }
 
 .donations_h{
+    position: fixed;
     font-size: 5ch;
     font-weight: bold;
     color: white;
-    margin-top: -20px;
+    top: 40px;
     margin-left: 400px;
 }
 
@@ -329,6 +333,7 @@ td, th{
     height: 40px;
     width: 300px;
 }
+
 thead, tbody { display: block; }
 
 tbody {
@@ -341,12 +346,12 @@ tbody {
     position: relative;
     max-width: 900px;
     overflow: auto;
-    margin-top: -10px;
+    margin-top: -60px;
     margin-left: 400px;
 }   
 
 #table-scroll {
-    height:500px;
+    height:600px;
     overflow:auto;  
     margin-top:20px;
 }
