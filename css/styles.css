@@ -268,13 +268,22 @@ img.avatar {
     font-size: medium;
     font-family: 'Oswald', sans-serif;
 }
-
-
-
-
 /****End of Login Page CSS****/
 
 /****My Donations CSS****/
+table{
+    border-collapse: collapse;
+    font-size: medium;
+    font-family: 'Oswald', sans-serif;
+}
+td, th{
+    background-color: whitesmoke;
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: left;
+    height: 40px;
+    width: 300px;
+}
 
 /****My Donations CSS****/
 
