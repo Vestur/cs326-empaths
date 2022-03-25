@@ -23,31 +23,33 @@
           crossorigin="anonymous"
           defer
         ></script>
+
        <title>Login Page</title>
        <body class="background-image">
-        <div class="container">
-            <label for="username" id="username"><b>Username</b></label>
-            <br /><br />
-            <input type="text" id="username" placeholder="Enter Username" class="box" required>
-            <br /><br />
-            <label for="password" id="password"><b>Password</b></label>
-            <br /><br />
-            <input type="text" id="password" placeholder="Enter Password" class="box" required>
-            <br /><br />
-        </div>
-
-        <div class="remember">
-            <label><input type="checkbox" checked="checked" name="remember" class="remember"> Remember me</label>
-        </div>   
-
-           <div class="text-center">
-               <button type="button" id="login" class="btn btn_login btn-lg">LOGIN</button>
-           </div>
-           <div class="text-center">
-               <button type="button" id="signup" class="btn btn-signup">SIGN UP</button>
+           <form action="/action_page.php" method="post">
+           <div class="imgcontainer">
+               <img src="../images/profile.png"
+               alt="Avatar" class="avatar">
            </div>
 
+           <div class="header">
+               <h1>LOG IN</h1>
+                 <!--<label id="username" class="container">Username</label>--> 
+                 <input type="text" id="username" placeholder="Enter Username" class="box" required>
+                 <br>
+                 <!--<label id="password" class="container">Password</label>-->
+                 <input type="text" id="password" placeholder="Enter Password" class="box" required> 
+           </div>
+   
+            <div class="remember">
+                <label><input type="checkbox" checked="checked" name="remember" class="remember"> Remember me</label>
+            </div>   
 
+            <div class="text-center">
+                <button type="button" id="signup" class="btn btn-signup btn-sm">SIGN UP</button>
+                <button type="button" id="login" class="btn btn_login btn-sm">LOGIN</button>
+            </div>
+        </form>
            
        </body>
     </head>
