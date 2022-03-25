@@ -23,154 +23,159 @@
           crossorigin="anonymous"
           defer
         ></script>
-
        <title>Donations Page</title>
-       <body class="background-image">
-           
-        <form action="/action_page.php" method="post">
-       <div class="sidebar_profile">
-            <img src="../images/profile.png"
-            alt="Avatar" class="avatar">
-        </div>
-
-        <label id="account" class="side-labels">ACCOUNT</label>
-        <br>
-        <button type="button" id="settings" class="btn btn-sidebar">Settings</button>
-        <br>
-        <label id="manage" class="side-labels">MANAGE</label>
-        <br>
-        <button type="button" id="my_lists" class="btn btn-sidebar">My Lists</button>
-        <br>
-        <button type="button" id="my_favorites" class="btn btn-sidebar">My Favorites</button>
-        <br>
-        <button type="button" id="my_likes" class="btn btn-sidebar">My Likes</button>
-        <br>
-        <button type="button" id="my_donations" class="btn btn-sidebar">My Donations</button>
-        <br>
-        <button type="button" id="signout" class="btn btn-sidebar signout">SIGN OUT</button>
-
-        <div class="donations_h">DONATIONS <i id="donations-logo" class="bi bi-coin"></i></div>
-           <div class="table-wrapper">
-               <div id="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>CHARITY</th>
-                            <th>AMOUNT</th>
-                            <th>DATE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td contenteditable="">ASPCA</td>
-                            <td contenteditable="">$150</td>
-                            <td contenteditable="">01/30/2022</td>
-                        </tr>
-                        <tr>
-                            <td contenteditable="">UNICEF</td>
-                            <td contenteditable="">$75</td>
-                            <td contenteditable="">02/22/2022</td>
-                        </tr>
-                        <tr>
-                            <td contenteditable="">ST. JUDE</td>
-                            <td contenteditable="">$100</td>
-                            <td contenteditable="">03/08/2022</td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                        <tr>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                            <td contenteditable=""></td>
-                        </tr>
-                    </tbody>
-                </table>
-               </div>
-               <button type="button" id="add_row" class="btn btn_login addrow">ADD ROW</button>
-           </div>
-       </body>
     </head>
+    <body class="background-image">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <form action="/action_page.php" method="post">
+                        <div class="profile-wrapper">
+                            <img src="../images/profile.png"
+                            class="img-fluid profile-image"
+                            alt="empty profile image">
+                        </div>
+                        <label id="account" class="side-labels">ACCOUNT</label>
+                        <br>
+                        <button type="button" id="settings" class="btn btn-sidebar">Settings</button>
+                        <br>
+                        <label id="manage" class="side-labels">MANAGE</label>
+                        <br>
+                        <button type="button" id="my_lists" class="btn btn-sidebar">My Lists</button>
+                        <br>
+                        <button type="button" id="my_favorites" class="btn btn-sidebar">My Favorites</button>
+                        <br>
+                        <button type="button" id="my_likes" class="btn btn-sidebar">My Likes</button>
+                        <br>
+                        <button type="button" id="my_donations" class="btn btn-sidebar">My Donations</button>
+                        <br>
+                        <button type="button" id="signout" class="btn btn-sidebar signout">SIGN OUT</button>            
+                </div>
+                <div class="col-10">
+                    <div class="donations_h">DONATIONS <i id="donations-logo" class="bi bi-coin"></i></div>
+                    <div class="table-wrapper">
+                        <div id="table-scroll">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>CHARITY</th>
+                                        <th>AMOUNT</th>
+                                        <th>DATE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td contenteditable="">ASPCA</td>
+                                        <td contenteditable="">$150</td>
+                                        <td contenteditable="">01/30/2022</td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable="">UNICEF</td>
+                                        <td contenteditable="">$75</td>
+                                        <td contenteditable="">02/22/2022</td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable="">ST. JUDE</td>
+                                        <td contenteditable="">$100</td>
+                                        <td contenteditable="">03/08/2022</td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                        <td contenteditable=""></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" id="add_row" class="btn btn_login addrow">ADD ROW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
