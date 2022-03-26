@@ -52,7 +52,6 @@ The likes page is similar to the favorites page except it displays the posted ch
 <img width="1020" alt="Screen Shot 2022-03-24 at 12 22 32 AM" src="https://user-images.githubusercontent.com/77020125/159841685-f8998ae9-4933-4ef4-b97f-c84fcc9a5202.png">
 
 The lists page is where the user can create and post a new charity list. Lists are posts users can make that list charities by a sepcific category. For example, a user can create a list of animal related charities that they find reliable, close to them in location, agree with their mission, etc. Users can edit or delete their lists. 
-((how will people like other's posts? Can we have lists appear in searches too? filter the search for most popular lists))
 
 <img width="1013" alt="Screen Shot 2022-03-24 at 12 23 09 AM" src="https://user-images.githubusercontent.com/77020125/159841737-47c94df3-0c85-4d51-8d20-398da1bb34cb.png">
 
@@ -63,8 +62,43 @@ Lastly, we have a donations page. This page will have an embedded spreadsheet th
 
 # HTML and CSS
 
+Login Page Mockup
 
-## Milestone 1 Release (Message)
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 11 05 AM" src="https://user-images.githubusercontent.com/77020125/160245719-a962de5a-bca3-4b02-a49f-f374b1467f77.png">
+
+Search Page Mockup
+
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 11 59 AM" src="https://user-images.githubusercontent.com/77020125/160245749-dfad1e7c-42bc-488b-b80c-3d1aa7c62146.png">
+
+Profile Page Mockup 
+
+<img width="1439" alt="Screen Shot 2022-03-26 at 11 15 16 AM" src="https://user-images.githubusercontent.com/77020125/160245854-7b83a97e-5fd6-488f-aacd-da7bd8498bf8.png">
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 15 33 AM" src="https://user-images.githubusercontent.com/77020125/160245865-7fdcaf6f-bfa0-4bff-80ee-5de09bb61802.png">
+
+Favorites Page Mockup 
+
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 15 56 AM" src="https://user-images.githubusercontent.com/77020125/160245873-772b708a-c0bb-4c8d-a78e-55601352afee.png">
+
+Likes Page Mockup
+
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 16 20 AM" src="https://user-images.githubusercontent.com/77020125/160245880-58bf6126-8124-4690-b999-c99824713ff8.png">
+
+Lists Page Mockup
+
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 17 35 AM" src="https://user-images.githubusercontent.com/77020125/160245911-cdb6e149-c859-492d-99de-9d9c0b5524ee.png">
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 17 56 AM" src="https://user-images.githubusercontent.com/77020125/160245922-a0ad709b-7638-4583-bf47-d3b50b403e0f.png">
+
+Donations Page Mockup 
+
+<img width="1440" alt="Screen Shot 2022-03-26 at 11 18 24 AM" src="https://user-images.githubusercontent.com/77020125/160245935-4eb3007a-f65e-4c09-bde5-330f3d0e3769.png">
+
+#Division of Labor
+Parsua: Data Interactions, Wireframes, Login, Donations
+Paarth: Sidebar, Search
+Eddie: Profile, Favorites
+Mat: Data Interactions, Likes, Lists 
+
+# Milestone 1 Release (Message)
 * Outlined interactions between users and data.
 * Designed and drew wireframes for proposed website.
 * Created a polished web interface with HTML and CSS code. 
