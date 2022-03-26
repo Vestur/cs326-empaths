@@ -260,6 +260,7 @@ img.avatar {
     color: rgb(161, 159, 159);
     font-size:large;
     font-family: 'Oswald', sans-serif;
+    border-radius: 10px;
 }
 
 ::placeholder {
@@ -310,7 +311,6 @@ img.avatar {
     color: white;
     margin-top: 30px;
     margin-left: 100px;
-    
 }
 
 #donations-logo {
