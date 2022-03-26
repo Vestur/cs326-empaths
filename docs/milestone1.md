@@ -92,7 +92,7 @@ Donations Page Mockup
 
 <img width="1440" alt="Screen Shot 2022-03-26 at 11 18 24 AM" src="https://user-images.githubusercontent.com/77020125/160245935-4eb3007a-f65e-4c09-bde5-330f3d0e3769.png">
 
-#Division of Labor
+# Division of Labor
 Parsua: Data Interactions, Wireframes, Login, Donations
 Paarth: Sidebar, Search
 Eddie: Profile, Favorites
