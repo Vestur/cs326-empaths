@@ -15,7 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
     />
     <!-- Our CSS -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
     <!-- Latest compiled and minified JavaScript -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -28,17 +28,19 @@
   <body class="background-image">
     <div class="container">
       <div class="row">
-        <div class="col text-center">
-          <img
-            src="../images/profile.png"
-            class="img-fluid profile-image"
-            alt="empty profile image"
-          />
+        <div class="col text-center sidebar">
+          <div class="row">
+            <img
+              src="../images/profile.png"
+              class="img-fluid profile-image"
+              alt="empty profile image"
+            />
+          </div>
           <div class="row">
             <div class="btn-group-vertical my-1">
-              <button class="btn btn-light sidebar-button" type="button">
+              <a href="profile.html" class="btn btn-light sidebar-button">
                 ACCOUNT
-              </button>
+              </a>
               <button class="btn btn-light sidebar-button" type="button">
                 Settings
               </button>
@@ -49,17 +51,24 @@
           </div>
           <div class="row">
             <div class="btn-group-vertical my-1">
-              <button class="btn btn-light sidebar-button" type="button">
+              <a href="mylists.html" class="btn btn-light sidebar-button">
                 My Lists
-              </button>
-              <button class="btn btn-light sidebar-button" type="button">
+              </a>
+              <a href="favorites.html" class="btn btn-light sidebar-button">
                 My Favorites
-              </button>
-              <button class="btn btn-light sidebar-button" type="button">
+              </a>
+              <a href="likes.html" class="btn btn-light sidebar-button">
                 My Likes
-              </button>
-              <button class="btn btn-light sidebar-button" type="button">
+              </a>
+              <a href="donations.html" class="btn btn-light sidebar-button">
                 My Donations
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="btn-group-vertical my-1">
+              <button class="btn btn-primary sidebar-button" type="button">
+                Sign Out 
               </button>
             </div>
           </div>
