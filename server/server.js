@@ -5,9 +5,13 @@ import { readFile, writeFile } from 'fs/promises';
 // boilerplate copied from routing lab
 
 const app = express();
-const port = 3000;
+
+// Add Middleware
+app.use(express.json());
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/static', express.static('static'));
 
 // charities
 
@@ -87,4 +91,16 @@ app.put('/updateList', async (request, response) => {
 
 app.delete('/deleteList', async (request, response) => {
     const options = request.query;
+});
+
+// This matches all routes that are not defined.
+app.all('*', async (request, response) => {
+response.status(404).send(`Not found: ${request.path}`);
+});
+
+const port = 3000;
+
+// Start the server.
+app.listen(port, () => {
+console.log(`Server started on http://localhost:${port}`);
 });
