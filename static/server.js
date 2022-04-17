@@ -9,6 +9,39 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
+let accounts = [];
+const accounts_JSONfile = 'accounts.json';
+
+async function reload(filename) {
+    try {
+      const data = await readFile(filename, { encoding: 'utf8' });
+      counters = JSON.parse(data);
+    } catch (err) {
+      counters = {};
+    }
+  }
+
+async function saveAccounts(){
+    
+}
+
+async function createAccount(){
+
+}
+
+async function getAccount(){
+    
+}
+
+async function updateAccount(){
+    
+}
+
+async function deleteAccount(){
+    
+}
+
 // charities
 
 app.post('/createCharity', async (request, response) => {
@@ -57,18 +90,23 @@ app.get('/search', async (request, response) => {
 
 app.post('/createAccount', async (request, response) => {
     const options = request.query;
+    //createAccount(response, options.email, options.username, options.password);
+    //should we track accounts using a number id?
 });
 
 app.get('/getAccount', async (request, response) => {
     const options = request.query;
+    //getAccount(response, options.id) //get account based on id or username?
 });
 
 app.put('/updateAccount', async (request, response) => {
     const options = request.query;
+   //updateAccount(response, options.whatever we're updating)
 });
 
 app.delete('/deleteAccount', async (request, response) => {
     const options = request.query;
+    //deleteAccount(response, options.id) //id or username 
 });
 
 // favorite lists
