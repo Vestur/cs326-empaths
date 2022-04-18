@@ -1,9 +1,48 @@
 
-
-let charities_result = [];
+let search_results = [];
 const search_button = document.getElementById("search");
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
+
+let cur_account_id = -1;
+
+async function add_to_favorites(ein) {
+    try {
+        const response = await fetch('/updateList', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: {
+                'ein': ein,
+            }
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+async function remove_from_favorites(ein) {
+    try {
+        const response = await fetch('/deleteList', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: {
+                'ein': ein,
+            }
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 
 function create_search_result_card(charity, num) {
     let container_div = document.createElement("div");
@@ -19,7 +58,7 @@ function create_search_result_card(charity, num) {
     outter_div.classList.add("d-flex");
     outter_div.classList.add("justify-content-between");
     let name = document.createElement("div");
-    name.appendChild(document.createTextNode(charity.getName()));
+    name.appendChild(document.createTextNode(charity.name()));
     let button = document.createElement("button");
     button.classList.add("btn");
     button.classList.add("results-button");
@@ -31,6 +70,7 @@ function create_search_result_card(charity, num) {
     let info_div = document.createElement("div")
     info_div.classList.add("card-text");
     info_div.classList.add("charitable-card-text");
+    info_div.appendChild(document.createTextNode(charity.text()));
 
     card_body.appendChild(outter_div);
     card_body.appendChild(info_div);
@@ -47,17 +87,29 @@ async function search_for(query) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: {
+            query: {
                 'query': query,
             }
         });
 
         search_response_body.innerHTML = "";
 
-        // assume response is array of objects that can be turned into charity objects
+        // assume response is array of ein numbers
         for(let i = 0; i < response.length; ++i) {
-            let new_charity = 
-            create_search_result_card(response[i], i);
+            // limit to ten search results
+            if (i >= 10) {
+                break;
+            }
+            let new_charity = await fetch("/getCharity", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                query: {
+                    'ein': response[i],
+                }
+            })
+            create_search_result_card(new_charity, i);
         }
     }
     catch (err) {
@@ -66,6 +118,7 @@ async function search_for(query) {
         const response = [];
     }
     const charities = response;
+    search_results = response;
     return charities;
 }
 
@@ -83,6 +136,7 @@ results_selection.forEach(function(elem) {
 
     let classes= elem.classList;
     let charity_num = int(elem.id);
+    let charity = search_results[charity_num];
 
     // find charity in question
     try {

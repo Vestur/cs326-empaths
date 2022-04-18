@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "@faker-js/faker": "^6.1.2"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "morgan": "^1.10.0"
+  },
+  "name": "cs326-empaths",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vestur/cs326-empaths.git"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vestur/cs326-empaths/issues"
+  },
+  "homepage": "https://github.com/Vestur/cs326-empaths#readme",
+  "description": ""
+}
