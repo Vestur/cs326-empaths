@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 /****General CSS*****/
+body {
+    overflow: scroll;
+}
+
 .section-title {
     font-size: 3.5em;
     font-weight: bold;
@@ -341,10 +345,7 @@ tbody {
 
 .table-wrapper{
     position: relative;
-    max-width: 900px;
     overflow: auto;
-    margin-top: 10px;
-    margin-left: 100px;
 }   
 
 #table-scroll {
