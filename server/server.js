@@ -3,7 +3,7 @@ import logger from 'morgan';
 import { readFile, writeFile } from 'fs/promises';
 import * as keys from "../keys.js";
 import {Faker, faker} from "@faker-js/faker"
-import * as database from "database.js";
+import * as database from "./database.js";
 
 // api keys
 const app_id = keys.app_id;
@@ -15,7 +15,7 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use("/", app.static("static"));
+app.use("/static", express.static("static"));
 
 let accounts = [];
 const accounts_JSONfile = 'accounts.json';
@@ -30,7 +30,7 @@ async function reload(filename) {
   }
 
 async function saveAccounts(){
-    
+
 }
 
 async function createAccount(){
@@ -38,15 +38,15 @@ async function createAccount(){
 }
 
 async function getAccount(){
-    
+
 }
 
 async function updateAccount(){
-    
+
 }
 
 async function deleteAccount(){
-    
+
 }
 
 async function search(query) {
@@ -142,7 +142,7 @@ app.put('/updateAccount', async (request, response) => {
 
 app.delete('/deleteAccount', async (request, response) => {
     const options = request.query;
-    //deleteAccount(response, options.id) //id or username 
+    //deleteAccount(response, options.id) //id or username
 });
 
 // favorite lists
@@ -184,3 +184,14 @@ app.delete('/deleteList', async (request, response) => {
         response.status(404).json(error);
     }
 });
+
+// This matches all routes that are not defined.
+app.all('*', async (request, response) => {
+  response.status(404).send(`Not found: ${request.path}`);
+});
+
+// Start the server.
+app.listen(port, () => {
+  console.log(`Server started on http://localhost:${port}`);
+});
+
