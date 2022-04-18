@@ -23,6 +23,7 @@
       crossorigin="anonymous"
       defer
     ></script>
+    <script type="module" src="search.js"></script>
     <title>Search</title>
   </head>
   <body class="background-image">
@@ -65,60 +66,61 @@
           </div>
         </div>
         <div class="col-10">
-          <div class="section-title" id="searchdiv">
-          	<input type="search" id="searchbar" class="form-control" placeholder="🔎 Search for a charity!" />
+          <div class="input-group section-title" id="searchdiv">
+          	<input type="text" id="searchbar" class="form-control" placeholder="🔎 Search for a charity!" />
+            <button id="search" class="btn btn-outline-secondary" type="button">Search</button>
           </div>
-          <div class="card charitable-card">
-            <div class="card-body">
-              <div
-                class="card-title charitable-card-title d-flex justify-content-between"
-              >
-                <div class="">Charity 1</div>
-                <button id="result-1" class="btn">✔️</button>
-              </div>
-              <div class="card-text charitable-card-text">
-                Information about Charity 1.
-              </div>
-            </div>
-          </div>
-          <div class="card charitable-card">
-            <div class="card-body">
-              <div
-                class="card-title charitable-card-title d-flex justify-content-between"
-              >
-                <div class="">Charity 2</div>
-                <button id="result-2" class="btn">➖</button>
-              </div>
-              <div class="card-text charitable-card-text">
-                Information about Charity 2.
-              </div>
-            </div>
-          </div>
-          <div class="card charitable-card">
-            <div class="card-body">
-              <div
-                class="card-title charitable-card-title d-flex justify-content-between"
-              >
-                <div class="">Charity 3</div>
-                <button id="result-3" class="btn">✔️</button>
-              </div>
-              <div class="card-text charitable-card-text">
-                Information about Charity 3.
-              </div>
-            </div>
-          </div>
-          <div class="card charitable-card">
-          	<div class="card-body">
-	        	<div
-                  class="card-title charitable-card-title d-flex justify-content-between"
-                >
-                <div class="">Charity 4</div>
-                  <button id="result-4" class="btn">✔️</button>
+          <div id = "response-body">
+            <div class="card charitable-card">
+              <div class="card-body">
+                <div class="card-title charitable-card-title d-flex justify-content-between">
+                  <div class="">Charity 1</div>
+                  <button id="result-1" class="btn">✔️</button>
                 </div>
                 <div class="card-text charitable-card-text">
-                  Information about Charity 4.
+                  Information about Charity 1.
                 </div>
-             </div>
+              </div>
+            </div>
+            <div class="card charitable-card">
+              <div class="card-body">
+                <div
+                  class="card-title charitable-card-title d-flex justify-content-between"
+                >
+                  <div class="">Charity 2</div>
+                  <button id="result-2" class="btn">➖</button>
+                </div>
+                <div class="card-text charitable-card-text">
+                  Information about Charity 2.
+                </div>
+              </div>
+            </div>
+            <div class="card charitable-card">
+              <div class="card-body">
+                <div
+                  class="card-title charitable-card-title d-flex justify-content-between"
+                >
+                  <div class="">Charity 3</div>
+                  <button id="result-3" class="btn">✔️</button>
+                </div>
+                <div class="card-text charitable-card-text">
+                  Information about Charity 3.
+                </div>
+              </div>
+            </div>
+            <div class="card charitable-card">
+              <div class="card-body">
+              <div
+                    class="card-title charitable-card-title d-flex justify-content-between"
+                  >
+                  <div class="">Charity 4</div>
+                    <button id="result-4" class="btn">✔️</button>
+                  </div>
+                  <div class="card-text charitable-card-text">
+                    Information about Charity 4.
+                  </div>
+               </div>
+            </div>
           </div>
         </div>
       </div>

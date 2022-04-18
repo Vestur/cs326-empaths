@@ -1,6 +1,11 @@
 import express from 'express';
 import logger from 'morgan';
 import { readFile, writeFile } from 'fs/promises';
+import * as keys from "../keys.js";
+
+// api keys
+const app_id = keys.app_id;
+const app_key = keys.app_key;
 
 // boilerplate copied from routing lab
 
@@ -40,6 +45,11 @@ async function updateAccount(){
 
 async function deleteAccount(){
     
+}
+
+async function search(query) {
+    const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
+    return search_results;
 }
 
 // charities
@@ -83,7 +93,14 @@ app.delete('/deleteReview', async (request, response) => {
 // search
 
 app.get('/search', async (request, response) => {
-    const options = request.query;
+    const body = request.body;
+    try {
+        let results = await search(body["query"]);
+        response.status(200).json(results);
+    }
+    catch (error) {
+        response.status(404).json(error);
+    }
 });
 
 // user accounts
