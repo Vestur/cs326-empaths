@@ -24,46 +24,34 @@
       defer
     ></script>
     <script type="module" src="search.js"></script>
+    <script type="module" src="sidebar.js" defer></script>
     <title>Search</title>
   </head>
   <body class="background-image">
     <div class="container">
       <div class="row">
-        <div class="col text-center">
-          <img
-            src="../images/profile.png"
-            class="img-fluid profile-image"
-            alt="empty profile image"
-          />
-          <div class="row">
-            <div class="btn-group-vertical my-1">
-              <button id= "sidebar-account" class="btn btn-light sidebar-button" type="button">
-                ACCOUNT
-              </button>
-              <button id= "sidebar-settings" class="btn btn-light sidebar-button" type="button">
-                Settings
-              </button>
-              <button id= "sidebar-manage" class="btn btn-light sidebar-button" type="button">
-                MANAGE
-              </button>
+        <div class="col">
+          <form action="/action_page.php" method="post">
+            <div class="profile-wrapper">
+              <img src="../images/profile.png"
+              class="img-fluid profile-image"
+              alt="empty profile image">
             </div>
-          </div>
-          <div class="row">
-            <div class="btn-group-vertical my-1">
-              <button id= "sidebar-lists" class="btn btn-light sidebar-button" type="button">
-                My Lists
-              </button>
-              <button id= "sidebar-favorites" class="btn btn-light sidebar-button" type="button">
-                My Favorites
-              </button>
-              <button id= "sidebar-likes" class="btn btn-light sidebar-button" type="button">
-                My Likes
-              </button>
-              <button id= "sidebar-donations" class="btn btn-light sidebar-button" type="button">
-                My Donations
-              </button>
-            </div>
-          </div>
+            <label id="account" class="side-labels">ACCOUNT</label>
+            <br>
+            <button type="button" id="settings" class="btn btn-sidebar">Settings</button>
+            <br>
+            <label id="manage" class="side-labels">MANAGE</label>
+            <br>
+            <button type="button" id="my_lists" class="btn btn-sidebar">My Lists</button>
+            <br>
+            <button type="button" id="my_favorites" class="btn btn-sidebar">My Favorites</button>
+            <br>
+            <button type="button" id="my_likes" class="btn btn-sidebar">My Likes</button>
+            <br>
+            <button type="button" id="my_donations" class="btn btn-sidebar">My Donations</button>
+            <br>
+            <button type="button" id="signout" class="btn btn-sidebar signout">SIGN OUT</button>       
         </div>
         <div class="col-10">
           <div class="input-group section-title" id="searchdiv">
