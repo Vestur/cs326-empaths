@@ -2,6 +2,8 @@ import express from 'express';
 import logger from 'morgan';
 import { readFile, writeFile } from 'fs/promises';
 import * as keys from "../keys.js";
+import {Faker, faker} from "@faker-js/faker"
+import * as database from "database.js";
 
 // api keys
 const app_id = keys.app_id;
@@ -13,7 +15,7 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+// app.use("/", app.static("static"));
 
 let accounts = [];
 const accounts_JSONfile = 'accounts.json';
@@ -48,8 +50,24 @@ async function deleteAccount(){
 }
 
 async function search(query) {
-    const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    return search_results;
+    // return array of eins
+    // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
+    return [faker.number, faker.number, faker.number];
+}
+
+async function get_charity(ein) {
+    const faker_ret = Faker()
+    return faker_ret;
+}
+
+async function updateList(account_number, ein) {
+    // update favorites list of account to include charity with ein ein
+    return 0;
+}
+
+async function removeFromList(account_number, ein) {
+    // update favorites list of account to exclude charity with ein ein
+    return 0;
 }
 
 // charities
@@ -60,6 +78,8 @@ app.post('/createCharity', async (request, response) => {
 
 app.get('/getCharity', async (request, response) => {
     const options = request.query;
+    let ein = options["ein"];
+    return await get_charity(ein);
 });
 
 app.put('/updateCharity', async (request, response) => {
@@ -91,11 +111,10 @@ app.delete('/deleteReview', async (request, response) => {
 });
 
 // search
-
 app.get('/search', async (request, response) => {
-    const body = request.body;
+    const query = request.query;
     try {
-        let results = await search(body["query"]);
+        let results = await search(query["query"]);
         response.status(200).json(results);
     }
     catch (error) {
@@ -128,18 +147,40 @@ app.delete('/deleteAccount', async (request, response) => {
 
 // favorite lists
 
+// initialize list (empty)
 app.post('/createList', async (request, response) => {
     const options = request.query;
 });
 
+// get array of charity items that populate list
 app.get('/getList', async (request, response) => {
     const options = request.query;
 });
 
+// add to list
 app.put('/updateList', async (request, response) => {
-    const options = request.query;
+    const body = request.body;
+    try {
+        let account_id = body["account_id"];
+        let charity_ein = body["ein"];
+        await updateList(account_id, charity_ein);
+        response.status(200).json({"status": "success"});
+    }
+    catch (error) {
+        response.status(404).json(error);
+    }
 });
 
+//delete from list
 app.delete('/deleteList', async (request, response) => {
-    const options = request.query;
+    const body = request.body;
+    try {
+        let account_id = body["account_id"];
+        let charity_ein = body["ein"];
+        await removeFromList(account_id, charity_ein);
+        response.status(200).json({"status": "success"});
+    }
+    catch (error) {
+        response.status(404).json(error);
+    }
 });
