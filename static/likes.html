@@ -28,50 +28,28 @@
   <body class="background-image">
     <div class="container">
       <div class="row">
-        <div class="col text-center sidebar">
-          <div class="row">
-            <img
-              src="../images/profile.png"
+        <div class="col">
+          <form action="/action_page.php" method="post">
+            <div class="profile-wrapper">
+              <img src="../images/profile.png"
               class="img-fluid profile-image"
-              alt="empty profile image"
-            />
-          </div>
-          <div class="row">
-            <div class="btn-group-vertical my-1">
-              <a href="profile.html" class="btn btn-light sidebar-button">
-                ACCOUNT
-              </a>
-              <button class="btn btn-light sidebar-button" type="button">
-                Settings
-              </button>
-              <button class="btn btn-light sidebar-button" type="button">
-                MANAGE
-              </button>
+              alt="empty profile image">
             </div>
-          </div>
-          <div class="row">
-            <div class="btn-group-vertical my-1">
-              <a href="mylists.html" class="btn btn-light sidebar-button">
-                My Lists
-              </a>
-              <a href="favorites.html" class="btn btn-light sidebar-button">
-                My Favorites
-              </a>
-              <a href="likes.html" class="btn btn-light sidebar-button">
-                My Likes
-              </a>
-              <a href="donations.html" class="btn btn-light sidebar-button">
-                My Donations
-              </a>
-            </div>
-          </div>
-          <div class="row">
-            <div class="btn-group-vertical my-1">
-              <button class="btn btn-primary sidebar-button" type="button">
-                Sign Out 
-              </button>
-            </div>
-          </div>
+            <label id="account" class="side-labels">ACCOUNT</label>
+            <br>
+            <button type="button" id="settings" class="btn btn-sidebar">Settings</button>
+            <br>
+            <label id="manage" class="side-labels">MANAGE</label>
+            <br>
+            <button type="button" id="my_lists" class="btn btn-sidebar">My Lists</button>
+            <br>
+            <button type="button" id="my_favorites" class="btn btn-sidebar">My Favorites</button>
+            <br>
+            <button type="button" id="my_likes" class="btn btn-sidebar">My Likes</button>
+            <br>
+            <button type="button" id="my_donations" class="btn btn-sidebar">My Donations</button>
+            <br>
+            <button type="button" id="signout" class="btn btn-sidebar signout">SIGN OUT</button>       
         </div>
         <div class="col-10">
           <div class="section-title">LIKES 💛</div>
