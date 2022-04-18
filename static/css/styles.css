@@ -355,7 +355,13 @@ tbody {
 
 .addrow {
     margin-top: -50px;
-    margin-left: 815px;
+    margin-left: 600px;
+}
+.saverow {
+    margin-top: -50px;
+}
+.deleterow {
+    margin-top: -50px;
 }
  
 /****My Donations CSS****/
