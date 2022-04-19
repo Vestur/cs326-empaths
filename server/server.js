@@ -111,8 +111,9 @@ app.get('/search', async (request, response) => {
     }
 });
 
-// user accounts
 
+//add and delete donation endpoint 
+// user accounts
 app.post('/createAccount', async (request, response) => {
     const options = request.query;
     

@@ -15,3 +15,5 @@ const deleteB = document.getElementById("delete_row");
 deleteB.addEventListener('click', () => {
     document.getElementById("my_table").getElementByTagName('tbody')[0].deleteRow(-1);
 });
+
+//get user account and donations list and then render in html 
