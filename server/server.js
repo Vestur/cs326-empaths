@@ -115,10 +115,16 @@ app.get('/search', async (request, response) => {
 
 app.post('/createAccount', async (request, response) => {
     const options = request.query;
+    
     const id = options.id; 
-    const email = options.email;
+    //const email = options.email;
     const user = options.user;
-    const pass = options.pass;
+    //const pass = options.pass; 
+    const bio = options.bio; 
+    const faves = options.favorites; 
+    const reviews = options.reviews; 
+
+    //{id, fave list --> charity ids (ein), likes --> charity ids, reviews --> review ids, username, bio, email, profile --> string, set --> zip code, donations dono objects} 
     //const faves = options.faves
     /**
      * if user undefined | email | pass word undefined  
@@ -126,22 +132,24 @@ app.post('/createAccount', async (request, response) => {
      * response status 400
      * 
      */
-
 });
 
 app.get('/getAccount', async (request, response) => {
     const options = request.query;
     //getAccount(response, options.id) //get account based on id or username?
+    //
 });
 
 app.put('/updateAccount', async (request, response) => {
     const options = request.query;
    //updateAccount(response, options.whatever we're updating)
+   //bio and everything 
 });
 
 app.delete('/deleteAccount', async (request, response) => {
     const options = request.query;
-    //deleteAccount(response, options.id) //id or username
+    //deleteAccount(response, options.id) 
+    //id 
 });
 
 // favorite lists

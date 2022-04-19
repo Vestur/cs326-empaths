@@ -34,3 +34,19 @@ const signoutB = document.getElementById("signout");
 signoutB.addEventListener('click', () => {
     window.location.href = "login.html";
 });
+
+//send login info to server
+
+//dynamically create the page 
+//fetch static html page 
+//fetch call, 
+//call repsonse.text
+//wrap in div?
+//document.body.innerHTML
+//
+//form fetch for you?
+
+///route called login, redirect to user dashboard (better way for login information)
+//redirect denied or go to 
+//express app.get(path,)
+//res.redirect 
