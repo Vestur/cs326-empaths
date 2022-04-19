@@ -5,6 +5,11 @@ settingsB.addEventListener('click', () => {
     window.location.href = "profile.html";
 });
 
+const searchB = document.getElementById("search");
+searchB.addEventListener('click', () => {
+    window.location.href = "search.html";
+});
+
 const listsB = document.getElementById("my_lists");
 listsB.addEventListener('click', () => {
     window.location.href = "mylists.html";
