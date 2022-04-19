@@ -23,30 +23,19 @@ const accounts_JSONfile = 'accounts.json';
 async function reload(filename) {
     try {
       const data = await readFile(filename, { encoding: 'utf8' });
-      counters = JSON.parse(data);
+      accounts = JSON.parse(data);
     } catch (err) {
-      counters = {};
+      accounts = [];
     }
   }
 
 async function saveAccounts(){
-
-}
-
-async function createAccount(){
-
-}
-
-async function getAccount(){
-
-}
-
-async function updateAccount(){
-
-}
-
-async function deleteAccount(){
-
+    try {
+        const data = JSON.stringify(accounts);
+        await writeFile(accounts_JSONfile, data, { encoding: 'utf8' });
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function search(query) {
@@ -126,8 +115,18 @@ app.get('/search', async (request, response) => {
 
 app.post('/createAccount', async (request, response) => {
     const options = request.query;
-    //createAccount(response, options.email, options.username, options.password);
-    //should we track accounts using a number id?
+    const id = options.id; 
+    const email = options.email;
+    const user = options.user;
+    const pass = options.pass;
+    //const faves = options.faves
+    /**
+     * if user undefined | email | pass word undefined  
+     * bad request 
+     * response status 400
+     * 
+     */
+
 });
 
 app.get('/getAccount', async (request, response) => {
