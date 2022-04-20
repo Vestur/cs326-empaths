@@ -41,8 +41,7 @@
     addFavorite - add a charity to a partiular user's favorites list
     removeFavorite - remove a charity from a particular user's favorite's list
     getFavoritedCharities - get a list of favorited charities 
-    
-
+    "/" - sends index.html file
 # 2 At least one set of four screenshots of your client interface with descriptions
 
 # 3 The URL of your Heroku Application
