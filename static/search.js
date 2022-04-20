@@ -1,4 +1,3 @@
-const search_button = document.getElementById("search");
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
 
@@ -95,7 +94,7 @@ async function search_for(query) {
         });
 
         search_response_body.innerHTML = "";
-
+        console.log("sdasdas");
         // assume response is array of ein numbers
         for(let i = 0; i < response.length; ++i) {
             // limit to ten search results
@@ -124,10 +123,16 @@ async function search_for(query) {
     return charities;
 }
 
+
+const search_button = document.getElementById("search");
+console.log(search_button);
+
 search_button.addEventListener('click', async () => {
     // get search query
+    console.log("ahaha");
     const query = searchbar.value;
     // search and build results on page
+    console.log("ahaha");
     charities_result = await search_for(query);
 })
 
