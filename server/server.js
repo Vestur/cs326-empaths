@@ -20,28 +20,28 @@ app.use(express.static("./static"));
 
 let accounts = [ {
                 id: '1', 
-                username: faker.string, 
-                email: faker.string, 
-                bio: faker.string,
-                pfp: faker.string, 
-                location: faker.string, 
+                username: faker.name.firstName(), 
+                email: faker.internet.email(), 
+                bio: faker.lorem.paragraph(),
+                pfp: faker.datatype.string(), 
+                location: faker.lorem.paragraph(), 
                 favlist: [],
                 likes: [],
-                reviews: [ {  rid: faker.number
-                          uid: faker.number
-                          chid: faker.number
-                          stars: faker.number
-                          text: faker.string},
-                          {  rid: faker.number
-                          uid: faker.number
-                          chid: faker.number
-                          stars: faker.number
-                          text: faker.string},
-                          {  rid: faker.number
-                          uid: faker.number
-                          chid: faker.number
-                          stars: faker.number
-                          text: faker.string} ],
+                reviews: [ {  rid: faker.datatype.number(),
+                          uid: faker.datatype.number(),
+                          chid: faker.datatype.number(),
+                          stars: faker.datatype.number(),
+                          text: faker.lorem.paragraph()},
+                          {  rid: faker.datatype.number(),
+                          uid: faker.datatype.number(),
+                          chid: faker.datatype.number(),
+                          stars: faker.datatype.number(),
+                          text: faker.lorem.paragraph()},
+                          {  rid: faker.datatype.number(),
+                          uid: faker.datatype.number(),
+                          chid: faker.datatype.number(),
+                          stars: faker.datatype.number(),
+                          text: faker.lorem.paragraph()} ],
                 donations: []
             } ];
 const accounts_JSONfile = 'accounts.json';
@@ -288,24 +288,28 @@ app.post('/createAccount', async (request, response) => {
 });
 
 app.get('/getAccount', async (request, response) => {
-    await reload(accounts_JSONfile);
+    //await reload(accounts_JSONfile);
     const options = request.query;
     let account_id = options['account_id']; // user id
     try {
-        for(const [index, user_object] of accounts.entries()){
+        let found = false;
+        for(const user_object of accounts){
             if(user_object.id === account_id){
-                response.json(user_object);
+                response.status(200).json(user_object);
+                found = true;
+                break;
             }
         }
-        response.status(200);
-
+        if (!found) {
+            response.status(404).json({"status": "not found"});
+        }
     } catch (err){
-        response.status(404).json(error);
+        response.status(404).json(err);
     }
 });
 
 app.put('/updateAccount', async (request, response) => {
-    await reload(accounts_JSONfile);
+    //await reload(accounts_JSONfile);
     const options = request.query;
     let account_id = options['account_id']; // user id
     try {
@@ -323,7 +327,7 @@ app.put('/updateAccount', async (request, response) => {
 });
 
 app.delete('/deleteAccount', async (request, response) => {
-    await reload(accounts_JSONfile);
+    //await reload(accounts_JSONfile);
     const options = request.query;
     let account_id = options['account_id']; // user id
     try {
