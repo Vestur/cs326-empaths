@@ -39,7 +39,7 @@ function generate_fake_charity() {
 function generate_fake_charity_list() {
     const fake_charities = [];
     for(let i = 0; i < 7; i++) {
-        faker_charities.push(ganerate_fake_charity());
+        faker_charities.push(generate_fake_charity());
     }
     return fake_charities();
 }
@@ -65,19 +65,12 @@ async function saveAccounts(){
 async function search(query) {
     // return array of eins
     // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    return [faker.number, faker.number, faker.number];
+    return [1243214, 1232133, 545435];
 }
 
 async function get_charity(ein) {
     // get charity from database in form of object below
-    return {eid: ein,
-        name: "awesome charity",
-        address: "shhh its a secret",
-        accountability: 1000,
-        mission: `To make the number ${ein} cool`,
-        current_rating: 5,
-        likes: 1000
-    };
+    return generate_fake_charity();
 }
 
 async function get_liked_charities(user_id) {
@@ -109,7 +102,13 @@ app.post('/createCharity', async (request, response) => {
 app.get('/getCharity', async (request, response) => {
     const options = request.query;
     let ein = options["ein"];
-    return await get_charity(ein);
+    try {
+        let charity = await get_charity(ein);
+        response.status(200).json(charity);
+    }
+    catch (error) {
+        console.log(error);
+    }
 });
 
 app.put('/updateCharity', async (request, response) => {
@@ -161,12 +160,17 @@ app.delete('/deleteReview', async (request, response) => {
 // search
 app.get('/search', async (request, response) => {
     const query = request.query;
+    console.log("1");
     try {
         let results = await search(query["query"]);
+        console.log("2");
+        console.log(results);
         response.status(200).json(results);
+        console.log("3");
     }
     catch (error) {
         response.status(404).json(error);
+        console.log("4");
     }
 });
 
