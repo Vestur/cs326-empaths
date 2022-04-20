@@ -1,7 +1,6 @@
-/**
- * sync function getAccount() {
+async function getAccount() {
     try {
-      const response = await fetch(`/getAccount?account_id=${id}`, {
+      const response = await fetch(`/getAccount`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -18,28 +17,27 @@ async function createAccount() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: name }),
+      body: JSON.stringify({ username: faker.name.firstName() }),
     });
     const data = await response.json();
     return data;
   }
- */
 
 
 const loginB = document.getElementById("login");
 loginB.addEventListener('click', () => {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value; 
+    const username = document.getElementById("username").value; // will later replace faker data 
+    const password = document.getElementById("password").value; // will be added during authentication
     window.location.href = "search.html";
-    //this is a placeholder for later authentication, just a bandaid for changing the page for now
-    //will try to use express endpoints and redirect to achieve this
-    //GET account using CRUD
+    // this is a placeholder for later authentication, just a bandaid for changing the page for now
+    // will try to use express endpoints and redirect to achieve this
+    // will GET account from database
 });
 
 const signupB = document.getElementById("signup");
 signupB.addEventListener('click', () => {
-    //add account to data base? 
-    //just use CRUD operations to add to JSON file
+    // here account with be created and added to database 
+    // placeholder for milestone 3
     window.location.href = "profile.html";
 });
 
