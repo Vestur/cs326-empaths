@@ -42,11 +42,10 @@
     removeFavorite - remove a charity from a particular user's favorite's list
     getFavoritedCharities - get a list of favorited charities 
     "/" - sends index.html file
-# 2 At least one set of four screenshots of your client interface with descriptions
-
-# 3 The URL of your Heroku Application
 
 # Part 2: Front-end Implementation
+
+<img width="1440" alt="Screen Shot 2022-04-20 at 2 17 56 PM" src="https://user-images.githubusercontent.com/77020125/164296574-4d3a6978-4ca6-4dad-a0f6-35b0e02b83c8.png">
 
 <img width="1440" alt="Screen Shot 2022-04-20 at 2 17 56 PM" src="https://user-images.githubusercontent.com/77020125/164296574-4d3a6978-4ca6-4dad-a0f6-35b0e02b83c8.png">
 
