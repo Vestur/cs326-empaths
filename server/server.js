@@ -18,10 +18,54 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
 
-let accounts = [];
+//let accounts = [ {
+//                id: '1',
+//                username: faker.string,
+//                email: faker.string,
+//                bio: faker.string,
+//                pfp: faker.string,
+//                location: faker.string,
+//                favlist: [],
+//                likes: [],
+//                reviews: [ {  rid: faker.number
+//                          uid: faker.number
+//                          chid: faker.number
+//                          stars: faker.number
+//                          text: faker.string},
+//                          {  rid: faker.number
+//                          uid: faker.number
+//                          chid: faker.number
+//                          stars: faker.number
+//                          text: faker.string},
+//                          {  rid: faker.number
+//                          uid: faker.number
+//                          chid: faker.number
+//                          stars: faker.number
+//                          text: faker.string} ],
+//                donations: []
+//            } ];
 const accounts_JSONfile = 'accounts.json';
 
 const __dirname = path.resolve(path.dirname(''));
+
+function generate_fake_review() {
+    const review = {
+        rid: faker.datatype.uuid(),
+        uid: faker.datatype.uuid(),
+        chid: faker.datatype.uuid(),
+        stars: faker.datatype.number(),
+        text: faker.lorem.paragraph(),
+    }
+    return review;
+}
+
+function generate_fake_reviews() {
+    const fake_reviews = [];
+    for(let i = 0; i < 2; i++) {
+        fake_reviews.push(generate_fake_review());
+    }
+    return fake_reviews;
+}
 
 function generate_fake_charity() {
     const charity = {
@@ -164,6 +208,17 @@ app.delete('/deleteReview', async (request, response) => {
     const options = request.query;
 });
 
+app.get('/getReviews', async (request, response) => {
+    const options = request.body;
+    const data = generate_fake_reviews();
+    try {
+        response.status(200).json(data);
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
+});
+
 // search
 app.get('/search', async (request, response) => {
     const query = request.query;
@@ -191,7 +246,7 @@ app.post('/createDonation', async (requent, response) => {
     try {
         for(const [index, user_object] of accounts.entries()){
             if(user_object.id === account_id){
-                user_object.donations.push({ charity_name: faker.string, amount: faker.string, date: faker.string}); //all be strings?
+                user_object.donations.push({ charity_name: faker.company.companyName(), amount: faker.finance.amount(), date: faker.date.recent()}); //all be strings?
             }
         }
         response.status(200).json({"status": "success"});
@@ -215,7 +270,7 @@ app.delete('/deleteDonation', async (request, response) => {
                 let donations_arr = user_object.donations;     //account's donations array
                 for(const [index, donation] of donations_arr.entries()){  //interate through donations array
                     if(donation.charity_name === charity){               //if found charity match
-                        donations_arr.splic(index);                    //delete from donations array
+                        donations_arr.splice(index);                    //delete from donations array
                     }
                     else{
                         response.json({ error: `Donation Not Found` }); //donation doen't exist
@@ -241,12 +296,12 @@ app.post('/createAccount', async (request, response) => {
     //repeat user names because of unique id?
     try {
         let new_user = {
-            id: faker.number,
-            username: faker.string,
-            email: faker.string,
-            bio: faker.string,
-            pfp: faker.string,
-            location: faker.string,
+            id: faker.datatype.uuid(),
+            username: faker.name.firstName(),
+            email: faker.internet.email(),
+            bio: faker.lorem.paragraph(),
+            pfp: faker.image.avatar(),
+            location: faker.random.locale(),
             favlist: [],
             likes: [],
             reviews: [],
@@ -273,7 +328,7 @@ app.get('/getAccount', async (request, response) => {
                 response.json(user_object);
             }
         }
-        response.status(200).json({"status": "success"});
+        response.status(200);
 
     } catch (err){
         response.status(404).json(error);
@@ -288,6 +343,7 @@ app.put('/updateAccount', async (request, response) => {
         for(const [index, user_object] of accounts.entries()){
             if(user_object.id === account_id){
                 //update field of user_object here
+                continue;
             }
         }
         response.status(200).json({"status": "success"});
