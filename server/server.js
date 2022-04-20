@@ -111,11 +111,62 @@ app.get('/search', async (request, response) => {
     }
 });
 
+// donation creation endpoint 
+app.post('/createDonation', async (requent, response) => {
+    const options = request.body; 
+    //charity name, amount, date 
+    let account_id = options['account_id'];
+    await reload(accounts_JSONfile);
 
-//add and delete donation endpoint 
+    try {
+        for(const [index, user_object] of accounts.entries()){
+            if(user_object.id === account_id){
+                user_object.donations.push({ charity_name: faker.string, amount: faker.string, date: faker.string}); //all be strings?
+            }
+        }
+        response.status(200).json({"status": "success"});
+
+    } catch (err){
+        response.status(404).json(error);
+    }
+});
+
+// donation deletion endpoint 
+app.delete('/deleteDonation', async (request, response) => {
+    const options = request.body; 
+    // extract user id, find account then delete donation from their 
+    let account_id = options['account_id']; // user id
+    let charity = options['charity_name']; // name of charity user wants to delete 
+    await reload(accounts_JSONfile);
+
+    try{
+        for(const [index, user_object] of accounts.entries()){   // go through accounts array, extract user object
+            if(user_object.id === account_id){                  // if account id matches one passed in
+                let donations_arr = user_object.donations;     //account's donations array 
+                for(const [index, donation] of donations_arr.entries()){  //interate through donations array
+                    if(donation.charity_name === charity){               //if found charity match
+                        delete donations_arr[index];                    //delete from donations array 
+                    }
+                    else{
+                        response.json({ error: `Donation Not Found` }); //donation doen't exist
+                    }
+                }
+            }
+            else{
+                response.json({ error: `User Not Found` });
+            }
+        }
+        response.status(200).json({"status": "success"});
+    }
+    catch (error) {
+        response.status(404).json(error);
+    }
+});
+ 
 // user accounts
 app.post('/createAccount', async (request, response) => {
-    const options = request.query;
+    await reload(accounts_JSONfile);
+    //const options = request.body; later, use faker as of now
     
     const id = options.id; 
     //const email = options.email;
@@ -137,8 +188,6 @@ app.post('/createAccount', async (request, response) => {
 
 app.get('/getAccount', async (request, response) => {
     const options = request.query;
-    //getAccount(response, options.id) //get account based on id or username?
-    //
 });
 
 app.put('/updateAccount', async (request, response) => {
