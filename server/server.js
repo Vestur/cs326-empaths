@@ -77,7 +77,6 @@ function generate_fake_charity() {
         current_rating: faker.datatype.number(),
         likes: faker.datatype.number(),
     }
-    console.log(charity);
     return charity;
 }
 
@@ -110,7 +109,11 @@ async function saveAccounts(){
 async function search(query) {
     // return array of eins
     // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    return [1243214, 1232133, 545435];
+    let results = [];
+    for(let i = 0; i < 5; ++i) {
+        results.push(faker.datatype.number());
+    }
+    return results;
 }
 
 async function get_charity(ein) {
@@ -130,7 +133,7 @@ async function get_favorited_charities(user_id) {
 
 async function updateList(account_number, ein) {
     // update favorites list of account to include charity with ein ein
-    return 0;
+    return JSON.parse(JSON.stringify([]));
 }
 
 async function removeFromList(account_number, ein) {
@@ -223,17 +226,12 @@ app.get('/getReviews', async (request, response) => {
 // search
 app.get('/search', async (request, response) => {
     const query = request.query;
-    console.log("1");
     try {
         let results = await search(query["query"]);
-        console.log("2");
-        console.log(results);
         response.status(200).json(results);
-        console.log("3");
     }
     catch (error) {
         response.status(404).json(error);
-        console.log("4");
     }
 });
 
@@ -457,35 +455,39 @@ app.get('/getList', async (request, response) => {
 
 // add to list
 app.put('/updateList', async (request, response) => {
-    const body = request.body;
+    const options = request.query;
     try {
-        let account_id = body["account_id"];
-        let charity_ein = body["ein"];
-        let state = await updateList(account_id, charity_ein);
+        let account_id = options["account_id"];
+        let charity_ein = options["ein"];
+        let state = updateList(account_id, charity_ein);
         if(state === -1) {
             response.status(404).json({"status": "no such charity in favorites"})
         }
-        response.status(200).json({"status": "success"});
+        else {
+            response.status(200).json({"status": "success"});
+        }
     }
-    catch (error) {
-        response.status(404).json(error);
+    catch {
+        response.status(404).json({"status": "Must have account id and charity id passed in"})
     }
 });
 
 //delete from list
 app.delete('/deleteList', async (request, response) => {
-    const body = request.body;
+    const options = request.query;
     try {
-        let account_id = body["account_id"];
-        let charity_ein = body["ein"];
-        let state = await removeFromList(account_id, charity_ein);
+        let account_id = options["account_id"];
+        let charity_ein = options["ein"];
+        let state = removeFromList(account_id, charity_ein);
         if(state === -1) {
             response.status(404).json({"status": "no such charity in favorites"})
         }
-        response.status(200).json({"status": "success"});
+        else {
+            response.status(200).json({"status": "success"});
+        }
     }
-    catch (error) {
-        response.status(404).json(error);
+    catch {
+        response.status(404).json({"status": "Must have account id and charity id passed in"})
     }
 });
 
