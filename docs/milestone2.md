@@ -1,4 +1,4 @@
-# 1 A brief and precise representation of APIs for you application
+# 1. A brief and precise representation of APIs for your application
     createCharity - pass in a charity ein (id), add a charity to our database that can be extracted to a charity object.
     getCharity - returns a charity object based on the ein passed in, of the form {eid: num, name: str, address: str, accountability: num, mission: str, current_rating: num, likes: num}
     updateCharity - update the charity object (may not be necessary)
@@ -43,7 +43,7 @@
     getFavoritedCharities - get a list of favorited charities 
     "/" - sends index.html file
 
-# Part 2: Front-end Implementation
+# 2. Front-end Implementation
 
 <img width="1440" alt="Screen Shot 2022-04-20 at 2 17 56 PM" src="https://user-images.githubusercontent.com/77020125/164296574-4d3a6978-4ca6-4dad-a0f6-35b0e02b83c8.png">
 
