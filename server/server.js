@@ -148,7 +148,7 @@ app.delete('/deleteDonation', async (request, response) => {
                 let donations_arr = user_object.donations;     //account's donations array 
                 for(const [index, donation] of donations_arr.entries()){  //interate through donations array
                     if(donation.charity_name === charity){               //if found charity match
-                        delete donations_arr[index];                    //delete from donations array 
+                        donations_arr.splic(index);                    //delete from donations array 
                     }
                     else{
                         response.json({ error: `Donation Not Found` }); //donation doen't exist
@@ -169,40 +169,82 @@ app.delete('/deleteDonation', async (request, response) => {
 // user accounts
 app.post('/createAccount', async (request, response) => {
     await reload(accounts_JSONfile);
-    //const options = request.body; later, use faker as of now
-    
-    const id = options.id; 
-    //const email = options.email;
-    const user = options.user;
-    //const pass = options.pass; 
-    const bio = options.bio; 
-    const faves = options.favorites; 
-    const reviews = options.reviews; 
+    const options = request.body; //later, use faker as of now
+    //pass_word will come into play later with autentication
+    //repeat user names because of unique id?
+    try {
+        let new_user = {
+            id: faker.number, 
+            username: faker.string, 
+            email: faker.string, 
+            bio: faker.string,
+            pfp: faker.string, 
+            location: faker.string, 
+            favlist: [],
+            likes: [],
+            reviews: [],
+            donations: []
+        };
+        accounts.push(new_user);
+        await saveAccounts(); 
+        response.json(new_user);
+        response.status(200).json({"status": "success"});
+    } catch (err){
+        response.status(404).json(err);
+    }
 
     //{id, fave list --> charity ids (ein), likes --> charity ids, reviews --> review ids, username, bio, email, profile --> string, set --> zip code, donations dono objects} 
-    //const faves = options.faves
-    /**
-     * if user undefined | email | pass word undefined  
-     * bad request 
-     * response status 400
-     * 
-     */
 });
 
 app.get('/getAccount', async (request, response) => {
+    await reload(accounts_JSONfile);
     const options = request.query;
+    let account_id = options['account_id']; // user id
+    try {
+        for(const [index, user_object] of accounts.entries()){
+            if(user_object.id === account_id){
+                response.json(user_object);
+            }
+        }
+        response.status(200).json({"status": "success"});
+
+    } catch (err){
+        response.status(404).json(error);
+    }
 });
 
 app.put('/updateAccount', async (request, response) => {
+    await reload(accounts_JSONfile);
     const options = request.query;
-   //updateAccount(response, options.whatever we're updating)
-   //bio and everything 
+    let account_id = options['account_id']; // user id
+    try {
+        for(const [index, user_object] of accounts.entries()){
+            if(user_object.id === account_id){
+                //update field of user_object here
+            }
+        }
+        response.status(200).json({"status": "success"});
+
+    } catch (err){
+        response.status(404).json(error);
+    }
 });
 
 app.delete('/deleteAccount', async (request, response) => {
+    await reload(accounts_JSONfile);
     const options = request.query;
-    //deleteAccount(response, options.id) 
-    //id 
+    let account_id = options['account_id']; // user id
+    try {
+        for(const [index, user_object] of accounts.entries()){
+            if(user_object.id === account_id){
+                accounts.splice(index);
+            }
+        }
+        response.status(200).json({"status": "success"});
+
+    } catch (err){
+        response.status(404).json(error);
+    }
 });
 
 // favorite lists
