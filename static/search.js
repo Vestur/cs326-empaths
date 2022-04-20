@@ -24,10 +24,8 @@ function add_remove_listener() {
             let statis = add_to_favorites(charity_num);
             if (statis) {
                 this.innerText = "✔️";
-                console.log(this);
                 this.classList.remove("to-add");
                 this.classList.add("to-remove");
-                console.log(this);
             }
             else {
                 throw "Error adding charity from favorites";
@@ -41,14 +39,10 @@ function add_remove_listener() {
     else {
         try {
             let statis = remove_from_favorites(charity_num);
-            console.log("wazzzup");
             if (statis) {
-                console.log("hiiii");
-                console.log(this);
                 this.innerText = "➖";
                 this.classList.remove("to-remove");
                 this.classList.add("to-add");
-                console.log(this);
             }
             else {
                 throw "Error deleting charity from favorites";
@@ -84,8 +78,6 @@ async function add_to_favorites(ein) {
 
 async function remove_from_favorites(ein) {
     try {
-        console.log(ein);
-        console.log(cur_account_id);
         let response = await fetch('/deleteList', {
             method: 'DELETE',
             headers: {
@@ -109,10 +101,11 @@ function create_search_result_card(charity, num) {
     let container_div = document.createElement("div");
     container_div.classList.add("card");
     container_div.classList.add("charitable-card");
-
+    
     let card_body = document.createElement("div");
     card_body.classList.add("card-body");
-
+    card_body.classList.add("background-white");
+  
     let outter_div = document.createElement("div");
     outter_div.classList.add("card-title");
     outter_div.classList.add("charitable-card-title");
@@ -120,7 +113,7 @@ function create_search_result_card(charity, num) {
     outter_div.classList.add("justify-content-between");
     let name = document.createElement("div");
     let charity_name = charity.name;
-
+  
     name.appendChild(document.createTextNode(charity_name));
     let button = document.createElement("button");
     button.classList.add("btn");
@@ -145,14 +138,15 @@ function create_search_result_card(charity, num) {
     info_div.appendChild(document.createTextNode(charity_mission));
     card_body.appendChild(outter_div);
     card_body.appendChild(info_div);
-
+  
     container_div.appendChild(card_body);
-
-    search_response_body.appendChild(card_body);
-}
+  
+    search_response_body.appendChild(container_div);
+  }
 
 async function search_for(query) {
     let response = [];
+    search_results = [];
     try {
         response = await fetch('/search', {
             method: 'GET',
@@ -191,7 +185,6 @@ async function search_for(query) {
         console.log(err);
     }
     const charities = response;
-    search_results = response;
     return charities;
 }
 
@@ -199,5 +192,7 @@ search_button.addEventListener('click', async () => {
     // get search query
     const query = searchbar.value;
     // search and build results on page
-    search_results = await search_for(query);
+    await search_for(query);
 })
+
+await search_for("");

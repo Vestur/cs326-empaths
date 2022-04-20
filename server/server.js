@@ -109,7 +109,11 @@ async function saveAccounts(){
 async function search(query) {
     // return array of eins
     // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    return [1243214, 1232133, 545435];
+    let results = [];
+    for(let i = 0; i < 5; ++i) {
+        results.push(faker.datatype.number());
+    }
+    return results;
 }
 
 async function get_charity(ein) {
@@ -223,7 +227,6 @@ app.get('/search', async (request, response) => {
     const query = request.query;
     try {
         let results = await search(query["query"]);
-        console.log(results);
         response.status(200).json(results);
     }
     catch (error) {
