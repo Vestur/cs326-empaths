@@ -13,35 +13,22 @@ const app_key = keys.app_key;
 // boilerplate copied from routing lab
 
 const app = express();
-const port = 5500;
+const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
 
 let accounts = [ {
-                id: '1', 
-                username: faker.name.firstName(), 
-                email: faker.internet.email(), 
+                id: '1',
+                username: faker.name.firstName(),
+                name: faker.name.firstName() + " " + faker.name.lastName(),
+                email: faker.internet.email(),
                 bio: faker.lorem.paragraph(),
-                pfp: faker.datatype.string(), 
-                location: faker.lorem.paragraph(), 
+                pfp: faker.datatype.string(),
+                location: faker.lorem.paragraph(),
                 favlist: [],
                 likes: [],
-                reviews: [ {  rid: faker.datatype.number(),
-                          uid: faker.datatype.number(),
-                          chid: faker.datatype.number(),
-                          stars: faker.datatype.number(),
-                          text: faker.lorem.paragraph()},
-                          {  rid: faker.datatype.number(),
-                          uid: faker.datatype.number(),
-                          chid: faker.datatype.number(),
-                          stars: faker.datatype.number(),
-                          text: faker.lorem.paragraph()},
-                          {  rid: faker.datatype.number(),
-                          uid: faker.datatype.number(),
-                          chid: faker.datatype.number(),
-                          stars: faker.datatype.number(),
-                          text: faker.lorem.paragraph()} ],
+                reviews: generate_fake_reviews(),
                 donations: []
             } ];
 const accounts_JSONfile = 'accounts.json';
@@ -237,8 +224,8 @@ app.get('/search', async (request, response) => {
 
 function generate_fake_donation(){
     const donation = {
-        charity_name: faker.company.companyName(), 
-        amount: faker.finance.amount(), 
+        charity_name: faker.company.companyName(),
+        amount: faker.finance.amount(),
         date: faker.date.recent()
     };
     return donation;
@@ -249,7 +236,7 @@ function generate_fake_donations_arr(){
     for(let i = 0; i < 15; i++){
         arr.push(generate_fake_donation());
     }
-    return arr; 
+    return arr;
 }
 
 async function get_fake_donations_arr(user_id){
