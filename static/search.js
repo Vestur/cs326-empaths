@@ -1,10 +1,8 @@
-
-let search_results = [];
-const search_button = document.getElementById("search");
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
 
 let cur_account_id = -1;
+let search_results = [];
 
 async function add_to_favorites(ein) {
     try {
@@ -58,7 +56,10 @@ function create_search_result_card(charity, num) {
     outter_div.classList.add("d-flex");
     outter_div.classList.add("justify-content-between");
     let name = document.createElement("div");
-    name.appendChild(document.createTextNode(charity.name()));
+    let charity_name = charity.name;
+    console.log(charity_name);
+
+    name.appendChild(document.createTextNode(charity_name()));
     let button = document.createElement("button");
     button.classList.add("btn");
     button.classList.add("results-button");
@@ -70,19 +71,23 @@ function create_search_result_card(charity, num) {
     let info_div = document.createElement("div")
     info_div.classList.add("card-text");
     info_div.classList.add("charitable-card-text");
-    info_div.appendChild(document.createTextNode(charity.text()));
-
+    let charity_address = charity.address;
+    let charity_mission = charity.mission;
+    info_div.appendChild(document.createTextNode(charity_address()));
+    info_div.appendChild(document.createTextNode(charity_mission()));
     card_body.appendChild(outter_div);
     card_body.appendChild(info_div);
 
     container_div.appendChild(card_body);
 
     search_response_body.appendChild(card_body);
+    console.log("ttttt");
 }
 
 async function search_for(query) {
+    let response = [];
     try {
-        const response = await fetch('/search', {
+        response = await fetch('/search', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -91,31 +96,34 @@ async function search_for(query) {
                 'query': query,
             }
         });
-
+        let json_response = await response.json();
         search_response_body.innerHTML = "";
+        console.log(json_response);
 
         // assume response is array of ein numbers
-        for(let i = 0; i < response.length; ++i) {
+        for(let i = 0; i < json_response.length; ++i) {
             // limit to ten search results
             if (i >= 10) {
                 break;
             }
-            let new_charity = await fetch("/getCharity", {
+            console.log("yup");
+            let response1 = await fetch("/getCharity", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 query: {
-                    'ein': response[i],
+                    'ein': json_response[i],
                 }
-            })
+            });
+            console.log("yupper");
+            let new_charity = response1.json();
             create_search_result_card(new_charity, i);
         }
     }
     catch (err) {
         console.log("error searching");
         console.log(err);
-        const response = [];
     }
     const charities = response;
     search_results = response;

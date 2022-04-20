@@ -1,3 +1,26 @@
+async function createDonation(account_id) {
+    const response = await fetch(`/createDonation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ charity_name: faker.string, amount: faker.string, date: faker.string }),
+    });
+    const data = await response.json();
+    return data;
+  }
+
+async function deleteDonation(account_id) {
+    try {
+      const response = await fetch(`/deleteDonation`, {
+        method: 'DELETE',
+      }); 
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 const addrowB = document.getElementById("add_row");
 addrowB.addEventListener('click', () => {
