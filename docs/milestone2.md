@@ -7,6 +7,8 @@
     deleteLike - undo a like (reduce number of likes charity has - add functionality to verify user doing the unliking had actually liked it)
     getLikedCharities - gives list of charity objects
     createReview - create a review (add said review object to user and charity)
+    deleteReview - remove review from user and charity
+    getReviews - gives list of review objects for a user
 # 2 At least one set of four screenshots of your client interface with descriptions
 
 # 3 The URL of your Heroku Application

@@ -36,7 +36,16 @@ fetchRes.then(res =>
     document.getElementById('email').value = d.email;
     document.getElementById('location').value = d.location;
     for (let review of d.reviews) {
-        let charityFetch = fetch("http://localhost:3000/getCharity?ein=1");
+        let options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            query: {
+                ein: 1
+            }
+        };
+        let charityFetch = fetch("/getCharity", options);
         charityFetch.then(cres => cres.json()).then(cd => {
             console.log(cd);
             let rating = (Math.round(cd.current_rating * 2) / 2).toFixed(1);
