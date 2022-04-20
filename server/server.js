@@ -39,9 +39,9 @@ function generate_fake_charity() {
 function generate_fake_charity_list() {
     const fake_charities = [];
     for(let i = 0; i < 7; i++) {
-        faker_charities.push(generate_fake_charity());
+        fake_charities.push(generate_fake_charity());
     }
-    return fake_charities();
+    return fake_charities;
 }
 
 async function reload(filename) {
@@ -144,7 +144,13 @@ app.delete('/deleteLike', async (request, response) => {
 app.get('/getLikedCharities', async (request, response) => {
     const options = request.query;
     let user_id = null;
-    return await get_liked_charities(user_id);
+    const data = await get_liked_charities(user_id);
+    try {
+        response.status(200).json(data);
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
 });
 
 // reviews
@@ -332,7 +338,13 @@ app.delete('/removeFavorite', async (request, response) => {
 app.get('/getFavoritedCharities', async (request, response) => {
     const options = request.query;
     let user_id = null;
-    return await get_favorited_charities(user_id);
+    const data = await get_favorited_charities(user_id);
+    try {
+        response.status(200).json(data);
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
 });
 
 

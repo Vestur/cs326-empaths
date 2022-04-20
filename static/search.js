@@ -65,11 +65,7 @@ function create_search_result_card(charity, num) {
     button.classList.add("results-button");
     button.classList.add("to-add");
     button.id = `${num}`;
-
-    let choices_choices = ["➖", "✔️"];
-    let choice = Math.floor(Math.random() * 1);
-    button.textContent = choices_choices[choice];
-    
+    button.textContent = "➖";
     outter_div.appendChild(name);
     outter_div.appendChild(button);
     let info_div = document.createElement("div")
@@ -103,6 +99,7 @@ async function search_for(query) {
         let json_response = await response.json();
         search_response_body.innerHTML = "";
         console.log(json_response);
+
         // assume response is array of ein numbers
         for(let i = 0; i < json_response.length; ++i) {
             // limit to ten search results
@@ -133,17 +130,11 @@ async function search_for(query) {
     return charities;
 }
 
-
-const search_button = document.getElementById("search_button");
-console.log(search_button);
-
 search_button.addEventListener('click', async () => {
     // get search query
-    console.log("ahaha");
     const query = searchbar.value;
     // search and build results on page
-    console.log("ahaha");
-    search_results = await search_for(query);
+    charities_result = await search_for(query);
 })
 
 const results_selection = document.querySelectorAll(".results-button");
