@@ -4,7 +4,7 @@ async function createDonation(account_id) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ charity_name: faker.string, amount: faker.string, date: faker.string }),
+      body: JSON.stringify({ charity_name: faker.company.companyName(), amount: faker.finance.amount(), date: faker.date.recent() }),
     });
     const data = await response.json();
     return data;
@@ -33,6 +33,8 @@ addrowB.addEventListener('click', () => {
     amount.innerHTML = "Amount";
     date.innerHTML = "Date";
 });
+
+//add save row event listener
 
 const deleteB = document.getElementById("delete_row");
 deleteB.addEventListener('click', () => {

@@ -245,7 +245,7 @@ app.post('/createDonation', async (requent, response) => {
     try {
         for(const [index, user_object] of accounts.entries()){
             if(user_object.id === account_id){
-                user_object.donations.push({ charity_name: faker.string, amount: faker.string, date: faker.string}); //all be strings?
+                user_object.donations.push({ charity_name: faker.company.companyName(), amount: faker.finance.amount(), date: faker.date.recent()}); //all be strings?
             }
         }
         response.status(200).json({"status": "success"});
@@ -269,7 +269,7 @@ app.delete('/deleteDonation', async (request, response) => {
                 let donations_arr = user_object.donations;     //account's donations array
                 for(const [index, donation] of donations_arr.entries()){  //interate through donations array
                     if(donation.charity_name === charity){               //if found charity match
-                        donations_arr.splic(index);                    //delete from donations array
+                        donations_arr.splice(index);                    //delete from donations array
                     }
                     else{
                         response.json({ error: `Donation Not Found` }); //donation doen't exist
@@ -295,12 +295,12 @@ app.post('/createAccount', async (request, response) => {
     //repeat user names because of unique id?
     try {
         let new_user = {
-            id: faker.number,
-            username: faker.string,
-            email: faker.string,
-            bio: faker.string,
-            pfp: faker.string,
-            location: faker.string,
+            id: faker.datatype.uuid(),
+            username: faker.name.firstName(),
+            email: faker.internet.email(),
+            bio: faker.lorem.paragraph(),
+            pfp: faker.image.avatar(),
+            location: faker.random.locale(),
             favlist: [],
             likes: [],
             reviews: [],
