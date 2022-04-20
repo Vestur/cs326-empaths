@@ -1,8 +1,50 @@
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
+const search_button = document.getElementById("search_button");
 
 let cur_account_id = -1;
 let search_results = [];
+
+function add_remove_listener() {
+    console.log("created");
+    let classes= elem.classList;
+    let charity_num = int(elem.id);
+    let charity = search_results[charity_num];
+
+    // find charity in question
+    try {
+        let charity = charities_result[charity_num];
+    }
+    catch {
+        console.log("can't find charity");
+    }
+
+    // decide to add or remove charity from favorites
+    if("to-add" in classes) {
+        try {
+            add_to_favorites(charity);
+            elem.value = "✔️";
+            elem.classList.remove("to-add");
+            elem.classList.add("to-remove");
+        }
+        catch (error) {
+            console.log("error adding charity to favorites");
+            console.log(error);
+        }
+    }
+    else {
+        try {
+            remove_from_favorites(charity);
+            elem.value = "➖";
+            elem.classList.remove("to-remove");
+            elem.classList.add("to-add");
+        }
+        catch (error) {
+            console.log("error adding charity to favorites");
+            console.log(error);
+        }
+    }
+}
 
 async function add_to_favorites(ein) {
     try {
@@ -57,15 +99,18 @@ function create_search_result_card(charity, num) {
     outter_div.classList.add("justify-content-between");
     let name = document.createElement("div");
     let charity_name = charity.name;
-    console.log(charity_name);
 
-    name.appendChild(document.createTextNode(charity_name()));
+    name.appendChild(document.createTextNode(charity_name));
     let button = document.createElement("button");
     button.classList.add("btn");
     button.classList.add("results-button");
     button.classList.add("to-add");
     button.id = `${num}`;
-    button.textContent = "➖";
+    button.addEventListener("click", add_remove_listener);
+    let choices = ["➖", "✔️"]
+    let choice = Math.floor(Math.random() * 2);
+
+    button.textContent = choices[choice];
     outter_div.appendChild(name);
     outter_div.appendChild(button);
     let info_div = document.createElement("div")
@@ -73,8 +118,8 @@ function create_search_result_card(charity, num) {
     info_div.classList.add("charitable-card-text");
     let charity_address = charity.address;
     let charity_mission = charity.mission;
-    info_div.appendChild(document.createTextNode(charity_address()));
-    info_div.appendChild(document.createTextNode(charity_mission()));
+    info_div.appendChild(document.createTextNode(charity_address));
+    info_div.appendChild(document.createTextNode(charity_mission));
     card_body.appendChild(outter_div);
     card_body.appendChild(info_div);
 
@@ -117,7 +162,7 @@ async function search_for(query) {
                 }
             });
             console.log("yupper");
-            let new_charity = response1.json();
+            let new_charity = await response1.json();
             create_search_result_card(new_charity, i);
         }
     }
@@ -134,50 +179,7 @@ search_button.addEventListener('click', async () => {
     // get search query
     const query = searchbar.value;
     // search and build results on page
-    charities_result = await search_for(query);
+    search_results = await search_for(query);
 })
 
 const results_selection = document.querySelectorAll(".results-button");
-
-results_selection.forEach(function(elem) {
-  elem.addEventListener("click", () => {
-
-    let classes= elem.classList;
-    let charity_num = int(elem.id);
-    let charity = search_results[charity_num];
-
-    // find charity in question
-    try {
-        let charity = charities_result[charity_num];
-    }
-    catch {
-        console.log("can't find charity");
-    }
-
-    // decide to add or remove charity from favorites
-    if("to-add" in classes) {
-        try {
-            add_to_favorites(charity);
-            elem.value = "✔️";
-            elem.classList.remove("to-add");
-            elem.classList.add("to-remove");
-        }
-        catch (error) {
-            console.log("error adding charity to favorites");
-            console.log(error);
-        }
-    }
-    else {
-        try {
-            remove_from_favorites(charity);
-            elem.value = "➖";
-            elem.classList.remove("to-remove");
-            elem.classList.add("to-add");
-        }
-        catch (error) {
-            console.log("error adding charity to favorites");
-            console.log(error);
-        }
-    }
-  })
-});
