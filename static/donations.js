@@ -24,6 +24,7 @@ async function deleteDonation(account_id) {
 
 const addrowB = document.getElementById("add_row");
 addrowB.addEventListener('click', () => {
+  const data = await createDonation();
     const tableBody = document.getElementById("my_table").getElementsByTagName('tbody')[0];
     let row = tableBody.insertRow(-1);
     let name = row.insertCell(0);

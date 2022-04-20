@@ -235,6 +235,15 @@ app.get('/search', async (request, response) => {
     }
 });
 
+function generate_fake_donation(){
+    const donation = {
+        charity_name: faker.company.companyName(), 
+        amount: faker.finance.amount(), 
+        date: faker.date.recent()
+    };
+    return donation;
+}
+
 // donation creation endpoint
 app.post('/createDonation', async (requent, response) => {
     const options = request.body;
@@ -245,7 +254,7 @@ app.post('/createDonation', async (requent, response) => {
     try {
         for(const [index, user_object] of accounts.entries()){
             if(user_object.id === account_id){
-                user_object.donations.push({ charity_name: faker.company.companyName(), amount: faker.finance.amount(), date: faker.date.recent()}); //all be strings?
+                user_object.donations.push(generate_fake_donation());
             }
         }
         response.status(200).json({"status": "success"});
