@@ -18,7 +18,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
 
-let accounts = [];
+let accounts = [ {
+                id: '1', 
+                username: faker.string, 
+                email: faker.string, 
+                bio: faker.string,
+                pfp: faker.string, 
+                location: faker.string, 
+                favlist: [],
+                likes: [],
+                reviews: [ {  rid: faker.number
+                          uid: faker.number
+                          chid: faker.number
+                          stars: faker.number
+                          text: faker.string},
+                          {  rid: faker.number
+                          uid: faker.number
+                          chid: faker.number
+                          stars: faker.number
+                          text: faker.string},
+                          {  rid: faker.number
+                          uid: faker.number
+                          chid: faker.number
+                          stars: faker.number
+                          text: faker.string} ],
+                donations: []
+            } ];
 const accounts_JSONfile = 'accounts.json';
 
 const __dirname = path.resolve(path.dirname(''));
@@ -302,7 +327,7 @@ app.get('/getAccount', async (request, response) => {
                 response.json(user_object);
             }
         }
-        response.status(200).json({"status": "success"});
+        response.status(200);
 
     } catch (err){
         response.status(404).json(error);
@@ -317,6 +342,7 @@ app.put('/updateAccount', async (request, response) => {
         for(const [index, user_object] of accounts.entries()){
             if(user_object.id === account_id){
                 //update field of user_object here
+                continue;
             }
         }
         response.status(200).json({"status": "success"});
