@@ -9,7 +9,7 @@ loginB.addEventListener('click', () => {
 const signupB = document.getElementById("signup");
 signupB.addEventListener('click', () => {
     //add account to data base? 
-    //just use CRUD operations to add to JSOn file
+    //just use CRUD operations to add to JSON file
     window.location.href = "profile.html";
 });
 
