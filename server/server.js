@@ -327,27 +327,27 @@ app.delete('/deleteDonation', async (request, response) => {
 
 // user accounts
 app.post('/createAccount', async (request, response) => {
-    await reload(accounts_JSONfile);
+    //await reload(accounts_JSONfile);
     const options = request.body; //later, use faker as of now
     //pass_word will come into play later with autentication
     //repeat user names because of unique id?
     try {
-        let new_user = {
-            id: faker.datatype.uuid(),
-            name: faker.name.firstName() + " " + faker.name.lastName(),
-            username: faker.name.firstName(),
-            email: faker.internet.email(),
-            bio: faker.lorem.paragraph(),
-            pfp: faker.image.avatar(),
-            location: faker.random.locale(),
-            favlist: [],
-            likes: [],
-            reviews: [],
-            donations: []
-        };
-        accounts.push(new_user);
-        await saveAccounts();
-        response.json(new_user);
+        //let new_user = {
+        //    id: faker.datatype.uuid(),
+        //    name: faker.name.firstName() + " " + faker.name.lastName(),
+        //    username: faker.name.firstName(),
+        //    email: faker.internet.email(),
+        //    bio: faker.lorem.paragraph(),
+        //    pfp: faker.image.avatar(),
+        //    location: faker.random.locale(),
+        //    favlist: [],
+        //    likes: [],
+        //    reviews: [],
+        //    donations: []
+        //};
+        //accounts.push(new_user);
+        //await saveAccounts();
+        //response.json(new_user);
         response.status(200).json({"status": "success"});
     } catch (err){
         response.status(404).json(err);
