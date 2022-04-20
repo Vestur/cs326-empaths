@@ -35,7 +35,7 @@ fetchRes.then(res =>
     document.getElementById('username').value = d.username;
     document.getElementById('email').value = d.email;
     document.getElementById('location').value = d.location;
-    for (const review of d.reviews) {
+    for (let review of d.reviews) {
         let charityFetch = fetch("http://localhost:3000/getCharity?ein=1");
         charityFetch.then(cres => cres.json()).then(cd => {
             console.log(cd);
