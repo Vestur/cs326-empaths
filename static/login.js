@@ -1,4 +1,5 @@
-async function getAccount() {
+/**
+ * sync function getAccount() {
     try {
       const response = await fetch(`/getAccount?account_id=${id}`, {
         method: 'GET',
@@ -22,6 +23,8 @@ async function createAccount() {
     const data = await response.json();
     return data;
   }
+ */
+
 
 const loginB = document.getElementById("login");
 loginB.addEventListener('click', () => {
