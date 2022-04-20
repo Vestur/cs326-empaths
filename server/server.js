@@ -80,7 +80,6 @@ function generate_fake_charity() {
         current_rating: faker.datatype.number(),
         likes: faker.datatype.number(),
     }
-    console.log(charity);
     return charity;
 }
 
@@ -113,7 +112,11 @@ async function saveAccounts(){
 async function search(query) {
     // return array of eins
     // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    return [1243214, 1232133, 545435];
+    let search_results = [];
+    for(let i = 0; i < 5; ++i) {
+        search_results.push(faker.datatype.number());
+    }
+    return search_results;
 }
 
 async function get_charity(ein) {
@@ -226,17 +229,12 @@ app.get('/getReviews', async (request, response) => {
 // search
 app.get('/search', async (request, response) => {
     const query = request.query;
-    console.log("1");
     try {
         let results = await search(query["query"]);
-        console.log("2");
-        console.log(results);
         response.status(200).json(results);
-        console.log("3");
     }
     catch (error) {
         response.status(404).json(error);
-        console.log("4");
     }
 });
 
