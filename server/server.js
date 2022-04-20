@@ -311,26 +311,26 @@ app.delete('/deleteDonation', async (request, response) => {
 
 // user accounts
 app.post('/createAccount', async (request, response) => {
-    await reload(accounts_JSONfile);
+    //await reload(accounts_JSONfile);
     const options = request.body; //later, use faker as of now
     //pass_word will come into play later with autentication
     //repeat user names because of unique id?
     try {
-        let new_user = {
-            id: faker.datatype.uuid(),
-            username: faker.name.firstName(),
-            email: faker.internet.email(),
-            bio: faker.lorem.paragraph(),
-            pfp: faker.image.avatar(),
-            location: faker.random.locale(),
-            favlist: [],
-            likes: [],
-            reviews: [],
-            donations: []
-        };
-        accounts.push(new_user);
-        await saveAccounts();
-        response.json(new_user);
+        //let new_user = {
+        //    id: faker.datatype.uuid(),
+        //    username: faker.name.firstName(),
+        //    email: faker.internet.email(),
+        //    bio: faker.lorem.paragraph(),
+        //    pfp: faker.image.avatar(),
+        //    location: faker.random.locale(),
+        //    favlist: [],
+        //    likes: [],
+        //    reviews: [],
+        //    donations: []
+        //};
+        //accounts.push(new_user);
+        //await saveAccounts();
+        //response.json(new_user);
         response.status(200).json({"status": "success"});
     } catch (err){
         response.status(404).json(err);
@@ -353,10 +353,10 @@ app.get('/getAccount', async (request, response) => {
             }
         }
         if (!found) {
-            response.status(404).json({"status": "not found"});
+            response.status(404).json({ status: "not found"});
         }
     } catch (err){
-        response.status(404).json(err);
+        response.status(404).json({ status: err });
     }
 });
 
