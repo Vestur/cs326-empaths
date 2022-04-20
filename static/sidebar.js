@@ -10,11 +10,6 @@ searchB.addEventListener('click', () => {
     window.location.href = "search.html";
 });
 
-const listsB = document.getElementById("my_lists");
-listsB.addEventListener('click', () => {
-    window.location.href = "mylists.html";
-});
-
 const favoritesB = document.getElementById("my_favorites");
 favoritesB.addEventListener('click', () => {
     window.location.href = "favorites.html";

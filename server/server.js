@@ -1,5 +1,6 @@
 import express from 'express';
 import logger from 'morgan';
+import path from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import * as keys from "../keys.js";
 import {Faker, faker} from "@faker-js/faker"
@@ -15,10 +16,12 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/static", express.static("static"));
+app.use(express.static("./static"));
 
 let accounts = [];
 const accounts_JSONfile = 'accounts.json';
+
+const __dirname = path.resolve(path.dirname(''));
 
 async function reload(filename) {
     try {
@@ -242,13 +245,18 @@ app.delete('/deleteList', async (request, response) => {
     }
 });
 
+// Load index.html
+app.get('/', function(req, res) {
+    res.sendFile('index.html');
+});
+
 // This matches all routes that are not defined.
 app.all('*', async (request, response) => {
-  response.status(404).send(`Not found: ${request.path}`);
+    response.status(404).send(`Not found: ${request.path}`);
 });
 
 // Start the server.
 app.listen(port, () => {
-  console.log(`Server started on http://localhost:${port}`);
+    console.log(`Server started on http://localhost:${port}`);
 });
 
