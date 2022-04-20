@@ -1,3 +1,6 @@
+// TODO
+// Add unique id for each card to have button event listeners for each of them
+// that call the delete like/favorites functions
 export function createCharityCard(charity) {
 
     const card = document.createElement("div");
