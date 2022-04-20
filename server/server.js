@@ -141,10 +141,21 @@ async function removeFromList(account_number, ein) {
     return 0;
 }
 
+async function add_like(ein) {
+    // increment likes on charity
+    return 0;
+}
+
+async function delete_like(ein) {
+    //undo a like
+    return 0;
+}
+
 // charities
 
 app.post('/createCharity', async (request, response) => {
     const options = request.query;
+    // need database
 });
 
 app.get('/getCharity', async (request, response) => {
@@ -173,6 +184,9 @@ app.delete('/deleteCharity', async (request, response) => {
 app.post('/createLike', async (request, response) => {
     const options = request.query;
     try {
+        // add like to charity
+        // let charity_id = options["ein"];
+        // add_like(charity_id);
         response.status(200).json({ status: "success" });
     }
     catch (error) {
@@ -183,6 +197,9 @@ app.post('/createLike', async (request, response) => {
 app.delete('/deleteLike', async (request, response) => {
     const options = request.query;
     try {
+        // add like to charity
+        // let charity_id = options["ein"];
+        // delete_like(charity_id);
         response.status(200).json({ status: "success" });
     }
     catch (error) {
@@ -203,7 +220,6 @@ app.get('/getLikedCharities', async (request, response) => {
 });
 
 // reviews
-
 app.post('/createReview', async (request, response) => {
     const options = request.query;
 });
