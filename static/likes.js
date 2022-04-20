@@ -5,7 +5,6 @@ async function getLikedCharities() {
       method: 'GET',
   });
   const data = await response.json();
-  console.log("hi", data);
   return data;
 }
 

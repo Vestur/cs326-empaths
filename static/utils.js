@@ -31,3 +31,46 @@ export function createCharityCard(charity) {
     return card;
 }
 
+async function createLike(ein) {
+  const response = await fetch("/createLike", {
+      method: 'POST',
+      body: {
+        ein: ein,
+      },
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function deleteLike(ein) {
+  const response = await fetch("/deleteLike", {
+      method: 'DELETE',
+      body: {
+        ein: ein,
+      },
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function addFavorite(ein) {
+  const response = await fetch("/addFavorite", {
+      method: 'POST',
+      body: {
+        ein: ein,
+      },
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function removeFavorite(ein) {
+  const response = await fetch("/removeFavorite", {
+      method: 'DELETE',
+      body: {
+        ein: ein,
+      },
+  });
+  const data = await response.json();
+  return data;
+}
