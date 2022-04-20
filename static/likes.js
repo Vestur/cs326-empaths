@@ -12,5 +12,5 @@ const charities = await getLikedCharities();
 const likesWrapper = document.getElementById("likes-wrapper");
 
 for(let charity of charities) {
-  likesWrapper.appendChild(createCharityCard(charity));
+  likesWrapper.appendChild(await createCharityCard(charity));
 }

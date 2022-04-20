@@ -23,6 +23,25 @@ const accounts_JSONfile = 'accounts.json';
 
 const __dirname = path.resolve(path.dirname(''));
 
+function generate_fake_review() {
+    const review = {
+        rid: faker.datatype.uuid(),
+        uid: faker.datatype.uuid(),
+        chid: faker.datatype.uuid(),
+        stars: faker.datatype.number(),
+        text: faker.lorem.paragraph(),
+    }
+    return review;
+}
+
+function generate_fake_reviews() {
+    const fake_reviews = [];
+    for(let i = 0; i < 2; i++) {
+        fake_reviews.push(generate_fake_review());
+    }
+    return fake_reviews;
+}
+
 function generate_fake_charity() {
     const charity = {
         eid: faker.datatype.uuid(),
@@ -161,6 +180,17 @@ app.post('/createReview', async (request, response) => {
 
 app.delete('/deleteReview', async (request, response) => {
     const options = request.query;
+});
+
+app.get('/getReviews', async (request, response) => {
+    const options = request.body;
+    const data = generate_fake_reviews();
+    try {
+        response.status(200).json(data);
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
 });
 
 // search
