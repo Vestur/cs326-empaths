@@ -47,6 +47,10 @@
 
 <img width="1440" alt="Screen Shot 2022-04-20 at 2 17 56 PM" src="https://user-images.githubusercontent.com/77020125/164296574-4d3a6978-4ca6-4dad-a0f6-35b0e02b83c8.png">
 
-<img width="1440" alt="Screen Shot 2022-04-20 at 2 17 56 PM" src="https://user-images.githubusercontent.com/77020125/164296574-4d3a6978-4ca6-4dad-a0f6-35b0e02b83c8.png">
+<img width="947" alt="search_before_delete" src="https://user-images.githubusercontent.com/42352267/164311133-cc7e3921-5971-450a-accb-fe01350943b2.PNG">
+Before we add or remove a favorite
+
+<img width="947" alt="search_after_delete_add" src="https://user-images.githubusercontent.com/42352267/164311158-c6f3f97c-bd87-42ce-8e3e-5eef3e826111.PNG">
+Decided to add Lubowitz to favorites, removed Crooks, Krajcik and Hackett.
 
 # Part 3: Deployment
