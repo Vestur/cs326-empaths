@@ -14,7 +14,7 @@ bio.addEventListener('keyup', (event) => {
             bio: bio.value
         })
     };
-    let fetchRes = fetch("http://localhost:3000/updateAccount", options);
+    let fetchRes = fetch("/updateAccount", options);
     fetchRes.then(res =>
         res.json()).then(d => {
         console.log('bio: ' + JSON.stringify(d))
@@ -27,7 +27,7 @@ let options = {
         'Content-Type': 'application/json'
     }
 };
-let fetchRes = fetch("http://localhost:3000/getAccount?account_id=1", options);
+let fetchRes = fetch("/getAccount?account_id=1", options);
 fetchRes.then(res =>
     res.json()).then(d => {
     bio.value = d.bio;
@@ -35,7 +35,7 @@ fetchRes.then(res =>
     document.getElementById('username').value = d.username;
     document.getElementById('email').value = d.email;
     document.getElementById('location').value = d.location;
-    for (const review of d.reviews) {
+    for (let review of d.reviews) {
         let charityFetch = fetch("http://localhost:3000/getCharity?ein=1");
         charityFetch.then(cres => cres.json()).then(cd => {
             console.log(cd);
@@ -43,7 +43,7 @@ fetchRes.then(res =>
             let reviewElement = `
             <form action="submit" class="background-white d-flex flex-column form-inline a-review" id="profile-charity-1">
             <div class="input-group no-border">
-                <textarea placeholder="  ` + cd.name + `" class="default-cursor button-at-end no-border" name="profile-charity-1-name" id="profile-charity-1-name" cols="30" rows="1" readonly=""></textarea>
+                <textarea placeholder="${cd.name}" class="default-cursor button-at-end no-border" name="profile-charity-1-name" id="profile-charity-1-name" cols="30" rows="1" readonly=""></textarea>
                 <span class="input-group-btn">
                     <button class="btn btn-default state-button" type="button">
                         <i class="bi bi-pencil-fill"></i>
@@ -61,7 +61,7 @@ fetchRes.then(res =>
                 }
             }
             reviewElement += `</div>
-            <textarea placeholder="` + review.text + `" class="default-cursor no-border" name="profile-charity-1-review" id="profile-charity-1-review" cols="30" rows="3" readonly=""></textarea>
+            <textarea placeholder="${review.text}" class="default-cursor no-border" name="profile-charity-1-review" id="profile-charity-1-review" cols="30" rows="3" readonly=""></textarea>
             </form>`;
             document.getElementById('review-list').innerHTML += reviewElement;
         })
