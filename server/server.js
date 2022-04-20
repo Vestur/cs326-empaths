@@ -21,6 +21,7 @@ app.use(express.static("./static"));
 
 let accounts = [ {
                 id: '1',
+                name: faker.name.firstName() + " " + faker.name.lastName(),
                 username: faker.name.firstName(),
                 email: faker.internet.email(),
                 bio: faker.lorem.paragraph(),
@@ -78,6 +79,7 @@ function generate_fake_charity() {
         current_rating: faker.datatype.number(),
         likes: faker.datatype.number(),
     }
+    console.log(charity);
     return charity;
 }
 
@@ -110,11 +112,7 @@ async function saveAccounts(){
 async function search(query) {
     // return array of eins
     // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    let results = [];
-    for(let i = 0; i < 5; ++i) {
-        results.push(faker.datatype.number());
-    }
-    return results;
+    return [1243214, 1232133, 545435];
 }
 
 async function get_charity(ein) {
@@ -134,7 +132,7 @@ async function get_favorited_charities(user_id) {
 
 async function updateList(account_number, ein) {
     // update favorites list of account to include charity with ein ein
-    return JSON.parse(JSON.stringify([]));
+    return 0;
 }
 
 async function removeFromList(account_number, ein) {
@@ -142,21 +140,10 @@ async function removeFromList(account_number, ein) {
     return 0;
 }
 
-async function add_like(ein) {
-    // increment likes on charity
-    return 0;
-}
-
-async function delete_like(ein) {
-    //undo a like
-    return 0;
-}
-
 // charities
 
 app.post('/createCharity', async (request, response) => {
     const options = request.query;
-    // need database
 });
 
 app.get('/getCharity', async (request, response) => {
@@ -185,9 +172,6 @@ app.delete('/deleteCharity', async (request, response) => {
 app.post('/createLike', async (request, response) => {
     const options = request.query;
     try {
-        // add like to charity
-        // let charity_id = options["ein"];
-        // add_like(charity_id);
         response.status(200).json({ status: "success" });
     }
     catch (error) {
@@ -198,9 +182,6 @@ app.post('/createLike', async (request, response) => {
 app.delete('/deleteLike', async (request, response) => {
     const options = request.query;
     try {
-        // add like to charity
-        // let charity_id = options["ein"];
-        // delete_like(charity_id);
         response.status(200).json({ status: "success" });
     }
     catch (error) {
@@ -221,6 +202,7 @@ app.get('/getLikedCharities', async (request, response) => {
 });
 
 // reviews
+
 app.post('/createReview', async (request, response) => {
     const options = request.query;
 });
@@ -243,12 +225,17 @@ app.get('/getReviews', async (request, response) => {
 // search
 app.get('/search', async (request, response) => {
     const query = request.query;
+    console.log("1");
     try {
         let results = await search(query["query"]);
+        console.log("2");
+        console.log(results);
         response.status(200).json(results);
+        console.log("3");
     }
     catch (error) {
         response.status(404).json(error);
+        console.log("4");
     }
 });
 
@@ -341,26 +328,27 @@ app.delete('/deleteDonation', async (request, response) => {
 
 // user accounts
 app.post('/createAccount', async (request, response) => {
-    //await reload(accounts_JSONfile);
+    await reload(accounts_JSONfile);
     const options = request.body; //later, use faker as of now
     //pass_word will come into play later with autentication
     //repeat user names because of unique id?
     try {
-        //let new_user = {
-        //    id: faker.datatype.uuid(),
-        //    username: faker.name.firstName(),
-        //    email: faker.internet.email(),
-        //    bio: faker.lorem.paragraph(),
-        //    pfp: faker.image.avatar(),
-        //    location: faker.random.locale(),
-        //    favlist: [],
-        //    likes: [],
-        //    reviews: [],
-        //    donations: []
-        //};
-        //accounts.push(new_user);
-        //await saveAccounts();
-        //response.json(new_user);
+        let new_user = {
+            id: faker.datatype.uuid(),
+            name: faker.name.firstName() + " " + faker.name.lastName(),
+            username: faker.name.firstName(),
+            email: faker.internet.email(),
+            bio: faker.lorem.paragraph(),
+            pfp: faker.image.avatar(),
+            location: faker.random.locale(),
+            favlist: [],
+            likes: [],
+            reviews: [],
+            donations: []
+        };
+        accounts.push(new_user);
+        await saveAccounts();
+        response.json(new_user);
         response.status(200).json({"status": "success"});
     } catch (err){
         response.status(404).json(err);
@@ -383,10 +371,10 @@ app.get('/getAccount', async (request, response) => {
             }
         }
         if (!found) {
-            response.status(404).json({ status: "not found"});
+            response.status(404).json({"status": "not found"});
         }
     } catch (err){
-        response.status(404).json({ status: err });
+        response.status(404).json(err);
     }
 });
 
@@ -472,39 +460,35 @@ app.get('/getList', async (request, response) => {
 
 // add to list
 app.put('/updateList', async (request, response) => {
-    const options = request.query;
+    const body = request.body;
     try {
-        let account_id = options["account_id"];
-        let charity_ein = options["ein"];
-        let state = updateList(account_id, charity_ein);
+        let account_id = body["account_id"];
+        let charity_ein = body["ein"];
+        let state = await updateList(account_id, charity_ein);
         if(state === -1) {
             response.status(404).json({"status": "no such charity in favorites"})
         }
-        else {
-            response.status(200).json({"status": "success"});
-        }
+        response.status(200).json({"status": "success"});
     }
-    catch {
-        response.status(404).json({"status": "Must have account id and charity id passed in"})
+    catch (error) {
+        response.status(404).json(error);
     }
 });
 
 //delete from list
 app.delete('/deleteList', async (request, response) => {
-    const options = request.query;
+    const body = request.body;
     try {
-        let account_id = options["account_id"];
-        let charity_ein = options["ein"];
-        let state = removeFromList(account_id, charity_ein);
+        let account_id = body["account_id"];
+        let charity_ein = body["ein"];
+        let state = await removeFromList(account_id, charity_ein);
         if(state === -1) {
             response.status(404).json({"status": "no such charity in favorites"})
         }
-        else {
-            response.status(200).json({"status": "success"});
-        }
+        response.status(200).json({"status": "success"});
     }
-    catch {
-        response.status(404).json({"status": "Must have account id and charity id passed in"})
+    catch (error) {
+        response.status(404).json(error);
     }
 });
 
