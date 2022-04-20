@@ -334,7 +334,13 @@ app.delete('/removeFavorite', async (request, response) => {
 app.get('/getFavoritedCharities', async (request, response) => {
     const options = request.query;
     let user_id = null;
-    return await get_favorited_charities(user_id);
+    const data = await get_favorited_charities(user_id);
+    try {
+        response.status(200).json(data);
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
 });
 
 
