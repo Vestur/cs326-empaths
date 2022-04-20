@@ -17,3 +17,31 @@ deleteB.addEventListener('click', () => {
 });
 
 //get user account and donations list and then render in html 
+/**
+ * 
+ *export async function createCounter(name) {
+    const response = await fetch(`/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: name }),
+    });
+    const data = await response.json();
+    return data;
+  }
+
+export async function deleteCounter(name) {
+    // TODO: Add your solution here.
+    try {
+      const response = await fetch(`/delete?name=${name}`, {
+        method: 'GET',
+      });
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+ */
+
