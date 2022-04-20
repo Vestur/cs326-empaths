@@ -37,6 +37,10 @@ body {
     background-size: cover;
 }
 
+#profile-pic {
+    border-radius: 50%;
+}
+
 .profile-image-bio-container {
     margin-bottom: 1%;
 }

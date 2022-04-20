@@ -26,7 +26,7 @@ let accounts = [ {
                 username: faker.name.firstName(),
                 email: faker.internet.email(),
                 bio: faker.lorem.paragraph(),
-                pfp: faker.datatype.string(),
+                pfp: faker.internet.avatar(),
                 location: faker.lorem.paragraph(),
                 favlist: [],
                 likes: [],

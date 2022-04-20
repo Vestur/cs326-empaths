@@ -30,11 +30,22 @@ signoutB.addEventListener('click', () => {
     window.location.href = "login.html";
 });
 
+const pfp = document.getElementById('profile-pic');
+let options = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+};
+let data = await fetch("/getAccount?account_id=1", options);
+let account = await data.json();
+pfp.setAttribute("src", account.pfp);
+
 //send login info to server
 
-//dynamically create the page 
-//fetch static html page 
-//fetch call, 
+//dynamically create the page
+//fetch static html page
+//fetch call,
 //call repsonse.text
 //wrap in div?
 //document.body.innerHTML
@@ -42,6 +53,6 @@ signoutB.addEventListener('click', () => {
 //form fetch for you?
 
 ///route called login, redirect to user dashboard (better way for login information)
-//redirect denied or go to 
+//redirect denied or go to
 //express app.get(path,)
-//res.redirect 
+//res.redirect
