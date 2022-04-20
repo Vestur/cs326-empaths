@@ -334,6 +334,7 @@ app.post('/createAccount', async (request, response) => {
     try {
         let new_user = {
             id: faker.datatype.uuid(),
+            name: faker.name.firstName() + " " + faker.name.lastName(),
             username: faker.name.firstName(),
             email: faker.internet.email(),
             bio: faker.lorem.paragraph(),
