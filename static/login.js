@@ -36,8 +36,10 @@ loginB.addEventListener('click', () => {
 
 const signupB = document.getElementById("signup");
 signupB.addEventListener('click', () => {
-    // here account with be created and added to database 
+    // here, account with be created and added to database 
     // placeholder for milestone 3
+    const account = await createAccount();
+     
     window.location.href = "profile.html";
 });
 

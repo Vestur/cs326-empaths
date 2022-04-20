@@ -13,7 +13,7 @@ const app_key = keys.app_key;
 // boilerplate copied from routing lab
 
 const app = express();
-const port = 3000;
+const port = 5500;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
@@ -156,6 +156,7 @@ app.get('/getCharity', async (request, response) => {
     }
 });
 
+
 app.put('/updateCharity', async (request, response) => {
     const options = request.query;
 });
@@ -245,10 +246,36 @@ function generate_fake_donation(){
     return donation;
 }
 
+function generate_fake_donations_arr(){
+    let arr = [];
+    for(let i = 0; i < 15; i++){
+        arr.push(generate_fake_donation());
+    }
+    return arr; 
+}
+
+async function get_fake_donations_arr(user_id){
+        const data = generate_fake_donations_arr();
+        return data;
+}
+
+app.get('/getDonation', async (request, response) => {
+    const options = request.query;
+    let user_id = null;
+    const data = await get_fake_donations_arr(user_id);
+    try {
+
+        response.status(200).json(data);
+
+    } catch (err){
+
+        response.status(404).json(error);
+    }
+});
+
 // donation creation endpoint
 app.post('/createDonation', async (requent, response) => {
-    const options = request.body;
-    //charity name, amount, date
+    const options = request.body; //charity name, amount, date
     let account_id = options['account_id'];
     await reload(accounts_JSONfile);
 

@@ -321,6 +321,13 @@ img.avatar {
     color: gold;
 }
 
+.inputs {
+    font-size: 1em;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    border-radius: 10px;
+}
+
 table{
     border-collapse: collapse;
     font-size: medium;
