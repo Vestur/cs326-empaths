@@ -1,3 +1,26 @@
+async function createDonation(account_id) {
+    const response = await fetch(`/createDonation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ charity_name: faker.string, amount: faker.string, date: faker.string }),
+    });
+    const data = await response.json();
+    return data;
+  }
+
+async function deleteDonation(account_id) {
+    try {
+      const response = await fetch(`/deleteDonation`, {
+        method: 'DELETE',
+      }); 
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 const addrowB = document.getElementById("add_row");
 addrowB.addEventListener('click', () => {
@@ -17,31 +40,3 @@ deleteB.addEventListener('click', () => {
 });
 
 //get user account and donations list and then render in html 
-/**
- * 
- *export async function createCounter(name) {
-    const response = await fetch(`/create`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name: name }),
-    });
-    const data = await response.json();
-    return data;
-  }
-
-export async function deleteCounter(name) {
-    // TODO: Add your solution here.
-    try {
-      const response = await fetch(`/delete?name=${name}`, {
-        method: 'GET',
-      });
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
-  }
- */
-

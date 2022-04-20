@@ -23,6 +23,27 @@ const accounts_JSONfile = 'accounts.json';
 
 const __dirname = path.resolve(path.dirname(''));
 
+function generate_fake_charity() {
+    const charity = {
+        eid: faker.datatype.uuid(),
+        name: faker.company.companyName(),
+        address: faker.address.streetAddress(true),
+        accountability: faker.datatype.number(),
+        mission: faker.company.catchPhrase(),
+        current_rating: faker.datatype.number(),
+        likes: faker.datatype.number(),
+    }
+    return charity;
+}
+
+function generate_fake_charity_list() {
+    const fake_charities = [];
+    for(let i = 0; i < 7; i++) {
+        faker_charities.push(ganerate_fake_charity());
+    }
+    return fake_charities();
+}
+
 async function reload(filename) {
     try {
       const data = await readFile(filename, { encoding: 'utf8' });
@@ -59,6 +80,16 @@ async function get_charity(ein) {
     };
 }
 
+async function get_liked_charities(user_id) {
+    const data = generate_fake_charity_list();
+    return data;
+}
+
+async function get_favorited_charities(user_id) {
+    const data = generate_fake_charity_list();
+    return data;
+}
+
 async function updateList(account_number, ein) {
     // update favorites list of account to include charity with ein ein
     return 0;
@@ -93,10 +124,28 @@ app.delete('/deleteCharity', async (request, response) => {
 
 app.post('/createLike', async (request, response) => {
     const options = request.query;
+    try {
+        response.status(200).json({ status: "success" });
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
 });
 
 app.delete('/deleteLike', async (request, response) => {
     const options = request.query;
+    try {
+        response.status(200).json({ status: "success" });
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
+});
+
+app.get('/getLikedCharities', async (request, response) => {
+    const options = request.query;
+    let user_id = null;
+    return await get_liked_charities(user_id);
 });
 
 // reviews
@@ -121,10 +170,10 @@ app.get('/search', async (request, response) => {
     }
 });
 
-// donation creation endpoint 
+// donation creation endpoint
 app.post('/createDonation', async (requent, response) => {
-    const options = request.body; 
-    //charity name, amount, date 
+    const options = request.body;
+    //charity name, amount, date
     let account_id = options['account_id'];
     await reload(accounts_JSONfile);
 
@@ -141,21 +190,21 @@ app.post('/createDonation', async (requent, response) => {
     }
 });
 
-// donation deletion endpoint 
+// donation deletion endpoint
 app.delete('/deleteDonation', async (request, response) => {
-    const options = request.body; 
-    // extract user id, find account then delete donation from their 
+    const options = request.body;
+    // extract user id, find account then delete donation from their
     let account_id = options['account_id']; // user id
-    let charity = options['charity_name']; // name of charity user wants to delete 
+    let charity = options['charity_name']; // name of charity user wants to delete
     await reload(accounts_JSONfile);
 
     try{
         for(const [index, user_object] of accounts.entries()){   // go through accounts array, extract user object
             if(user_object.id === account_id){                  // if account id matches one passed in
-                let donations_arr = user_object.donations;     //account's donations array 
+                let donations_arr = user_object.donations;     //account's donations array
                 for(const [index, donation] of donations_arr.entries()){  //interate through donations array
                     if(donation.charity_name === charity){               //if found charity match
-                        donations_arr.splic(index);                    //delete from donations array 
+                        donations_arr.splic(index);                    //delete from donations array
                     }
                     else{
                         response.json({ error: `Donation Not Found` }); //donation doen't exist
@@ -172,7 +221,7 @@ app.delete('/deleteDonation', async (request, response) => {
         response.status(404).json(error);
     }
 });
- 
+
 // user accounts
 app.post('/createAccount', async (request, response) => {
     await reload(accounts_JSONfile);
@@ -181,26 +230,26 @@ app.post('/createAccount', async (request, response) => {
     //repeat user names because of unique id?
     try {
         let new_user = {
-            id: faker.number, 
-            username: faker.string, 
-            email: faker.string, 
+            id: faker.number,
+            username: faker.string,
+            email: faker.string,
             bio: faker.string,
-            pfp: faker.string, 
-            location: faker.string, 
+            pfp: faker.string,
+            location: faker.string,
             favlist: [],
             likes: [],
             reviews: [],
             donations: []
         };
         accounts.push(new_user);
-        await saveAccounts(); 
+        await saveAccounts();
         response.json(new_user);
         response.status(200).json({"status": "success"});
     } catch (err){
         response.status(404).json(err);
     }
 
-    //{id, fave list --> charity ids (ein), likes --> charity ids, reviews --> review ids, username, bio, email, profile --> string, set --> zip code, donations dono objects} 
+    //{id, fave list --> charity ids (ein), likes --> charity ids, reviews --> review ids, username, bio, email, profile --> string, set --> zip code, donations dono objects}
 });
 
 app.get('/getAccount', async (request, response) => {
@@ -255,6 +304,33 @@ app.delete('/deleteAccount', async (request, response) => {
 });
 
 // favorite lists
+app.post('/addFavorite', async (request, response) => {
+    const options = request.query;
+    // Process userid here...
+    try {
+        response.status(200).json({ status: "success" });
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
+});
+
+app.delete('/removeFavorite', async (request, response) => {
+    const options = request.query;
+    // Process userid here...
+    try {
+        response.status(200).json({ status: "success" });
+    }
+    catch (error) {
+        response.status(404).json({ status: err });
+    }
+});
+app.get('/getFavoritedCharities', async (request, response) => {
+    const options = request.query;
+    let user_id = null;
+    return await get_favorited_charities(user_id);
+});
+
 
 // initialize list (empty)
 app.post('/createList', async (request, response) => {
