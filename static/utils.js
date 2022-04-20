@@ -119,7 +119,7 @@ async function deleteLike(ein) {
   return data;
 }
 
-async function addFavorite(ein) {
+export async function addFavorite(ein) {
   const response = await fetch("/addFavorite", {
     method: 'POST',
     body: {
@@ -130,7 +130,7 @@ async function addFavorite(ein) {
   return data;
 }
 
-async function removeFavorite(ein) {
+export async function removeFavorite(ein) {
   const response = await fetch("/removeFavorite", {
     method: 'DELETE',
     body: {

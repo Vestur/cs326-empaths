@@ -6,9 +6,43 @@
     createLike - pass in charity id (add like to charity in database)
     deleteLike - undo a like (reduce number of likes charity has - add functionality to verify user doing the unliking had actually liked it)
     getLikedCharities - gives list of charity objects
-    createReview - create a review (add said review object to user and charity)
+    createReview - create a review object (add said review object to user and charity) of the form {  rid: faker.datatype.number(),
+                uid: faker.datatype.number(),
+                chid: faker.datatype.number(),
+                stars: faker.datatype.number(),
+                text: faker.lorem.paragraph()},
+                {  rid: faker.datatype.number(),
+                uid: faker.datatype.number(),
+                chid: faker.datatype.number(),
+                stars: faker.datatype.number(),
+                text: faker.lorem.paragraph()} 
     deleteReview - remove review from user and charity
     getReviews - gives list of review objects for a user
+    search - returns list of charity ids (i.e. the result of the search)
+    getDonation - return list of donations object (of form {charity_name: faker.company.companyName(), amount: faker.finance.amount(), date: faker.date.recent()}
+    createDonation - creates a donation object for a particular user and charity
+    deleteDonation - untrack a donation (you can't undo a donation)
+    createAccount - creates a user account using username, password, and email at a minimum
+    getAccount - returns a user object of the form ({
+                id: '1', 
+                name: faker.name.firstName() + " " + faker.name.lastName(),
+                username: faker.name.firstName(), 
+                email: faker.internet.email(), 
+                bio: faker.lorem.paragraph(),
+                pfp: faker.datatype.string(), 
+                location: faker.lorem.paragraph(), 
+                favlist: [],
+                likes: [],
+                reviews: [ review objects],
+                donations: []
+            })
+    updateAccount - update fields in account/user object
+    deleteAccount - delete specified user account
+    addFavorite - add a charity to a partiular user's favorites list
+    removeFavorite - remove a charity from a particular user's favorite's list
+    getFavoritedCharities - get a list of favorited charities 
+    
+
 # 2 At least one set of four screenshots of your client interface with descriptions
 
 # 3 The URL of your Heroku Application
