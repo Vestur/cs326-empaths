@@ -10,6 +10,7 @@ import * as database from "./database.js";
 // api keys
 const app_id = process.env.APP_ID;
 const app_key = process.env.APP_KEY;
+const PORT = process.env.PORT || 3000;
 
 // boilerplate copied from routing lab
 
@@ -503,7 +504,7 @@ app.all('*', async (request, response) => {
 });
 
 // Start the server.
-app.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
 });
 
