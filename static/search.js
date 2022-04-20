@@ -1,3 +1,4 @@
+import {addFavorite, removeFavorite} from "./utils.js";
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
 const search_button = document.getElementById("search_button");
@@ -57,17 +58,7 @@ function add_remove_listener() {
 
 async function add_to_favorites(ein) {
     try {
-        const response = await fetch('/updateList', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            query: {
-                'account_id': cur_account_id,
-                'ein': ein
-            },
-        });
-        let state = await response.json();
+        const response = addFavorite(ein);
         return true;
     }
     catch (error) {
@@ -78,17 +69,7 @@ async function add_to_favorites(ein) {
 
 async function remove_from_favorites(ein) {
     try {
-        let response = await fetch('/deleteList', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            query: {
-                'account_id': cur_account_id,
-                'ein': ein
-            },
-        });
-        let state = await response.json();
+        let response = removeFavorite(ein);
         return true;
     }
     catch (error) {
