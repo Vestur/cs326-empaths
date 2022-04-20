@@ -1,14 +1,15 @@
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
+import 'dotenv/config';
 import { readFile, writeFile } from 'fs/promises';
 import * as keys from "../keys.js";
 import {Faker, faker} from "@faker-js/faker"
 import * as database from "./database.js";
 
 // api keys
-const app_id = keys.app_id;
-const app_key = keys.app_key;
+const app_id = process.env.APP_ID;
+const app_key = process.env.APP_KEY;
 
 // boilerplate copied from routing lab
 
@@ -19,12 +20,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
 
 let accounts = [ {
-                id: '1', 
-                username: faker.name.firstName(), 
-                email: faker.internet.email(), 
+                id: '1',
+                username: faker.name.firstName(),
+                email: faker.internet.email(),
                 bio: faker.lorem.paragraph(),
-                pfp: faker.datatype.string(), 
-                location: faker.lorem.paragraph(), 
+                pfp: faker.datatype.string(),
+                location: faker.lorem.paragraph(),
                 favlist: [],
                 likes: [],
                 reviews: [ {  rid: faker.datatype.number(),
@@ -253,8 +254,8 @@ app.get('/search', async (request, response) => {
 
 function generate_fake_donation(){
     const donation = {
-        charity_name: faker.company.companyName(), 
-        amount: faker.finance.amount(), 
+        charity_name: faker.company.companyName(),
+        amount: faker.finance.amount(),
         date: faker.date.recent()
     };
     return donation;
@@ -265,7 +266,7 @@ function generate_fake_donations_arr(){
     for(let i = 0; i < 15; i++){
         arr.push(generate_fake_donation());
     }
-    return arr; 
+    return arr;
 }
 
 async function get_fake_donations_arr(user_id){
