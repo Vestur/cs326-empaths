@@ -53,4 +53,9 @@ Before we add or remove a favorite
 <img width="947" alt="search_after_delete_add" src="https://user-images.githubusercontent.com/42352267/164311158-c6f3f97c-bd87-42ce-8e3e-5eef3e826111.PNG">
 Decided to add Lubowitz to favorites, removed Crooks, Krajcik and Hackett.
 
+<img width="948" alt="donations_before" src="https://user-images.githubusercontent.com/42352267/164312066-de66be45-6e1b-488b-baf6-af9247981f4f.PNG">
+donations before changes
+
+<img width="960" alt="donations_after" src="https://user-images.githubusercontent.com/42352267/164312118-e31ca0f9-1f72-4a90-81eb-6ae25bf8ccf4.PNG">
+created a new donation
 # Part 3: Deployment
