@@ -18,32 +18,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
 
-let accounts = [ {
-                id: '1', 
-                username: faker.string, 
-                email: faker.string, 
-                bio: faker.string,
-                pfp: faker.string, 
-                location: faker.string, 
-                favlist: [],
-                likes: [],
-                reviews: [ {  rid: faker.number
-                          uid: faker.number
-                          chid: faker.number
-                          stars: faker.number
-                          text: faker.string},
-                          {  rid: faker.number
-                          uid: faker.number
-                          chid: faker.number
-                          stars: faker.number
-                          text: faker.string},
-                          {  rid: faker.number
-                          uid: faker.number
-                          chid: faker.number
-                          stars: faker.number
-                          text: faker.string} ],
-                donations: []
-            } ];
+//let accounts = [ {
+//                id: '1',
+//                username: faker.string,
+//                email: faker.string,
+//                bio: faker.string,
+//                pfp: faker.string,
+//                location: faker.string,
+//                favlist: [],
+//                likes: [],
+//                reviews: [ {  rid: faker.number
+//                          uid: faker.number
+//                          chid: faker.number
+//                          stars: faker.number
+//                          text: faker.string},
+//                          {  rid: faker.number
+//                          uid: faker.number
+//                          chid: faker.number
+//                          stars: faker.number
+//                          text: faker.string},
+//                          {  rid: faker.number
+//                          uid: faker.number
+//                          chid: faker.number
+//                          stars: faker.number
+//                          text: faker.string} ],
+//                donations: []
+//            } ];
 const accounts_JSONfile = 'accounts.json';
 
 const __dirname = path.resolve(path.dirname(''));
