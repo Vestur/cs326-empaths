@@ -3,7 +3,7 @@ import logger from 'morgan';
 import path from 'path';
 import 'dotenv/config';
 import { readFile, writeFile } from 'fs/promises';
-import * as keys from "../keys.js";
+//import * as keys from "../keys.js";
 import {Faker, faker} from "@faker-js/faker"
 import * as database from "./database.js";
 
