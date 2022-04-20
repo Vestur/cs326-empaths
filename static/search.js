@@ -5,10 +5,10 @@ const search_button = document.getElementById("search_button");
 let cur_account_id = -1;
 let search_results = [];
 
-function add_remove_listener() {
+function add_remove_listener(elem) {
     console.log("created");
     let classes= elem.classList;
-    let charity_num = int(elem.id);
+    let charity_num = parseInt(elem.id);
     let charity = search_results[charity_num];
 
     // find charity in question
@@ -106,7 +106,7 @@ function create_search_result_card(charity, num) {
     button.classList.add("results-button");
     button.classList.add("to-add");
     button.id = `${num}`;
-    button.addEventListener("click", add_remove_listener);
+    button.addEventListener("click", add_remove_listener(button));
     let choices = ["➖", "✔️"]
     let choice = Math.floor(Math.random() * 2);
 
@@ -126,7 +126,6 @@ function create_search_result_card(charity, num) {
     container_div.appendChild(card_body);
 
     search_response_body.appendChild(card_body);
-    console.log("ttttt");
 }
 
 async function search_for(query) {
@@ -143,7 +142,6 @@ async function search_for(query) {
         });
         let json_response = await response.json();
         search_response_body.innerHTML = "";
-        console.log(json_response);
 
         // assume response is array of ein numbers
         for(let i = 0; i < json_response.length; ++i) {
@@ -151,7 +149,6 @@ async function search_for(query) {
             if (i >= 10) {
                 break;
             }
-            console.log("yup");
             let response1 = await fetch("/getCharity", {
                 method: 'GET',
                 headers: {
@@ -161,7 +158,6 @@ async function search_for(query) {
                     'ein': json_response[i],
                 }
             });
-            console.log("yupper");
             let new_charity = await response1.json();
             create_search_result_card(new_charity, i);
         }

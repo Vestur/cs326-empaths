@@ -130,12 +130,12 @@ async function get_favorited_charities(user_id) {
 
 async function updateList(account_number, ein) {
     // update favorites list of account to include charity with ein ein
-    return 0;
+    return JSON.parse(JSON.stringify([]));
 }
 
 async function removeFromList(account_number, ein) {
     // update favorites list of account to exclude charity with ein ein
-    return 0;
+    return JSON.parse(JSON.stringify([]));
 }
 
 // charities
@@ -421,7 +421,7 @@ app.put('/updateList', async (request, response) => {
     try {
         let account_id = body["account_id"];
         let charity_ein = body["ein"];
-        let state = await updateList(account_id, charity_ein);
+        let state = updateList(account_id, charity_ein);
         if(state === -1) {
             response.status(404).json({"status": "no such charity in favorites"})
         }
@@ -438,14 +438,17 @@ app.delete('/deleteList', async (request, response) => {
     try {
         let account_id = body["account_id"];
         let charity_ein = body["ein"];
-        let state = await removeFromList(account_id, charity_ein);
+        console.log("aaaa");
+        let state = removeFromList(account_id, charity_ein);
         if(state === -1) {
             response.status(404).json({"status": "no such charity in favorites"})
         }
         response.status(200).json({"status": "success"});
+        console.log("rrrr");
     }
     catch (error) {
         response.status(404).json(error);
+        console.log("rrrrrrrrr");
     }
 });
 
