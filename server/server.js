@@ -447,49 +447,49 @@ app.get('/getFavoritedCharities', async (request, response) => {
 });
 
 
-// initialize list (empty)
-app.post('/createList', async (request, response) => {
-    const options = request.query;
-});
+// // initialize list (empty)
+// app.post('/createList', async (request, response) => {
+//     const options = request.query;
+// });
 
-// get array of charity items that populate list
-app.get('/getList', async (request, response) => {
-    const options = request.query;
-});
+// // get array of charity items that populate list
+// app.get('/getList', async (request, response) => {
+//     const options = request.query;
+// });
 
-// add to list
-app.put('/updateList', async (request, response) => {
-    const body = request.body;
-    try {
-        let account_id = body["account_id"];
-        let charity_ein = body["ein"];
-        let state = await updateList(account_id, charity_ein);
-        if(state === -1) {
-            response.status(404).json({"status": "no such charity in favorites"})
-        }
-        response.status(200).json({"status": "success"});
-    }
-    catch (error) {
-        response.status(404).json(error);
-    }
-});
+// // add to list
+// app.put('/updateList', async (request, response) => {
+//     const body = request.body;
+//     try {
+//         let account_id = body["account_id"];
+//         let charity_ein = body["ein"];
+//         let state = await updateList(account_id, charity_ein);
+//         if(state === -1) {
+//             response.status(404).json({"status": "no such charity in favorites"})
+//         }
+//         response.status(200).json({"status": "success"});
+//     }
+//     catch (error) {
+//         response.status(404).json(error);
+//     }
+// });
 
-//delete from list
-app.delete('/deleteList', async (request, response) => {
-    const body = request.body;
-    try {
-        let account_id = body["account_id"];
-        let charity_ein = body["ein"];
-        let state = await removeFromList(account_id, charity_ein);
-        if(state === -1) {
-            response.status(404).json({"status": "no such charity in favorites"})
-        }
-        response.status(200).json({"status": "success"});
-    }
-    catch (error) {
-        response.status(404).json(error);
-    }
-});
+// //delete from list
+// app.delete('/deleteList', async (request, response) => {
+//     const body = request.body;
+//     try {
+//         let account_id = body["account_id"];
+//         let charity_ein = body["ein"];
+//         let state = await removeFromList(account_id, charity_ein);
+//         if(state === -1) {
+//             response.status(404).json({"status": "no such charity in favorites"})
+//         }
+//         response.status(200).json({"status": "success"});
+//     }
+//     catch (error) {
+//         response.status(404).json(error);
+//     }
+// });
 
 // Load index.html
 app.get('/', function(req, res) {
