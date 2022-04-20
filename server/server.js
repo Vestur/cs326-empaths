@@ -20,6 +20,7 @@ app.use(express.static("./static"));
 
 let accounts = [ {
                 id: '1', 
+                name: faker.name.firstName() + " " + faker.name.lastName(),
                 username: faker.name.firstName(), 
                 email: faker.internet.email(), 
                 bio: faker.lorem.paragraph(),
