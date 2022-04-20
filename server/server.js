@@ -33,6 +33,7 @@ function generate_fake_charity() {
         current_rating: faker.datatype.number(),
         likes: faker.datatype.number(),
     }
+    console.log(charity);
     return charity;
 }
 
