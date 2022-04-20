@@ -48,8 +48,15 @@ async function search(query) {
 }
 
 async function get_charity(ein) {
-    const faker_ret = Faker()
-    return faker_ret;
+    // get charity from database in form of object below
+    return {eid: ein,
+        name: "awesome charity",
+        address: "shhh its a secret",
+        accountability: 1000,
+        mission: `To make the number ${ein} cool`,
+        current_rating: 5,
+        likes: 1000
+    };
 }
 
 async function updateList(account_number, ein) {
@@ -265,7 +272,10 @@ app.put('/updateList', async (request, response) => {
     try {
         let account_id = body["account_id"];
         let charity_ein = body["ein"];
-        await updateList(account_id, charity_ein);
+        let state = await updateList(account_id, charity_ein);
+        if(state === -1) {
+            response.status(404).json({"status": "no such charity in favorites"})
+        }
         response.status(200).json({"status": "success"});
     }
     catch (error) {
@@ -279,7 +289,10 @@ app.delete('/deleteList', async (request, response) => {
     try {
         let account_id = body["account_id"];
         let charity_ein = body["ein"];
-        await removeFromList(account_id, charity_ein);
+        let state = await removeFromList(account_id, charity_ein);
+        if(state === -1) {
+            response.status(404).json({"status": "no such charity in favorites"})
+        }
         response.status(200).json({"status": "success"});
     }
     catch (error) {

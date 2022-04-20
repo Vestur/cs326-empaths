@@ -1,5 +1,3 @@
-
-let search_results = [];
 const search_button = document.getElementById("search");
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
@@ -64,7 +62,11 @@ function create_search_result_card(charity, num) {
     button.classList.add("results-button");
     button.classList.add("to-add");
     button.id = `${num}`;
-    button.textContent = "➖";
+
+    let choices_choices = ["➖", "✔️"];
+    let choice = Math.floor(Math.random() * 1);
+    button.textContent = choices_choices[choice];
+    
     outter_div.appendChild(name);
     outter_div.appendChild(button);
     let info_div = document.createElement("div")
