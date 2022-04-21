@@ -55,4 +55,4 @@ Our website is at: [https://cs326-charitable.herokuapp.com/](https://cs326-chari
 - **Parsua**: login page frontend/CRUD, donations page frontend/CRUD, sidebar frontend
 - **Eddie**: search page frontend/CRUD, milestone2 writeup
 - **Mathew**: favorites page frontend/CRUD, likes page frontend/CRUD, Heroku deployment, milestone2 formatting
-- **Paarth**: server creation, `faker.js` setup,, profile page frontend/CRUD, 
+- **Paarth**: server creation, `faker.js` setup, profile page frontend/CRUD
