@@ -59,4 +59,7 @@ donations before changes
 <img width="960" alt="donations_after" src="https://user-images.githubusercontent.com/42352267/164312118-e31ca0f9-1f72-4a90-81eb-6ae25bf8ccf4.PNG">
 created a new donation
 
+<img width="947" alt="profile_page" src="https://user-images.githubusercontent.com/42352267/164354655-2460b3d7-2b5d-4126-a700-5cd2418fbfab.PNG">
+On profile page, you can update your profile picture, update your bio, read any reviews you've made, edit those reviews, delete parts of your bio, update various profile information points (username, password, location, etc..)
+
 # Part 3: Deployment
