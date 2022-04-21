@@ -62,4 +62,7 @@ created a new donation
 <img width="947" alt="profile_page" src="https://user-images.githubusercontent.com/42352267/164354655-2460b3d7-2b5d-4126-a700-5cd2418fbfab.PNG">
 On profile page, you can update your profile picture, update your bio, read any reviews you've made, edit those reviews, delete parts of your bio, update various profile information points (username, password, location, etc..)
 
+<img width="948" alt="signup" src="https://user-images.githubusercontent.com/42352267/164354908-ba1380f2-c484-4d2d-b530-d693b9d20536.PNG">
+From log in page, you can press sign up which will initiate a process to create a user, which is created by entering your information on the profile page.
+
 # Part 3: Deployment
