@@ -5,12 +5,18 @@ import 'dotenv/config';
 import { readFile, writeFile } from 'fs/promises';
 //import * as keys from "../keys.js";
 import {Faker, faker} from "@faker-js/faker"
-import * as database from "./database.js";
+import {CharitableDatabase} from "./database.js";
 
 // api keys
 const app_id = process.env.APP_ID;
 const app_key = process.env.APP_KEY;
 const PORT = process.env.PORT || 3000;
+const dburl = process.env.DBURL;
+
+// database connection
+const db = new CharitableDatabase(dburl);
+await db.connect();
+await db.init();
 
 // boilerplate copied from routing lab
 
