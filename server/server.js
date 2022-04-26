@@ -1,11 +1,9 @@
 import express from 'express';
-import logger from 'morgan';
 import path from 'path';
 import 'dotenv/config';
 import { readFile, writeFile } from 'fs/promises';
-//import * as keys from "../keys.js";
-import {Faker, faker} from "@faker-js/faker"
-import {CharitableDatabase} from "./database.js";
+import { faker} from "@faker-js/faker"
+import { CharitableDatabase } from "./database.js";
 
 // api keys
 const app_id = process.env.APP_ID;
@@ -53,9 +51,12 @@ let accounts = [ {
                           text: faker.lorem.paragraph()} ],
                 donations: []
             } ];
-const accounts_JSONfile = 'accounts.json';
 
 const __dirname = path.resolve(path.dirname(''));
+
+///////////////////////////////
+// Generators for dummy data
+///////////////////////////////
 
 function generate_fake_review() {
     const review = {
@@ -97,23 +98,9 @@ function generate_fake_charity_list() {
     return fake_charities;
 }
 
-async function reload(filename) {
-    try {
-      const data = await readFile(filename, { encoding: 'utf8' });
-      accounts = JSON.parse(data);
-    } catch (err) {
-      accounts = [];
-    }
-  }
-
-async function saveAccounts(){
-    try {
-        const data = JSON.stringify(accounts);
-        await writeFile(accounts_JSONfile, data, { encoding: 'utf8' });
-    } catch (err) {
-        console.log(err);
-    }
-}
+///////////////////////////////
+// CRUD Helpers
+///////////////////////////////
 
 async function search(query) {
     // return array of eins
@@ -150,7 +137,9 @@ async function removeFromList(account_number, ein) {
     return 0;
 }
 
-// charities
+///////////////////////////////
+// Endpoints
+///////////////////////////////
 
 app.post('/createCharity', async (request, response) => {
     const options = request.query;
@@ -284,7 +273,6 @@ app.get('/getDonation', async (request, response) => {
 app.post('/createDonation', async (requent, response) => {
     const options = request.body; //charity name, amount, date
     let account_id = options['account_id'];
-    await reload(accounts_JSONfile);
 
     try {
         for(const [index, user_object] of accounts.entries()){
@@ -305,7 +293,6 @@ app.delete('/deleteDonation', async (request, response) => {
     // extract user id, find account then delete donation from their
     let account_id = options['account_id']; // user id
     let charity = options['charity_name']; // name of charity user wants to delete
-    await reload(accounts_JSONfile);
 
     try{
         for(const [index, user_object] of accounts.entries()){   // go through accounts array, extract user object
@@ -333,7 +320,6 @@ app.delete('/deleteDonation', async (request, response) => {
 
 // user accounts
 app.post('/createAccount', async (request, response) => {
-    //await reload(accounts_JSONfile);
     const options = request.body; //later, use faker as of now
     //pass_word will come into play later with autentication
     //repeat user names because of unique id?
@@ -363,7 +349,6 @@ app.post('/createAccount', async (request, response) => {
 });
 
 app.get('/getAccount', async (request, response) => {
-    //await reload(accounts_JSONfile);
     const options = request.query;
     let account_id = options['account_id']; // user id
     try {
@@ -384,7 +369,6 @@ app.get('/getAccount', async (request, response) => {
 });
 
 app.put('/updateAccount', async (request, response) => {
-    //await reload(accounts_JSONfile);
     const options = request.query;
     let account_id = options['account_id']; // user id
     try {
@@ -402,7 +386,6 @@ app.put('/updateAccount', async (request, response) => {
 });
 
 app.delete('/deleteAccount', async (request, response) => {
-    //await reload(accounts_JSONfile);
     const options = request.query;
     let account_id = options['account_id']; // user id
     try {
