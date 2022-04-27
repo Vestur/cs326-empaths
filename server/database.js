@@ -37,8 +37,8 @@ export class CharitableDatabase {
 					bio: 'I am test subject one. Commmence with your testing.',
 					pfp: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih0.redbubble.net%2Fimage.193421889.8165%2Fflat%2C1000x1000%2C075%2Cf.jpg&f=1&nofb=1',
 					location: '00000',
-					favlist: [0, 1],
-					likes: [0, 1, 2],
+					favlist: ['000000030', '000000144'],
+					likes: ['000000030', '000000144', '000000147'],
 					reviews: [0],
 					donations: [
 						{ charityName: 'Fake 1', amount: '100', date: '00/00/00' },
@@ -52,8 +52,8 @@ export class CharitableDatabase {
 					bio: 'I am test subject two. Commmence with your testing.',
 					pfp: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnecaonline.com%2Fwp-content%2Fuploads%2F2013%2F06%2F1300h-PBody.jpg&f=1&nofb=1',
 					location: '00000',
-					favlist: [0, 2],
-					likes: [2, 1],
+					favlist: ['000000030', '000000147'],
+					likes: ['000000147', '000000144'],
 					reviews: [1, 2],
 					donations: [
 						{ charityName: 'Fake 2', amount: '100', date: '00/00/00' },
@@ -71,21 +71,21 @@ export class CharitableDatabase {
 				{
 					rid: 0,
 					uid: 0,
-					chid: 1,
+					chid: '000000144',
 					stars: 3,
 					text: 'Banana Slicer Saved My Life: What can I say about the 571B Banana Slicer that hasn’t already been said about the wheel, penicillin, or the iPhone…. this is one of the greatest inventions of all time. My husband and I would argue constantly over who had to cut the day’s banana slices. It’s one of those chores NO ONE wants to do! You know, the old ‘I spent the entire day rearing OUR children, maybe YOU can pitch in a little and cut these bananas?’ Then there’s, ‘You think I have the energy to slave over your damn bananas? I worked a 12-hour shift just to come home to THIS?!’ These are the things that can destroy an entire relationship. It got to the point where our children could sense the tension. The minute I heard our six-year-old girl in her bedroom, re-enacting our daily banana fight with her Barbie dolls, I knew we had to make a change. That’s when I found the 571B Banana Slicer. Our marriage has never been healthier.'
 				},
 				{
 					rid: 1,
 					uid: 1,
-					chid: 0,
+					chid: '000000030',
 					stars: 1,
 					text: 'One star is too much for this product. I don’t know if this is a scam or if mine was broken, but it doesn’t work and I am still getting abducted by UFOs on a regular basis. Maybe the battery’s dead? I’m literally inside of a UFO right now, and the thing’s just sitting there.'
 				},
 				{
 					rid: 2,
 					uid: 1,
-					chid: 2,
+					chid: '000000147',
 					stars: 5,
 					text: 'DO IT, just DO IT! Don’t let your dreams be dreams. Yesterday, you said tomorrow. So just. DO IT! Make. your dreams. COME TRUE! Just… do it! Some people dream of success, while you’re gonna wake up and work HARD at it! NOTHING IS IMPOSSIBLE!You should get to the point where anyone else would quit, and you’re not gonna stop there. NO! What are you waiting for? … DO IT! Just… DO IT! Yes you can! Just do it! If you’re tired of starting over, stop. giving. up.'
 				}
@@ -98,17 +98,17 @@ export class CharitableDatabase {
 		if (charityCount === 0) {
 			await this.charityCollection.insertMany([
 				{
-					eid: 0,
+					eid: '000000030',
 					reviews: [1],
 					totalLikes: 1
 				},
 				{
-					eid: 1,
+					eid: '000000144',
 					reviews: [0],
 					totalLikes: 2
 				},
 				{
-					eid: 2,
+					eid: '000000147',
 					reviews: [2],
 					totalLikes: 2
 				}
