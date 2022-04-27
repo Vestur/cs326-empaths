@@ -1,4 +1,4 @@
-import {addFavorite, removeFavorite} from "./utils.js";
+import {createCharityCard, addFavorite, removeFavorite} from "./utils.js";
 const searchbar = document.getElementById("searchbar");
 const search_response_body = document.getElementById("response-body");
 const search_button = document.getElementById("search_button");
@@ -82,11 +82,11 @@ function create_search_result_card(charity, num) {
     let container_div = document.createElement("div");
     container_div.classList.add("card");
     container_div.classList.add("charitable-card");
-    
+
     let card_body = document.createElement("div");
     card_body.classList.add("card-body");
     card_body.classList.add("background-white");
-  
+
     let outter_div = document.createElement("div");
     outter_div.classList.add("card-title");
     outter_div.classList.add("charitable-card-title");
@@ -94,7 +94,7 @@ function create_search_result_card(charity, num) {
     outter_div.classList.add("justify-content-between");
     let name = document.createElement("div");
     let charity_name = charity.name;
-  
+
     name.appendChild(document.createTextNode(charity_name));
     let button = document.createElement("button");
     button.classList.add("btn");
@@ -119,9 +119,9 @@ function create_search_result_card(charity, num) {
     info_div.appendChild(document.createTextNode(charity_mission));
     card_body.appendChild(outter_div);
     card_body.appendChild(info_div);
-  
+
     container_div.appendChild(card_body);
-  
+
     search_response_body.appendChild(container_div);
   }
 
@@ -129,7 +129,7 @@ async function search_for(query) {
     let response = [];
     search_results = [];
     try {
-        response = await fetch('/search', {
+        response = await fetch(`/search?query=${query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -141,25 +141,31 @@ async function search_for(query) {
         let json_response = await response.json();
         search_response_body.innerHTML = "";
 
-        // assume response is array of ein numbers
-        for(let i = 0; i < json_response.length; ++i) {
-            // limit to ten search results
-            if (i >= 10) {
-                break;
-            }
-            let response1 = await fetch("/getCharity", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                query: {
-                    'ein': json_response[i],
-                }
-            });
-            let new_charity = await response1.json();
-            create_search_result_card(new_charity, i);
-            search_results.push(new_charity);
+        for(let i = 0; i < json_response.length; i++) {
+            let charity = json_response[i];
+            create_search_result_card(charity, i);
+            search_results.push(charity);
         }
+
+        // assume response is array of ein numbers
+        //for(let i = 0; i < json_response.length; ++i) {
+        //    // limit to ten search results
+        //    if (i >= 10) {
+        //        break;
+        //    }
+        //    let response1 = await fetch("/getCharity", {
+        //        method: 'GET',
+        //        headers: {
+        //            'Content-Type': 'application/json',
+        //        },
+        //        query: {
+        //            'ein': json_response[i],
+        //        }
+        //    });
+        //    let new_charity = await response1.json();
+        //    create_search_result_card(new_charity, i);
+        //    search_results.push(new_charity);
+        //}
     }
     catch (err) {
         console.log("error searching");
@@ -172,6 +178,7 @@ async function search_for(query) {
 search_button.addEventListener('click', async () => {
     // get search query
     const query = searchbar.value;
+    console.log(searchbar.value);
     // search and build results on page
     await search_for(query);
 })

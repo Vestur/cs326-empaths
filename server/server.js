@@ -1,18 +1,20 @@
 import express from 'express';
 import path from 'path';
 import 'dotenv/config';
-import { readFile, writeFile } from 'fs/promises';
-import { faker} from "@faker-js/faker"
+import { faker } from "@faker-js/faker"
+import fetch from "node-fetch";
 import { CharitableDatabase } from "./database.js";
 
 // api keys
-const app_id = process.env.APP_ID;
-const app_key = process.env.APP_KEY;
+const APP_ID = process.env.APP_ID;
+const APP_KEY = process.env.APP_KEY;
 const PORT = process.env.PORT || 3000;
-const dburl = process.env.DBURL;
+const DBURL = process.env.DBURL;
+const ENDPOINT = `https://api.data.charitynavigator.org/v2/`
+const API_KEY=`app_id=${APP_ID}&app_key=${APP_KEY}`
 
 // database connection
-const db = new CharitableDatabase(dburl);
+const db = new CharitableDatabase(DBURL);
 await db.connect();
 await db.init();
 
@@ -102,19 +104,49 @@ function generate_fake_charity_list() {
 // CRUD Helpers
 ///////////////////////////////
 
+function createClientCharity(serverCharity, user) {
+    const address = `${serverCharity.mailingAddress.streetAddress1} ${serverCharity.mailingAddress.city}, ${serverCharity.mailingAddress.stateOrProvince}`;
+
+    //TODO
+    const charity = {
+        eid: serverCharity.ein,
+        name: serverCharity.charityName,
+        address: address,
+        mission: serverCharity.mission,
+        accountability: faker.datatype.number(),
+        current_rating: faker.datatype.number(),
+        likes: faker.datatype.number(),
+    }
+    return charity;
+}
+
 async function search(query) {
     // return array of eins
     // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
-    let search_results = [];
-    for(let i = 0; i < 5; ++i) {
-        search_results.push(faker.datatype.number());
+    const response = await fetch(`${ENDPOINT}Organizations?${API_KEY}&search=${query}&pageSize=25`, {
+        method: 'GET',
+    });
+    const data = await response.json();
+
+    const charities = [];
+    for(let serverCharity of data) {
+       charities.push(createClientCharity(serverCharity, null));
     }
-    return search_results;
+    //let search_results = [];
+    //for(let i = 0; i < 5; ++i) {
+    //    search_results.push(faker.datatype.number());
+    //}
+    return charities;
 }
 
 async function get_charity(ein) {
     // get charity from database in form of object below
-    return generate_fake_charity();
+    const response = await fetch(`${ENDPOINT}Organizations/${ein}?${API_KEY}`, {
+        method: 'GET',
+    });
+    const data = response.json();
+
+    return createClientCharity(data, null);
 }
 
 async function get_liked_charities(user_id) {
@@ -134,7 +166,7 @@ async function updateList(account_number, ein) {
 
 async function removeFromList(account_number, ein) {
     // update favorites list of account to exclude charity with ein ein
-    return 0;
+    return 0 ;
 }
 
 ///////////////////////////////
