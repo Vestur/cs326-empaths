@@ -143,7 +143,7 @@ async function search_for(query) {
 
         for(let i = 0; i < json_response.length; i++) {
             let charity = json_response[i];
-            create_search_result_card(charity, i);
+            search_response_body.appendChild(await createCharityCard(charity));
             search_results.push(charity);
         }
 

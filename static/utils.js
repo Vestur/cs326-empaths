@@ -1,5 +1,5 @@
 async function getReviews(ein) {
-  const response = await fetch("/getReviews", {
+  const response = await fetch(`/getReviews?ein=${ein}`, {
     method: 'GET',
   });
   const data = await response.json();

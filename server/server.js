@@ -114,10 +114,41 @@ function generate_fake_charity_list() {
 // CRUD Helpers
 ///////////////////////////////
 
-function createClientCharity(serverCharity, user) {
+function formatAddress(street, city, state) {
+  let address = "";
+  if(state) {
+    address = state;
+    if(city) {
+      address = `${city}, ${address}`;
+      if(street) {
+        address = `${street} ${address}`;
+      }
+    }
+  }
+  return address;
+}
+
+async function createClientCharity(serverCharity, user) {
   //TODO
   //Existence checks
-  const address = `${serverCharity.mailingAddress.streetAddress1} ${serverCharity.mailingAddress.city}, ${serverCharity.mailingAddress.stateOrProvince}`;
+  //const address = `${serverCharity.mailingAddress.streetAddress1} ${serverCharity.mailingAddress.city}, ${serverCharity.mailingAddress.stateOrProvince}`;
+  const address = formatAddress(serverCharity.mailingAddress.streetAddress1,
+                                serverCharity.mailingAddress.city,
+                                serverCharity.mailingAddress.stateOrProvince);
+
+  let likes = 0;
+  let current_rating = 0;
+  let accountability = 0;
+
+  try {
+    const dbCharity = await db.readCharity(serverCharity.ein);
+    if(dbCharity != null) {
+      likes = dbCharity.totalLikes;
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
 
   //TODO
   const charity = {
@@ -127,7 +158,7 @@ function createClientCharity(serverCharity, user) {
     mission: serverCharity.mission,
     accountability: faker.datatype.number(),
     current_rating: faker.datatype.number(),
-    likes: faker.datatype.number(),
+    likes: likes,
   };
   return charity;
 }
@@ -145,7 +176,7 @@ async function search(query) {
 
   const charities = [];
   for (let serverCharity of data) {
-    charities.push(createClientCharity(serverCharity, null));
+    charities.push(await createClientCharity(serverCharity, null));
   }
   //let search_results = [];
   //for(let i = 0; i < 5; ++i) {
@@ -161,14 +192,14 @@ async function get_charity(ein) {
   });
   const data = await response.json();
 
-  return createClientCharity(data, null);
+  return await createClientCharity(data, null);
 }
 
 async function get_liked_charities(user_id) {
   const data = [];
   try {
     const user = await db.readUser(0);
-    for (let ein of user.favlist) {
+    for (let ein of user.likes) {
       let charity = await get_charity(ein);
       data.push(charity);
     }
@@ -180,7 +211,17 @@ async function get_liked_charities(user_id) {
 }
 
 async function get_favorited_charities(user_id) {
-  const data = generate_fake_charity_list();
+  const data = [];
+  try {
+    const user = await db.readUser(0);
+    for (let ein of user.favlist) {
+      let charity = await get_charity(ein);
+      data.push(charity);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  //const data = generate_fake_charity_list();
   return data;
 }
 
@@ -259,12 +300,19 @@ app.delete("/deleteReview", async (request, response) => {
 });
 
 app.get("/getReviews", async (request, response) => {
-  const options = request.body;
+  const options = request.query;
   const data = generate_fake_reviews();
+  //const data = [];
   try {
+    //const dbCharity = await db.readCharity(options.ein);
+
+    //for(let rid of dbCharity.reviews) {
+    //  data.push(await db.readReview(rid));
+    //}
+
     response.status(200).json(data);
   } catch (error) {
-    response.status(404).json({ status: err });
+    response.status(404).json({ status: error });
   }
 });
 
