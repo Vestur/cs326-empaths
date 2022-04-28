@@ -35,7 +35,7 @@ fetchRes.then(res =>
     document.getElementById('username').value = d.username;
     document.getElementById('email').value = d.email;
     document.getElementById('location').value = d.location;
-    const pfp = document.getElementById('profile-pic');
+    const pfp = document.getElementById('main-profile-pic');
     pfp.setAttribute("src", d.pfp);
     for (let review of d.reviews) {
         let options = {

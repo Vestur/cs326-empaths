@@ -42,7 +42,7 @@ export async function createCharityCard(charity) {
 
   const cardSubtitle = document.createElement("div");
   cardSubtitle.classList.add("card-subtitle", "mb-2", "text-muted");
-  cardSubtitle.innerHTML = charity.address;
+  cardSubtitle.innerHTML = `Location: ${charity.address}`;
 
   cardTitle.appendChild(wrapper);
   cardTitle.appendChild(likes);
@@ -55,7 +55,7 @@ export async function createCharityCard(charity) {
   const targetId = `reviews-wrapper-${charity.eid}`;
 
   const reviewsButton = document.createElement("button");
-  reviewsButton.classList.add("btn", "btn-secondary");
+  reviewsButton.classList.add("btn", "btn-outline-primary", "btn-small", "reviews-button");
   reviewsButton.setAttribute("type", "button");
   reviewsButton.setAttribute("data-bs-toggle", "collapse");
   reviewsButton.setAttribute("data-bs-target", "#"+targetId);
