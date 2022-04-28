@@ -168,6 +168,30 @@ export class CharitableDatabase {
 		}
 	}
 
+	async createChartiy(eid) {
+		try {
+			const charityObj = {
+				eid: eid,
+				reviews: [],
+				totalLikes: 0
+			};
+
+			const res = await this.charityCollection.insertOne(charityObj);
+			return res;
+		} catch(err) {
+			return err;
+		}
+	}
+
+	async readCharity(eid) {
+		try {
+			const res = await this.charityCollection.findOne({ eid: eid });
+			return res;
+		} catch(err) {
+			return err;
+		}
+	}
+
 	async createFavorite(userId, charityId) {
 		try {
 			const res = await this.userCollection.updateOne({ id: userId }, { $push: { favlist: charityId }});
