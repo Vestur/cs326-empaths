@@ -244,6 +244,15 @@ export class CharitableDatabase {
 		}
 	}
 
+	async readReview(rid) {
+		try {
+			const res = await this.reviewCollection.findOne({ rid: rid });
+			return res;
+		} catch(err) {
+			return err;
+		}
+	}
+
 	async updateReview(reviewId, stars, text) {
 		try {
 			const res = await this.reviewCollection.updateOne({ rid: reviewId }, { $set: { stars: stars, text: text } });
