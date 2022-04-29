@@ -105,6 +105,23 @@ body {
     margin: 8px;
 }
 
+.review-box {
+    margin-bottom: 8px;
+}
+
+.review-submit {
+    margin: auto;
+}
+
+.review-rating {
+    font-weight: bold;
+}
+
+.review-creator-wrapper {
+    padding: 8px;
+    text-align: center;
+}
+
 #manage-reviews-label {
     margin-bottom: 1.5%;
 }

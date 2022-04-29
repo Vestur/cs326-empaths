@@ -16,7 +16,8 @@ export async function createCharityCard(charity) {
 
   const cardHeader = document.createElement("div");
   cardHeader.classList.add("card-header");
-  cardHeader.innerHTML = `Rating - ${charity.current_rating}`;
+  const rating = charity.current_rating !== null ? charity.current_rating : "not rated";
+  cardHeader.innerHTML = `Rating - ${rating}`;
 
   const cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
@@ -50,7 +51,7 @@ export async function createCharityCard(charity) {
   info.classList.add("card-text", "charitable-card-text");
   info.innerHTML = charity.mission;
 
-  const reviews = await getReviews();
+  const reviews = charity.reviews;
 
   const targetId = `reviews-wrapper-${charity.eid}`;
 
@@ -76,6 +77,7 @@ export async function createCharityCard(charity) {
     const reviewRating = document.createElement("span");
     const reviewText = document.createElement("p");
 
+    reviewRating.classList.add("review-rating");
     reviewRating.innerHTML = `Review rating - ${review.stars}`;
     reviewText.innerHTML = review.text;
 
@@ -84,7 +86,21 @@ export async function createCharityCard(charity) {
 
     reviewsList.appendChild(reviewItem);
   }
+
+  const reviewCreatorWrapper = document.createElement("div");
+  reviewCreatorWrapper.classList.add("review-creator-wrapper");
+  const reviewsCreator = document.createElement("textarea");
+  reviewsCreator.placeholder = "Write a review...";
+  reviewsCreator.classList.add("form-control", "review-box");
+
+  const reviewsCreatorSubmit = document.createElement("button");
+  reviewsCreatorSubmit.innerHTML = "Submit";
+  reviewsCreatorSubmit.classList.add("btn", "btn-primary", "review-submit");
+
+  reviewCreatorWrapper.appendChild(reviewsCreator);
+  reviewCreatorWrapper.appendChild(reviewsCreatorSubmit);
   reviewsWrapper.appendChild(reviewsList);
+  reviewsWrapper.appendChild(reviewCreatorWrapper);
 
   cardBody.appendChild(cardTitle);
   cardBody.appendChild(cardSubtitle);

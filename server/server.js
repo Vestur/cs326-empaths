@@ -109,6 +109,28 @@ function generate_fake_charity_list() {
   }
   return fake_charities;
 }
+function generate_fake_donation() {
+  const donation = {
+    charity_name: faker.company.companyName(),
+    amount: faker.finance.amount(),
+    date: faker.date.recent(),
+  };
+  return donation;
+}
+
+function generate_fake_donations_arr() {
+  let arr = [];
+  for (let i = 0; i < 15; i++) {
+    arr.push(generate_fake_donation());
+  }
+  return arr;
+}
+
+async function get_fake_donations_arr(user_id) {
+  const data = generate_fake_donations_arr();
+  return data;
+}
+
 
 ///////////////////////////////
 // CRUD Helpers
@@ -129,9 +151,6 @@ function formatAddress(street, city, state) {
 }
 
 async function createClientCharity(serverCharity, user) {
-  //TODO
-  //Existence checks
-  //const address = `${serverCharity.mailingAddress.streetAddress1} ${serverCharity.mailingAddress.city}, ${serverCharity.mailingAddress.stateOrProvince}`;
   const address = formatAddress(serverCharity.mailingAddress.streetAddress1,
                                 serverCharity.mailingAddress.city,
                                 serverCharity.mailingAddress.stateOrProvince);
@@ -150,6 +169,10 @@ async function createClientCharity(serverCharity, user) {
     console.log(error);
   }
 
+  const reviews = await getReviews(serverCharity.ein);
+  const totalRating = reviews.reduce((a, b) => a + b.stars, 0);
+  current_rating = reviews.length === 0 ? null : Math.round(totalRating/reviews.length * 10)/10;
+
   //TODO
   const charity = {
     eid: serverCharity.ein,
@@ -157,10 +180,27 @@ async function createClientCharity(serverCharity, user) {
     address: address,
     mission: serverCharity.mission,
     accountability: faker.datatype.number(),
-    current_rating: faker.datatype.number(),
+    current_rating: current_rating,
     likes: likes,
+    reviews: reviews,
   };
   return charity;
+}
+
+async function getReviews(ein) {
+  const data = [];
+  try {
+    const dbCharity = await db.readCharity(ein);
+
+    if(dbCharity) {
+      for(let rid of dbCharity.reviews) {
+        data.push(await db.readReview(rid));
+      }
+    }
+  } catch(error) {
+    console.log(error);
+  }
+  return data;
 }
 
 async function search(query) {
@@ -301,15 +341,9 @@ app.delete("/deleteReview", async (request, response) => {
 
 app.get("/getReviews", async (request, response) => {
   const options = request.query;
-  const data = generate_fake_reviews();
-  //const data = [];
+  let data = [];
   try {
-    //const dbCharity = await db.readCharity(options.ein);
-
-    //for(let rid of dbCharity.reviews) {
-    //  data.push(await db.readReview(rid));
-    //}
-
+    data = await getReviews(options.ein);
     response.status(200).json(data);
   } catch (error) {
     response.status(404).json({ status: error });
@@ -325,28 +359,6 @@ app.get("/search", async (request, response) => {
     response.status(404).json(error);
   }
 });
-
-function generate_fake_donation() {
-  const donation = {
-    charity_name: faker.company.companyName(),
-    amount: faker.finance.amount(),
-    date: faker.date.recent(),
-  };
-  return donation;
-}
-
-function generate_fake_donations_arr() {
-  let arr = [];
-  for (let i = 0; i < 15; i++) {
-    arr.push(generate_fake_donation());
-  }
-  return arr;
-}
-
-async function get_fake_donations_arr(user_id) {
-  const data = generate_fake_donations_arr();
-  return data;
-}
 
 app.get("/getDonation", async (request, response) => {
   const options = request.query;
