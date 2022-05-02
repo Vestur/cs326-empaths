@@ -6,6 +6,45 @@ async function getReviews(ein) {
   return data;
 }
 
+function add_remove_listener() {
+  let charity_ein = parseInt(this["ein"]);
+  // decide to add or remove charity from favorites
+  if(this.classList.contains("to-add")) {
+      try {
+          let statis = addFavorite(charity_ein);
+          if (statis) {
+              this.innerText = "⭐";
+              this.classList.remove("to-add");
+              this.classList.add("to-remove");
+          }
+          else {
+              throw "Error adding charity from favorites";
+          }
+      }
+      catch (error) {
+          console.log("error adding charity to favorites");
+          console.log(error);
+      }
+  }
+  else {
+      try {
+          let statis = removeFavorite(charity_ein);
+          if (statis) {
+              this.innerText = "➖";
+              this.classList.remove("to-remove");
+              this.classList.add("to-add");
+          }
+          else {
+              throw "Error deleting charity from favorites";
+          }
+      }
+      catch (error) {
+          console.log("error adding charity to favorites");
+          console.log(error);
+      }
+  }
+}
+
 // TODO
 // Add unique id for each card to have button event listeners for each of them
 // that call the delete like/favorites functions
@@ -29,10 +68,27 @@ export async function createCharityCard(charity) {
   const titleText = document.createElement("span");
   titleText.innerHTML = `${charity.name}`;
   const favorite = document.createElement("button");
-  favorite.classList.add(["btn", "to-add"]);
 
-  // Replace with function that determines which emoji
-  favorite.innerHTML = "⭐";
+  /************ */
+  // check if charity is in favorites - if it is add class to-remove make icon star
+  // if it is not in favorites - add class to-add and make icon minus sign
+  let favorites = await getFavoritedCharities(0);
+  console.log(favorites);
+  if(favorites.includes(charity.ein)) {
+    favorite.classList.add(["btn", "to-remove"]);
+    // star indicates charity is favorited
+    favorite.innerHTML = "⭐";
+  }
+  else {
+    favorite.classList.add(["btn", "to-add"]);
+    // minus sign indicates charity is NOT favorited
+    favorite.innerHTML = "➖";
+  }
+  // ******************
+
+  // add event listener to favorite button to handle favoriting and unfavoriting
+  favorite.addEventListener("click", add_remove_listener);
+  favorite["ein"] = charity["eid"];
 
   wrapper.appendChild(favorite);
   wrapper.appendChild(titleText);
@@ -135,10 +191,22 @@ async function deleteLike(ein) {
   return data;
 }
 
+async function getFavoritedCharities(user_id) {
+  const response = await fetch("/getFavoritedCharities",  {
+    method: "GET",
+    query: {
+      user_id: user_id
+    },
+  });
+  // returns list of charity objects
+  const favorites = await response.json();
+  return favorites;
+}
+
 export async function addFavorite(ein) {
   const response = await fetch("/addFavorite", {
     method: 'POST',
-    body: {
+    query: {
       ein: ein,
     },
   });
@@ -149,7 +217,7 @@ export async function addFavorite(ein) {
 export async function removeFavorite(ein) {
   const response = await fetch("/removeFavorite", {
     method: 'DELETE',
-    body: {
+    query: {
       ein: ein,
     },
   });

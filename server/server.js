@@ -260,13 +260,15 @@ async function get_favorited_charities(user_id) {
 
 async function updateList(user_id, ein) {
   // update favorites list of account to include charity with ein ein
-  await db.createFavorite(user_id, ein);
+  // user id might need to be 0?
+  await db.createFavorite(0, ein);
   return 0;
 }
 
 async function removeFromList(user_id, ein) {
   // update favorites list of account to exclude charity with ein ein
-  await db.deleteFavorite(user_id, ein);
+  // user id might need to be 0?
+  await db.deleteFavorite(0, ein);
   return 0;
 }
 
@@ -499,27 +501,30 @@ app.delete("/deleteAccount", async (request, response) => {
 // favorite lists
 app.post("/addFavorite", async (request, response) => {
   const options = request.query;
-  user_id = options["user_id"];
-  charity_ein = options["ein"];
+  let user_id = null;
+  let charity_ein = options["ein"];
   try {
-    updateList(user_id, charity_ein)
+    await updateList(user_id, charity_ein)
     response.status(200).json({ status: "success" });
   } catch (error) {
+    console.log("ahhh1");
     response.status(404).json({ status: err });
   }
 });
 
 app.delete("/removeFavorite", async (request, response) => {
   const options = request.query;
-  user_id = options["user_id"];
-  charity_ein = options["ein"];
+  let user_id = null;
+  let charity_ein = options["ein"];
   try {
-    removeFromList(user_id, charity_ein);
+    await removeFromList(user_id, charity_ein);
     response.status(200).json({ status: "success" });
   } catch (error) {
+    console.log("ahhh2");
     response.status(404).json({ status: err });
   }
 });
+
 app.get("/getFavoritedCharities", async (request, response) => {
   const options = request.query;
   let user_id = null;
@@ -530,50 +535,6 @@ app.get("/getFavoritedCharities", async (request, response) => {
     response.status(404).json({ status: err });
   }
 });
-
-// // initialize list (empty)
-// app.post('/createList', async (request, response) => {
-//     const options = request.query;
-// });
-
-// // get array of charity items that populate list
-// app.get('/getList', async (request, response) => {
-//     const options = request.query;
-// });
-
-// // add to list
-// app.put('/updateList', async (request, response) => {
-//     const body = request.body;
-//     try {
-//         let account_id = body["account_id"];
-//         let charity_ein = body["ein"];
-//         let state = await updateList(account_id, charity_ein);
-//         if(state === -1) {
-//             response.status(404).json({"status": "no such charity in favorites"})
-//         }
-//         response.status(200).json({"status": "success"});
-//     }
-//     catch (error) {
-//         response.status(404).json(error);
-//     }
-// });
-
-// //delete from list
-// app.delete('/deleteList', async (request, response) => {
-//     const body = request.body;
-//     try {
-//         let account_id = body["account_id"];
-//         let charity_ein = body["ein"];
-//         let state = await removeFromList(account_id, charity_ein);
-//         if(state === -1) {
-//             response.status(404).json({"status": "no such charity in favorites"})
-//         }
-//         response.status(200).json({"status": "success"});
-//     }
-//     catch (error) {
-//         response.status(404).json(error);
-//     }
-// });
 
 // Load index.html
 app.get("/", function (req, res) {
