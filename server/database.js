@@ -197,6 +197,7 @@ export class CharitableDatabase {
 			const res = await this.userCollection.updateOne({ id: userId }, { $push: { favlist: charityId }});
 			return res;
 		} catch(err) {
+			console.log("favorite not created");
 			return err;
 		}
 	}
@@ -206,6 +207,7 @@ export class CharitableDatabase {
 			const res = await this.userCollection.updateOne({ id: userId }, { $pull: { favlist: charityId }});
 			return res;
 		} catch(err) {
+			console.log("favorite not deleted");
 			return err;
 		}
 	}

@@ -500,7 +500,7 @@ app.delete("/deleteAccount", async (request, response) => {
 
 // favorite lists
 app.post("/addFavorite", async (request, response) => {
-  const options = request.query;
+  const options = request.body;
   let user_id = null;
   let charity_ein = options["ein"];
   try {
@@ -512,7 +512,7 @@ app.post("/addFavorite", async (request, response) => {
 });
 
 app.delete("/removeFavorite", async (request, response) => {
-  const options = request.query;
+  const options = request.body;
   let user_id = null;
   let charity_ein = options["ein"];
   try {

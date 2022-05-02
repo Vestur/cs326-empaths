@@ -11,7 +11,7 @@ let favorited_charities = await getFavoritedCharities(0);
 favorited_charities = favorited_charities.map(function(obj) { return obj.eid; });
 
 async function add_remove_listener() {
-  let charity_ein = parseInt(this["ein"]);
+  let charity_ein = this["ein"];
   // decide to add or remove charity from favorites
   if(this.classList.contains("to-add")) {
       try {
@@ -206,22 +206,26 @@ async function getFavoritedCharities(user_id) {
 }
 
 export async function addFavorite(ein) {
+  console.log(`in utils add ${ein}`)
   const response = await fetch("/addFavorite", {
     method: 'POST',
-    query: {
-      ein: ein,
-    },
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      "ein": ein,
+    }),
   });
   const data = await response.json();
   return data;
 }
 
 export async function removeFavorite(ein) {
+  console.log(`in utils remove ${ein}`)
   const response = await fetch("/removeFavorite", {
     method: 'DELETE',
-    query: {
-      ein: ein,
-    },
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      "ein": ein,
+    }),
   });
   const data = await response.json();
   return data;
