@@ -5,27 +5,27 @@ const search_button = document.getElementById("search_button");
 
 let search_results = {};
 
-async function add_to_favorites(ein) {
-    try {
-        const response = addFavorite(ein);
-        return true;
-    }
-    catch (error) {
-        console.log(error);
-        return false;
-    }
-}
+// async function add_to_favorites(ein) {
+//     try {
+//         const response = addFavorite(ein);
+//         return true;
+//     }
+//     catch (error) {
+//         console.log(error);
+//         return false;
+//     }
+// }
 
-async function remove_from_favorites(ein) {
-    try {
-        let response = removeFavorite(ein);
-        return true;
-    }
-    catch (error) {
-        console.log(error);
-        return false;
-    }
-}
+// async function remove_from_favorites(ein) {
+//     try {
+//         let response = removeFavorite(ein);
+//         return true;
+//     }
+//     catch (error) {
+//         console.log(error);
+//         return false;
+//     }
+// }
 
 async function search_for(query) {
     let response = [];
