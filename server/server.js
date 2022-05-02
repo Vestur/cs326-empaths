@@ -507,7 +507,6 @@ app.post("/addFavorite", async (request, response) => {
     await updateList(user_id, charity_ein)
     response.status(200).json({ status: "success" });
   } catch (error) {
-    console.log("ahhh1");
     response.status(404).json({ status: err });
   }
 });
@@ -520,7 +519,6 @@ app.delete("/removeFavorite", async (request, response) => {
     await removeFromList(user_id, charity_ein);
     response.status(200).json({ status: "success" });
   } catch (error) {
-    console.log("ahhh2");
     response.status(404).json({ status: err });
   }
 });
