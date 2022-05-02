@@ -29,7 +29,7 @@ export async function createCharityCard(charity) {
   const titleText = document.createElement("span");
   titleText.innerHTML = `${charity.name}`;
   const favorite = document.createElement("button");
-  favorite.classList.add("btn");
+  favorite.classList.add(["btn", "to-add"]);
 
   // Replace with function that determines which emoji
   favorite.innerHTML = "⭐";

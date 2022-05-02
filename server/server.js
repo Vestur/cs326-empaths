@@ -204,8 +204,6 @@ async function getReviews(ein) {
 }
 
 async function search(query) {
-  // return array of eins
-  // const search_results = await fetch(`https://api.data.charitynavigator.org/v2/Organizations?app_id=${app_id}&app_key=${app_key}&search=${query}`);
   const response = await fetch(
     `${ENDPOINT}Organizations?${API_KEY}&search=${query}&pageSize=${PAGE_SIZE}`,
     {
@@ -218,10 +216,6 @@ async function search(query) {
   for (let serverCharity of data) {
     charities.push(await createClientCharity(serverCharity, null));
   }
-  //let search_results = [];
-  //for(let i = 0; i < 5; ++i) {
-  //    search_results.push(faker.datatype.number());
-  //}
   return charities;
 }
 
@@ -261,17 +255,18 @@ async function get_favorited_charities(user_id) {
   } catch (error) {
     console.log(error);
   }
-  //const data = generate_fake_charity_list();
   return data;
 }
 
-async function updateList(account_number, ein) {
+async function updateList(user_id, ein) {
   // update favorites list of account to include charity with ein ein
+  await db.createFavorite(user_id, ein);
   return 0;
 }
 
-async function removeFromList(account_number, ein) {
+async function removeFromList(user_id, ein) {
   // update favorites list of account to exclude charity with ein ein
+  await db.deleteFavorite(user_id, ein);
   return 0;
 }
 
@@ -504,8 +499,10 @@ app.delete("/deleteAccount", async (request, response) => {
 // favorite lists
 app.post("/addFavorite", async (request, response) => {
   const options = request.query;
-  // Process userid here...
+  user_id = options["user_id"];
+  charity_ein = options["ein"];
   try {
+    updateList(user_id, charity_ein)
     response.status(200).json({ status: "success" });
   } catch (error) {
     response.status(404).json({ status: err });
@@ -514,8 +511,10 @@ app.post("/addFavorite", async (request, response) => {
 
 app.delete("/removeFavorite", async (request, response) => {
   const options = request.query;
-  // Process userid here...
+  user_id = options["user_id"];
+  charity_ein = options["ein"];
   try {
+    removeFromList(user_id, charity_ein);
     response.status(200).json({ status: "success" });
   } catch (error) {
     response.status(404).json({ status: err });
