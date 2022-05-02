@@ -6,6 +6,7 @@ async function getReviews(ein) {
   return data;
 }
 
+// get a list of all the eids/eins of the current user's favorite charities
 let favorited_charities = await getFavoritedCharities(0);
 favorited_charities = favorited_charities.map(function(obj) { return obj.eid; });
 
