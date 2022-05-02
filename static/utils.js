@@ -6,6 +6,9 @@ async function getReviews(ein) {
   return data;
 }
 
+let favorited_charities = await getFavoritedCharities(0);
+favorited_charities = favorited_charities.map(function(obj) { return obj.eid; });
+
 async function add_remove_listener() {
   let charity_ein = parseInt(this["ein"]);
   // decide to add or remove charity from favorites
@@ -72,12 +75,7 @@ export async function createCharityCard(charity) {
   /************ */
   // check if charity is in favorites - if it is add class to-remove make icon star
   // if it is not in favorites - add class to-add and make icon minus sign
-  let favorites = await getFavoritedCharities(0);
-  console.log(favorites);
-  favorites = favorites.map(function(obj) { return obj.eid; });
-  console.log(favorites);
-  console.log(charity.eid);
-  if(favorites.includes(charity.eid)) {
+  if(favorited_charities.includes(charity.eid)) {
     favorite.classList.add(["btn", "to-remove"]);
     // star indicates charity is favorited
     favorite.innerHTML = "⭐";
