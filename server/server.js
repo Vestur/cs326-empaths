@@ -358,9 +358,8 @@ app.get("/search", async (request, response) => {
 });
 
 app.get("/getDonation", async (request, response) => {
-  const options = request.query;
-  let user_id = null;
-  const data = await get_fake_donations_arr(user_id);
+  const user = db.readUser(0);
+  const data = user.donations; // await get_fake_donations_arr(user_id);
   try {
     response.status(200).json(data);
   } catch (err) {
@@ -369,16 +368,17 @@ app.get("/getDonation", async (request, response) => {
 });
 
 // donation creation endpoint
-app.post("/createDonation", async (requent, response) => {
-  const options = request.body; //charity name, amount, date
-  let account_id = options["account_id"];
-
+app.post("/createDonation", async (request, response) => { //charity name, amount, date
+  const options = request.body; // get the charity, amount, date from here
+  const user = db.readUser(0);
+  // let account_id = user.id;
   try {
-    for (const [index, user_object] of accounts.entries()) {
-      if (user_object.id === account_id) {
-        user_object.donations.push(generate_fake_donation());
-      }
-    }
+    //for (const [index, user_object] of accounts.entries()) {
+      //if (user_object.id === account_id) {
+        //not sure if pushing right thing
+        user.donations.push({ charity_name: options.charity_name, amount: options.amount, date: options.date});
+     // }
+    //}
     response.status(200).json({ status: "success" });
   } catch (err) {
     response.status(404).json(error);
@@ -387,28 +387,20 @@ app.post("/createDonation", async (requent, response) => {
 
 // donation deletion endpoint
 app.delete("/deleteDonation", async (request, response) => {
-  const options = request.body;
   // extract user id, find account then delete donation from their
-  let account_id = options["account_id"]; // user id
+  const options = request.body;
+  const user = db.readUser(0); // 0 is placeholder for user id
   let charity = options["charity_name"]; // name of charity user wants to delete
+  let amount = options["amount"];
+  let date = options["date"];
 
   try {
-    for (const [index, user_object] of accounts.entries()) {
-      // go through accounts array, extract user object
-      if (user_object.id === account_id) {
-        // if account id matches one passed in
-        let donations_arr = user_object.donations; //account's donations array
-        for (const [index, donation] of donations_arr.entries()) {
-          //interate through donations array
-          if (donation.charity_name === charity) {
-            //if found charity match
-            donations_arr.splice(index); //delete from donations array
-          } else {
-            response.json({ error: `Donation Not Found` }); //donation doen't exist
-          }
-        }
+    // account's donations array
+    for (const [index, donation] of user.donations) { //interate through donations array
+      if (donation.charity_name === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
+        user.donations.splice(index); //delete from donations array, then delete from table 
       } else {
-        response.json({ error: `User Not Found` });
+        response.json({ error: `Donation Not Found` }); //donation doen't exist
       }
     }
     response.status(200).json({ status: "success" });
