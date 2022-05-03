@@ -151,10 +151,13 @@ function formatAddress(street, city, state) {
 }
 
 async function createClientCharity(serverCharity, user) {
-  const address = formatAddress(serverCharity.mailingAddress.streetAddress1,
+  let address = "Not provided";
+  if(serverCharity.mailingAddress) {
+    address = formatAddress(serverCharity.mailingAddress.streetAddress1,
                                 serverCharity.mailingAddress.city,
                                 serverCharity.mailingAddress.stateOrProvince);
 
+  }
   let likes = 0;
   let current_rating = 0;
   let accountability = 0;
@@ -350,6 +353,18 @@ app.get("/getLikedCharities", async (request, response) => {
   }
 });
 
+app.get("/getLikedCharitiesEins", async (request, response) => {
+  const options = request.query;
+  let user_id = null;
+  try {
+    const user = await db.readUser(0);
+    const data = user.likes;
+    response.status(200).json(data);
+  } catch (error) {
+    response.status(404).json({ status: err });
+  }
+});
+
 app.post("/createReview", async (request, response) => {
   const options = request.query;
 });
@@ -420,7 +435,7 @@ app.delete("/deleteDonation", async (request, response) => {
     // account's donations array
     for (const [index, donation] of user.donations) { //interate through donations array
       if (donation.charity_name === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
-        user.donations.splice(index); //delete from donations array, then delete from table 
+        user.donations.splice(index); //delete from donations array, then delete from table
       } else {
         response.json({ error: `Donation Not Found` }); //donation doen't exist
       }
@@ -542,6 +557,18 @@ app.get("/getFavoritedCharities", async (request, response) => {
   let user_id = null;
   const data = await get_favorited_charities(user_id);
   try {
+    response.status(200).json(data);
+  } catch (error) {
+    response.status(404).json({ status: err });
+  }
+});
+
+app.get("/getFavoritedCharitiesEins", async (request, response) => {
+  const options = request.query;
+  let user_id = null;
+  try {
+    const user = await db.readUser(0);
+    const data = user.favlist;
     response.status(200).json(data);
   } catch (error) {
     response.status(404).json({ status: err });

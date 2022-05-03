@@ -1,4 +1,4 @@
-import { createCharityCard } from "./utils.js";
+import { createCharityCard, createCharityPlaceholder, num_favorited } from "./utils.js";
 
 async function getLikedCharities() {
   const response = await fetch("/getFavoritedCharities", {
@@ -8,8 +8,13 @@ async function getLikedCharities() {
   return data;
 }
 
-const charities = await getLikedCharities();
 const favoritesWrapper = document.getElementById("favorites-wrapper");
+for(let i = 0; i < num_favorited; i++) {
+  favoritesWrapper.appendChild(createCharityPlaceholder());
+}
+
+const charities = await getLikedCharities();
+favoritesWrapper.innerHTML = "";
 
 for(let charity of charities) {
   favoritesWrapper.appendChild(await createCharityCard(charity));
