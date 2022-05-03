@@ -1,8 +1,4 @@
-const charity_name_input = document.getElementById("charity").value;
-const amount_input = document.getElementById("amount").value; 
-const date_input = document.getElementById("date").value; 
-
-async function createDonation(account_id) {
+async function createDonation(charity_name_input, amount_input, date_input) {
     const response = await fetch(`/createDonation`, {
       method: 'POST',
       headers: {
@@ -10,11 +6,11 @@ async function createDonation(account_id) {
       },
       body: JSON.stringify({ charity_name: charity_name_input, amount: amount_input, date: date_input }),
     });
-    const data = await response.json();
+    const data = await response.json(); //do I need these?
     return data;
   }
 
-async function deleteDonation(account_id) {
+async function deleteDonation(charity_name_input, amount_input, date_input) {
     try {
       const response = await fetch(`/deleteDonation`, {
         method: 'DELETE',
@@ -47,20 +43,39 @@ async function deleteDonation(account_id) {
   */
 const addrowB = document.getElementById("add_row");
 addrowB.addEventListener('click', () => {
-  // create donation here so it saves in database
+  let name = document.getElementById("charity").value;
+  let amount = document.getElementById("amount").value; 
+  let date = document.getElementById("date").value;
+  await createDonation(name, amount, date); // create donation here so it saves in database
   const tableBody = document.getElementById("my_table").getElementsByTagName('tbody')[0];
   let row = tableBody.insertRow(-1);
-  let name = row.insertCell(0);
-  let amount = row.insertCell(1);
-  let date = row.insertCell(2);
-  name.innerHTML = charity_name_input;
-  amount.innerHTML = amount_input; 
-  date.innerHTML = date_input; 
+  let name_cell = row.insertCell(0);
+  let amount_cell = row.insertCell(1);
+  let date_cell = row.insertCell(2);
+  name_cell.innerHTML = name; 
+  amount_cell.innerHTML = amount; 
+  date_cell.innerHTML = date;
 });
 
 const deleteB = document.getElementById("delete_row");
 deleteB.addEventListener('click', () => {
-    //document.getElementById("my_table").getElementByTagName('tbody')[0].deleteRow(-1);
+  let name = document.getElementById("charity").value;
+  let amount = document.getElementById("amount").value; 
+  let date = document.getElementById("date").value;
+  const tableBody = document.getElementById("my_table").getElementByTagName('tbody')[0];
+  //loop through rows aka td elements of table body, check if all cells match, if they do, delete row 
+  for(let i = 0; i < tableBody.rows.length; i++){
+    if(tableBody.rows[i].cells[0] === name && 
+       tableBody.rows[i].cells[1] === amount &&
+       tableBody.rows[i].cells[2] === date
+      ){
+      tableBody.deleteRow(i);
+      await deleteDonation(name, amount, date);
+    }
+    else{
+      alert("Failed to Delete Donation :(");
+    }
+  }
 });
 
 function generateRows(donation){
