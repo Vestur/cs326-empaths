@@ -167,6 +167,10 @@ async function createClientCharity(serverCharity, user) {
     if(dbCharity != null) {
       likes = dbCharity.totalLikes;
     }
+    else {
+      // not used
+      const new_dbCharity = await db.createChartiy(serverCharity.ein)
+    }
 
   } catch (error) {
     console.log(error);
@@ -278,7 +282,6 @@ async function removeFromList(user_id, ein) {
 async function addLike(user_id, ein) {
   // update favorites list of account to include charity with ein ein
   // user id might need to be 0?
-  console.log(`in liking server 2 ${ein}`);
   await db.createLike(0, ein);
   return 0;
 }
@@ -286,7 +289,6 @@ async function addLike(user_id, ein) {
 async function removeLike(user_id, ein) {
   // update favorites list of account to exclude charity with ein ein
   // user id might need to be 0?
-  console.log(`in unliking server 2 ${ein}`);
   await db.deleteLike(0, ein);
   return 0;
 }
@@ -320,7 +322,6 @@ app.delete("/deleteCharity", async (request, response) => {
 
 app.post("/createLike", async (request, response) => {
   const options = request.body;
-  console.log(`in server, create like ${options["ein"]}`)
   let charity_ein = options["ein"];
   try {
     await addLike(0, charity_ein);
@@ -332,7 +333,6 @@ app.post("/createLike", async (request, response) => {
 
 app.delete("/deleteLike", async (request, response) => {
   const options = request.body;
-  console.log(`in server, delete like ${options["ein"]}`)
   let charity_ein = options["ein"];
   try {
     await removeLike(0, charity_ein);

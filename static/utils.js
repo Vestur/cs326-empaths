@@ -197,9 +197,11 @@ export async function createCharityCard(charity) {
   likes.innerHTML = `${charity.likes} 💛`;
   if(liked_charities.includes(charity.eid)) {
     likes.classList.add("liked");
+    likes.innerHTML = `${charity.likes} 💛`;
   }
   else {
     likes.classList.add("unliked");
+    likes.innerHTML = `${charity.likes} 🤍`;
   }
   likes.addEventListener("click", likes_handler);
   likes["ein"] = charity["eid"];
