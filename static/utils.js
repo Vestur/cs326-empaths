@@ -18,11 +18,10 @@ async function likes_handler() {
   // decide to add or remove charity from favorites
   if(this.classList.contains("unliked")) {
       try {
-          let statis = await createLike(charity_ein);
+          let updated_charity = await createLike(charity_ein);
           // reload in likes information (number of likes)
-          let updated_charity = await getCharity(charity_ein);
-          if (statis) {
-              this.innerHTML = `${updated_charity.likes} 💛`;
+          if (updated_charity) {
+              this.innerHTML = `${updated_charity.totalLikes} 💛`;
               this.classList.remove("unliked");
               this.classList.add("liked");
           }
@@ -37,11 +36,10 @@ async function likes_handler() {
   }
   else {
       try {
-          let statis = await deleteLike(charity_ein);
+          let updated_charity = await deleteLike(charity_ein);
           // reload in likes information (number of likes)
-          let updated_charity = await getCharity(charity_ein);
-          if (statis) {
-              this.innerHTML = `${updated_charity.likes} 🤍`;
+          if (updated_charity) {
+              this.innerHTML = `${updated_charity.totalLikes} 🤍`;
               this.classList.remove("liked");
               this.classList.add("unliked");
           }
