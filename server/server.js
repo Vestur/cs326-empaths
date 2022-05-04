@@ -172,10 +172,13 @@ function formatAddress(street, city, state) {
 }
 
 async function createClientCharity(serverCharity, user) {
-  const address = formatAddress(serverCharity.mailingAddress.streetAddress1,
+  let address = "Not provided";
+  if(serverCharity.mailingAddress) {
+    address = formatAddress(serverCharity.mailingAddress.streetAddress1,
                                 serverCharity.mailingAddress.city,
                                 serverCharity.mailingAddress.stateOrProvince);
 
+  }
   let likes = 0;
   let current_rating = 0;
   let accountability = 0;
@@ -184,6 +187,12 @@ async function createClientCharity(serverCharity, user) {
     const dbCharity = await db.readCharity(serverCharity.ein);
     if(dbCharity != null) {
       likes = dbCharity.totalLikes;
+    }
+    else {
+      // not used
+      const new_dbCharity = await db.createCharity(serverCharity.ein)
+      // will be 0
+      likes = new_dbCharity.totalLikes;
     }
 
   } catch (error) {
@@ -296,17 +305,15 @@ async function removeFromList(user_id, ein) {
 async function addLike(user_id, ein) {
   // update favorites list of account to include charity with ein ein
   // user id might need to be 0?
-  console.log(`in liking server 2 ${ein}`);
-  await db.createLike(0, ein);
-  return 0;
+  const new_charity = await db.createLike(0, ein);
+  return new_charity;
 }
 
 async function removeLike(user_id, ein) {
   // update favorites list of account to exclude charity with ein ein
   // user id might need to be 0?
-  console.log(`in unliking server 2 ${ein}`);
-  await db.deleteLike(0, ein);
-  return 0;
+  const new_charity = await db.deleteLike(0, ein);
+  return new_charity;
 }
 
 ///////////////////////////////
@@ -338,11 +345,10 @@ app.delete("/deleteCharity", async (request, response) => {
 
 app.post("/createLike", async (request, response) => {
   const options = request.body;
-  console.log(`in server, create like ${options["ein"]}`)
   let charity_ein = options["ein"];
   try {
-    await addLike(0, charity_ein);
-    response.status(200).json({ status: "success" });
+    const updated_charity = await addLike(0, charity_ein);
+    response.status(200).json(updated_charity);
   } catch (error) {
     response.status(404).json({ status: error });
   }
@@ -350,11 +356,10 @@ app.post("/createLike", async (request, response) => {
 
 app.delete("/deleteLike", async (request, response) => {
   const options = request.body;
-  console.log(`in server, delete like ${options["ein"]}`)
   let charity_ein = options["ein"];
   try {
-    await removeLike(0, charity_ein);
-    response.status(200).json({ status: "success" });
+    const updated_charity = await removeLike(0, charity_ein);
+    response.status(200).json(updated_charity);
   } catch (error) {
     response.status(404).json({ status: error });
   }
@@ -365,6 +370,18 @@ app.get("/getLikedCharities", async (request, response) => {
   let user_id = null;
   const data = await get_liked_charities(user_id);
   try {
+    response.status(200).json(data);
+  } catch (error) {
+    response.status(404).json({ status: err });
+  }
+});
+
+app.get("/getLikedCharitiesEins", async (request, response) => {
+  const options = request.query;
+  let user_id = null;
+  try {
+    const user = await db.readUser(0);
+    const data = user.likes;
     response.status(200).json(data);
   } catch (error) {
     response.status(404).json({ status: err });
@@ -413,15 +430,13 @@ app.get("/getDonation", async (request, response) => {
 // donation creation endpoint
 app.post("/createDonation", async (request, response) => { //charity name, amount, date
   const options = request.body; // get the charity, amount, date from here
-  const user = db.readUser(0);
-  // let account_id = user.id;
+  let user_id = 0; 
+  let updated_donations_arr = db.readUser(user_id).donations.slice();
   try {
-    //for (const [index, user_object] of accounts.entries()) {
-      //if (user_object.id === account_id) {
-        //not sure if pushing right thing
-        user.donations.push({ charity_name: options.charity_name, amount: options.amount, date: options.date});
-     // }
-    //}
+
+       updated_donations_arr.push({ charity_name: options.charity_name, amount: options.amount, date: options.date});
+       db.updateUser(user_id, { donations: updated_donations_arr });
+
     response.status(200).json({ status: "success" });
   } catch (err) {
     response.status(404).json(error);
@@ -432,16 +447,19 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
 app.delete("/deleteDonation", async (request, response) => {
   // extract user id, find account then delete donation from their
   const options = request.body;
-  const user = db.readUser(0); // 0 is placeholder for user id
+  let user_id = 0; 
+  let updated_donations_arr = db.readUser(user_id).donations.slice();
+
   let charity = options["charity_name"]; // name of charity user wants to delete
   let amount = options["amount"];
   let date = options["date"];
 
   try {
     // account's donations array
-    for (const [index, donation] of user.donations) { //interate through donations array
+    for (const [index, donation] of updated_donations_arr) { //interate through donations array
       if (donation.charity_name === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
-        user.donations.splice(index); //delete from donations array, then delete from table 
+        db.updateUser(user_id, { donations: updated_donations_arr.splice(index) }); //delete from donations array, then delete from table
+
       } else {
         response.json({ error: `Donation Not Found` }); //donation doen't exist
       }
@@ -597,6 +615,16 @@ app.get("/likesAuth", checkLoggedIn, async (request, response) => {
 
 app.get("/profileAuth", checkLoggedIn, async (request, response) => {
   response.redirect("/profile.html");
+app.get("/getFavoritedCharitiesEins", async (request, response) => {
+  const options = request.query;
+  let user_id = null;
+  try {
+    const user = await db.readUser(0);
+    const data = user.favlist;
+    response.status(200).json(data);
+  } catch (error) {
+    response.status(404).json({ status: err });
+  }
 });
 
 // Load index.html

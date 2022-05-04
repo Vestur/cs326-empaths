@@ -7,21 +7,21 @@ async function getReviews(ein) {
 }
 
 // get a list of all the eids/eins of the current user's favorite charities
-let favorited_charities = await getFavoritedCharities(0);
-favorited_charities = favorited_charities.map(function(obj) { return obj.eid; });
-let liked_charities = await getLikedCharities(0);
-liked_charities = liked_charities.map(function(obj) { return obj.eid; });
+let favorited_charities = await getFavoritedCharitiesEins(0);
+let liked_charities = await getLikedCharitiesEins(0);
+
+export let num_favorited = favorited_charities.length;
+export let num_liked = liked_charities.length;
 
 async function likes_handler() {
   let charity_ein = this["ein"];
   // decide to add or remove charity from favorites
   if(this.classList.contains("unliked")) {
       try {
-          let statis = await createLike(charity_ein);
+          let updated_charity = await createLike(charity_ein);
           // reload in likes information (number of likes)
-          let updated_charity = await getCharity(charity_ein);
-          if (statis) {
-              this.innerHTML = `${updated_charity.likes} 💛`;
+          if (updated_charity) {
+              this.innerHTML = `${updated_charity.totalLikes} 💛`;
               this.classList.remove("unliked");
               this.classList.add("liked");
           }
@@ -36,11 +36,10 @@ async function likes_handler() {
   }
   else {
       try {
-          let statis = await deleteLike(charity_ein);
+          let updated_charity = await deleteLike(charity_ein);
           // reload in likes information (number of likes)
-          let updated_charity = await getCharity(charity_ein);
-          if (statis) {
-              this.innerHTML = `${updated_charity.likes} 🤍`;
+          if (updated_charity) {
+              this.innerHTML = `${updated_charity.totalLikes} 🤍`;
               this.classList.remove("liked");
               this.classList.add("unliked");
           }
@@ -91,7 +90,7 @@ async function add_remove_listener() {
           console.log("error deleting charity from favorites");
           console.log(error);
       }
-  }  
+  }
 }
 
 async function getCharity(ein){
@@ -104,6 +103,45 @@ async function getCharity(ein){
   });
   let data = await response.json();
   return data;
+}
+
+export function createCharityPlaceholder() {
+  const card = document.createElement("div");
+  card.classList.add("card", "charitable-card");
+  const cardHeader = document.createElement("div");
+  cardHeader.classList.add("placeholder-glow", "card-header");
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
+  const cardTitle = document.createElement("div");
+  cardTitle.classList.add("placeholder-glow", "card-title", "charitable-card-title", "d-flex", "justify-content-between");
+  const wrapper = document.createElement("div");
+  const info = document.createElement("div");
+  info.classList.add("placeholder-glow", "card-text", "charitable-card-text");
+
+  const placeholder1 = document.createElement("span");
+  placeholder1.classList.add("placeholder", "col-4");
+
+  const placeholder2 = document.createElement("span");
+  placeholder2.classList.add("placeholder", "col-7");
+
+  const placeholder3 = document.createElement("span");
+  placeholder3.classList.add("placeholder", "col-6");
+
+  const reviewsButton = document.createElement("button");
+  reviewsButton.classList.add("btn", "btn-outline-primary", "btn-small", "reviews-button", "placeholder");
+
+  cardTitle.appendChild(placeholder1);
+  cardHeader.appendChild(placeholder2);
+  info.appendChild(placeholder3);
+
+  cardBody.appendChild(cardTitle);
+  cardBody.appendChild(info);
+
+  card.appendChild(cardHeader);
+  card.appendChild(cardBody);
+  card.appendChild(reviewsButton);
+
+  return card;
 }
 
 // TODO
@@ -134,12 +172,12 @@ export async function createCharityCard(charity) {
   // check if charity is in favorites - if it is add class to-remove make icon star
   // if it is not in favorites - add class to-add and make icon minus sign
   if(favorited_charities.includes(charity.eid)) {
-    favorite.classList.add(["btn", "favorited"]);
+    favorite.classList.add("btn", "favorited");
     // star indicates charity is favorited
     favorite.innerHTML = "⭐";
   }
   else {
-    favorite.classList.add(["btn", "not-favorite"]);
+    favorite.classList.add("btn", "not-favorite");
     // minus sign indicates charity is NOT favorited
     favorite.innerHTML = "➖";
   }
@@ -157,12 +195,14 @@ export async function createCharityCard(charity) {
   likes.innerHTML = `${charity.likes} 💛`;
   if(liked_charities.includes(charity.eid)) {
     likes.classList.add("liked");
+    likes.innerHTML = `${charity.likes} 💛`;
   }
   else {
     likes.classList.add("unliked");
+    likes.innerHTML = `${charity.likes} 🤍`;
   }
   likes.addEventListener("click", likes_handler);
-  likes["ein"] = charity["eid"];  
+  likes["ein"] = charity["eid"];
 
   const cardSubtitle = document.createElement("div");
   cardSubtitle.classList.add("card-subtitle", "mb-2", "text-muted");
@@ -262,8 +302,8 @@ async function deleteLike(ein) {
   return data;
 }
 
-async function getFavoritedCharities(user_id) {
-  const response = await fetch("/getFavoritedCharities",  {
+async function getFavoritedCharitiesEins(user_id) {
+  const response = await fetch("/getFavoritedCharitiesEins",  {
     method: "GET",
     query: {
       user_id: user_id
@@ -274,8 +314,8 @@ async function getFavoritedCharities(user_id) {
   return favorites;
 }
 
-async function getLikedCharities(user_id) {
-  const response = await fetch("/getLikedCharities",  {
+async function getLikedCharitiesEins(user_id) {
+  const response = await fetch("/getLikedCharitiesEins",  {
     method: "GET",
     query: {
       user_id: user_id

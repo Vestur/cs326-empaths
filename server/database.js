@@ -180,7 +180,7 @@ export class CharitableDatabase {
 		}
 	}
 
-	async createChartiy(eid) {
+	async createCharity(eid) {
 		try {
 			const charityObj = {
 				eid: eid,
@@ -226,19 +226,10 @@ export class CharitableDatabase {
 
 	async createLike(userId, charityId) {
 		try {
-			let cur_user = await this.readUser(0);
-			console.log("before liking");
-			console.log(cur_user.likes);
-			let cur_charity = await this.readCharity(charityId);
-			console.log(cur_charity.totalLikes);
 			await this.userCollection.updateOne({ id: userId }, { $push: { likes: charityId }});
 			const res = await this.charityCollection.updateOne({ eid: charityId }, { $inc: { totalLikes: 1 }});
-			console.log("after liking");
-			cur_user = await this.readUser(0);
-			console.log(cur_user.likes);
-			cur_charity = await this.readCharity(charityId);
-			console.log(cur_charity.totalLikes);
-			return res;
+			const new_charity = await this.readCharity(charityId);
+			return new_charity;
 		} catch(err) {
 			return err;
 		}
@@ -246,19 +237,10 @@ export class CharitableDatabase {
 
 	async deleteLike(userId, charityId) {
 		try {
-			let cur_user = await this.readUser(0);
-			console.log("before unliking");
-			console.log(cur_user.likes);
-			let cur_charity = await this.readCharity(charityId);
-			console.log(cur_charity.totalLikes);
 			await this.userCollection.updateOne({ id: userId }, { $pull: { likes: charityId }});
 			const res = await this.charityCollection.updateOne({ eid: charityId }, { $inc: { totalLikes: -1 }});
-			console.log("after unliking");
-			cur_user = await this.readUser(0);
-			console.log(cur_user.likes);
-			cur_charity = await this.readCharity(charityId);
-			console.log(cur_charity.totalLikes);
-			return res;
+			const new_charity = await this.readCharity(charityId);
+			return new_charity;
 		} catch(err) {
 			return err;
 		}
