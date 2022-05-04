@@ -2,7 +2,7 @@
 //window.location.href = "search.html";
 const settingsB = document.getElementById("settings");
 settingsB.addEventListener('click', () => {
-    window.location.href = "profile.html";
+    window.location.href = "/profileAuth";
 });
 
 const searchB = document.getElementById("search");
@@ -12,21 +12,28 @@ searchB.addEventListener('click', () => {
 
 const favoritesB = document.getElementById("my_favorites");
 favoritesB.addEventListener('click', () => {
-    window.location.href = "favorites.html";
+    window.location.href = "/favoritesAuth";
 });
 
 const likesB = document.getElementById("my_likes");
 likesB.addEventListener('click', () => {
-    window.location.href = "likes.html";
+    window.location.href = "/likesAuth";
 });
 
 const donationsB = document.getElementById("my_donations");
 donationsB.addEventListener('click', () => {
-    window.location.href = "donations.html";
+    window.location.href = "/donationsAuth";
 });
 
 const signoutB = document.getElementById("signout");
-signoutB.addEventListener('click', () => {
+signoutB.addEventListener('click', async () => {
+    const response = await fetch('/logout', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    console.log(response);
     window.location.href = "login.html";
 });
 

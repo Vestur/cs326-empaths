@@ -22,17 +22,6 @@ async function createAccount() {
   return data;
 }
 
-
-const loginB = document.getElementById("login");
-loginB.addEventListener('click', async () => {
-  const username = document.getElementById("username").value; // will later replace faker data
-  const password = document.getElementById("password").value; // will be added during authentication
-  window.location.href = "search.html";
-  // this is a placeholder for later authentication, just a bandaid for changing the page for now
-  // will try to use express endpoints and redirect to achieve this
-  // will GET account from database
-});
-
 const signupB = document.getElementById("signup");
 signupB.addEventListener('click', async () => {
   // here, account with be created and added to database
@@ -42,5 +31,17 @@ signupB.addEventListener('click', async () => {
   window.location.href = "profile.html";
 });
 
+// const loginB = document.getElementById("login");
+// loginB.addEventListener('click', async (e) => {
+//   e.preventDefault()
+//   let loginForm = new FormData();
+//   loginForm.append('username', document.getElementById('username').value);
+//   loginForm.append('password', document.getElementById('password').value);
 
+//   const response = await fetch('/login', {
+//     method: 'POST',
+//     body: loginForm
+//   });
 
+//   console.log(response);
+// });

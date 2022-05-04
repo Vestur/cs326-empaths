@@ -33,6 +33,7 @@ export class CharitableDatabase {
 				{
 					id: 0,
 					username: 'Test Subject 1',
+					password: 'pass1',
 					email: 'test1@charitable.org',
 					bio: 'I am test subject one. Commmence with your testing.',
 					pfp: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih0.redbubble.net%2Fimage.193421889.8165%2Fflat%2C1000x1000%2C075%2Cf.jpg&f=1&nofb=1',
@@ -48,6 +49,7 @@ export class CharitableDatabase {
 				{
 					id: 1,
 					username: 'Test Subject 2',
+					password: 'pass2',
 					email: 'test2@charitable.org',
 					bio: 'I am test subject two. Commmence with your testing.',
 					pfp: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnecaonline.com%2Fwp-content%2Fuploads%2F2013%2F06%2F1300h-PBody.jpg&f=1&nofb=1',
@@ -116,7 +118,7 @@ export class CharitableDatabase {
 		}
 	}
 
-	async createUser(username, email, bio, pfp, location) {
+	async createUser(username, password, email, bio, pfp, location) {
 		try {
 			const idObj = await this.userCollection.find().sort({ "id": -1 }).limit(1).toArray();
 			const id = idObj[0]['id'] + 1;
@@ -124,6 +126,7 @@ export class CharitableDatabase {
 			const usrObj = {
 				id: id,
 				username: username,
+				password: password,
 				email: email,
 				bio: bio,
 				pfp: pfp,
@@ -143,7 +146,16 @@ export class CharitableDatabase {
 
 	async readUser(id) {
 		try {
-			const res = await this.userCollection.findOne({ id: id });
+			const res = await this.userCollection.findOne({ id: id }).toArray();
+			return res;
+		} catch(err) {
+			return err;
+		}
+	}
+
+	async findUsers(username) {
+		try {
+			const res = await this.userCollection.find({ username: username });
 			return res;
 		} catch(err) {
 			return err;

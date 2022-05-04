@@ -1,9 +1,11 @@
 import express from "express";
+import expressSession from 'express-session';
 import path from "path";
 import "dotenv/config";
 import { faker } from "@faker-js/faker";
 import fetch from "node-fetch";
 import { CharitableDatabase } from "./database.js";
+import auth from './auth.js';
 
 // CONSTS
 const APP_ID = process.env.APP_ID;
@@ -19,15 +21,34 @@ const db = new CharitableDatabase(DBURL);
 await db.connect();
 await db.init();
 
-// boilerplate copied from routing lab
+// Session configuration
+const sessionConfig = {
+  // set this encryption key in Heroku config (never in GitHub)!
+  secret: process.env.SECRET || 'SECRET',
+  resave: false,
+  saveUninitialized: false,
+};
+
+// routing
 const app = express();
 const port = 3000;
+app.use(expressSession(sessionConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
 
-// what is this for?
-const __dirname = path.resolve(path.dirname(""));
+// auth
+auth.configure(app);
+
+function checkLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    // If we are authenticated, run the next route.
+    next();
+  } else {
+    // Otherwise, redirect to the login page.
+    res.redirect('/login.html');
+  }
+}
 
 ///////////////////////////////
 // Generators for dummy data
@@ -546,6 +567,36 @@ app.get("/getFavoritedCharities", async (request, response) => {
   } catch (error) {
     response.status(404).json({ status: err });
   }
+});
+
+// Auth endpoints
+app.post('/login', auth.authenticate('local', {
+    // use username/password authentication
+    successRedirect: '/profileAuth',
+    failureRedirect: '/login.html', // otherwise, back to login
+  })
+);
+
+app.get('/logout', (req, res) => {
+  console.log(req);
+  req.logout(); // Logs us out!
+  res.redirect('/login.html');
+});
+
+app.get("/donationsAuth", checkLoggedIn, async (request, response) => {
+  response.redirect("/donations.html");
+});
+
+app.get("/favoritesAuth", checkLoggedIn, async (request, response) => {
+  response.redirect("/favorites.html");
+});
+
+app.get("/likesAuth", checkLoggedIn, async (request, response) => {
+  response.redirect("/likes.html");
+});
+
+app.get("/profileAuth", checkLoggedIn, async (request, response) => {
+  response.redirect("/profile.html");
 });
 
 // Load index.html

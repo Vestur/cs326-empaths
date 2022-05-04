@@ -29,7 +29,7 @@
        <title>Login Page</title>
        </head>
        <body class="background-image">
-           <form action="/action_page.php" method="post"></form>
+           <form id="loginForm" method="POST" action="/login">
            <div class="imgcontainer">
                <img src="./images/profile.png"
                alt="Avatar" class="avatar">
@@ -38,10 +38,10 @@
            <div class="header">
                <h1>LOG IN</h1>
                  <!--<label id="username" class="container">Username</label>--> 
-                 <input type="text" id="username" placeholder="Enter Username" class="box" required>
+                 <input type="text" name="username" id="username" placeholder="Enter Username" class="box" required>
                  <br>
                  <!--<label id="password" class="container">Password</label>-->
-                 <input type="text" id="password" placeholder="Enter Password" class="box" required> 
+                 <input type="text" name="password" id="password" placeholder="Enter Password" class="box" required> 
            </div>
    
             <div class="remember">
@@ -50,9 +50,10 @@
 
             <div class="text-center">
                 <button type="button" id="signup" class="btn btn-signup">SIGN UP</button>
-                <button type="button" id="login" class="btn btn_login">LOGIN</button>
+                <button type="submit" id="login" class="btn btn_login">LOGIN</button>
                 <br>
                 <span class="forgot">Forgot <a href="#">Username or Password?</a></span> 
             </div>
+            </form>
        </body>
 </html>
