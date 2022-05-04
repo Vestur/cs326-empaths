@@ -214,12 +214,9 @@ export class CharitableDatabase {
 
 	async createLike(userId, charityId) {
 		try {
-			// const old_charity = await this.readCharity(charityId);
-			// console.log(old_charity);
 			await this.userCollection.updateOne({ id: userId }, { $push: { likes: charityId }});
 			const res = await this.charityCollection.updateOne({ eid: charityId }, { $inc: { totalLikes: 1 }});
 			const new_charity = await this.readCharity(charityId);
-			// console.log(new_charity);
 			return new_charity;
 		} catch(err) {
 			return err;
@@ -228,12 +225,9 @@ export class CharitableDatabase {
 
 	async deleteLike(userId, charityId) {
 		try {
-			// const old_charity = await this.readCharity(charityId);
-			// console.log(old_charity);
 			await this.userCollection.updateOne({ id: userId }, { $pull: { likes: charityId }});
 			const res = await this.charityCollection.updateOne({ eid: charityId }, { $inc: { totalLikes: -1 }});
 			const new_charity = await this.readCharity(charityId);
-			// console.log(new_charity);
 			return new_charity;
 		} catch(err) {
 			return err;
