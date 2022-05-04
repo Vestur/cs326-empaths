@@ -615,6 +615,8 @@ app.get("/likesAuth", checkLoggedIn, async (request, response) => {
 
 app.get("/profileAuth", checkLoggedIn, async (request, response) => {
   response.redirect("/profile.html");
+});
+
 app.get("/getFavoritedCharitiesEins", async (request, response) => {
   const options = request.query;
   let user_id = null;
