@@ -7,7 +7,7 @@ settingsB.addEventListener('click', () => {
 
 const searchB = document.getElementById("search");
 searchB.addEventListener('click', () => {
-    window.location.href = "search.html";
+    window.location.href = "/searchAuth";
 });
 
 const favoritesB = document.getElementById("my_favorites");

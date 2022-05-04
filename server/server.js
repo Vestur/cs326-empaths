@@ -601,6 +601,10 @@ app.get('/logout', (req, res) => {
   res.redirect('/login.html');
 });
 
+app.get("/searchAuth", checkLoggedIn, async (request, response) => {
+  response.redirect("/search.html");
+});
+
 app.get("/donationsAuth", checkLoggedIn, async (request, response) => {
   response.redirect("/donations.html");
 });
