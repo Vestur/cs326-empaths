@@ -146,7 +146,7 @@ export class CharitableDatabase {
 
 	async readUser(id) {
 		try {
-			const res = await this.userCollection.findOne({ id: id }).toArray();
+			const res = await this.userCollection.findOne({ id: id });
 			return res;
 		} catch(err) {
 			return err;

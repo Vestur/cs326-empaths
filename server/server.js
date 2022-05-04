@@ -596,7 +596,6 @@ app.post('/login', auth.authenticate('local', {
 );
 
 app.get('/logout', (req, res) => {
-  console.log(req);
   req.logout(); // Logs us out!
   res.redirect('/login.html');
 });
@@ -623,9 +622,9 @@ app.get("/profileAuth", checkLoggedIn, async (request, response) => {
 
 app.get("/getFavoritedCharitiesEins", async (request, response) => {
   const options = request.query;
-  let user_id = null;
+  let user_id = request.user.id;
   try {
-    const user = await db.readUser(0);
+    const user = await db.readUser(user_id);
     const data = user.favlist;
     response.status(200).json(data);
   } catch (error) {
