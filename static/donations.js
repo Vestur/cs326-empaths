@@ -96,7 +96,7 @@ function generateRows(donation){
   let name = row.insertCell(0);
   let amount = row.insertCell(1);
   let date = row.insertCell(2);
-  name.innerHTML = donation.charity_name; 
+  name.innerHTML = donation.charityName; 
   amount.innerHTML = donation.amount; 
   date.innerHTML = donation.date; 
 }
