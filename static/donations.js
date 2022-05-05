@@ -6,8 +6,8 @@ async function createDonation(charity_name_input, amount_input, date_input) {
       },
       body: JSON.stringify({ charity_name: charity_name_input, amount: amount_input, date: date_input }),
     });
-    const data = await response.json(); //do I need these?
-    return data;
+    //const data = await response.json(); //do I need these?
+    //return data;
   }
 
 async function deleteDonation(charity_name_input, amount_input, date_input) {
@@ -15,8 +15,8 @@ async function deleteDonation(charity_name_input, amount_input, date_input) {
       const response = await fetch(`/deleteDonation`, {
         method: 'DELETE',
       }); 
-      const data = await response.json();
-      return data;
+      //const data = await response.json();
+      //return data;
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +46,9 @@ addrowB.addEventListener('click', async () => {
   let name = document.getElementById("charity").value;
   let amount = document.getElementById("amount").value; 
   let date = document.getElementById("date").value;
+  console.log(name);
+  console.log(amount);
+  console.log(date);
   await createDonation(name, amount, date); // create donation here so it saves in database
   const tableBody = document.getElementById("my_table").getElementsByTagName('tbody')[0];
   let row = tableBody.insertRow(-1);
@@ -62,19 +65,28 @@ deleteB.addEventListener('click', async () => {
   let name = document.getElementById("charity").value;
   let amount = document.getElementById("amount").value; 
   let date = document.getElementById("date").value;
-  const tableBody = document.getElementById("my_table").getElementByTagName('tbody')[0];
+  const tableBody = document.getElementById("my_table").getElementsByTagName('tbody')[0];
+  let deleted = false;
   //loop through rows aka td elements of table body, check if all cells match, if they do, delete row 
   for(let i = 0; i < tableBody.rows.length; i++){
-    if(tableBody.rows[i].cells[0] === name && 
-       tableBody.rows[i].cells[1] === amount &&
-       tableBody.rows[i].cells[2] === date
+
+    console.log(tableBody.rows[i].cells[0].innerHTML);
+    console.log(tableBody.rows[i].cells[1].innerHTML);
+    console.log(tableBody.rows[i].cells[2].innerHTML);
+
+
+    if(tableBody.rows[i].cells[0].innerHTML === name && 
+       tableBody.rows[i].cells[1].innerHTML === amount &&
+       tableBody.rows[i].cells[2].innerHTML === date
       ){
       tableBody.deleteRow(i);
       await deleteDonation(name, amount, date);
+      deleted = true; 
     }
-    else{
+  }
+
+  if(deleted === false){
       alert("Failed to Delete Donation :(");
-    }
   }
 });
 

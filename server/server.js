@@ -432,7 +432,7 @@ app.get("/getDonation", async (request, response) => {
 app.post("/createDonation", async (request, response) => { //charity name, amount, date
   const options = request.body; // get the charity, amount, date from here
   let user_id = 0; 
-  let updated_donations_arr = await db.readUser(user_id).donations.slice();
+  let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
   try {
 
        updated_donations_arr.push({ charity_name: options.charity_name, amount: options.amount, date: options.date});
