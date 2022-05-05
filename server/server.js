@@ -435,7 +435,7 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
   try {
 
-       updated_donations_arr.push({ charity_name: options.charity_name, amount: options.amount, date: options.date});
+       updated_donations_arr.push({ charityName: options.charityName, amount: options.amount, date: options.date});
        await db.updateUser(user_id, { donations: updated_donations_arr });
 
     response.status(200).json({ status: "success" });
@@ -451,14 +451,14 @@ app.delete("/deleteDonation", async (request, response) => {
   let user_id = 0; 
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
 
-  let charity = options["charity_name"]; // name of charity user wants to delete
+  let charity = options["charityName"]; // name of charity user wants to delete
   let amount = options["amount"];
   let date = options["date"];
 
   try {
     // account's donations array
     for (const [index, donation] of updated_donations_arr) { //interate through donations array
-      if (donation.charity_name === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
+      if (donation.charityName === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
         await db.updateUser(user_id, { donations: updated_donations_arr.splice(index) }); //delete from donations array, then delete from table
 
       } else {

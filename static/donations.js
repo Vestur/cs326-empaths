@@ -4,7 +4,7 @@ async function createDonation(charity_name_input, amount_input, date_input) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ charity_name: charity_name_input, amount: amount_input, date: date_input }),
+      body: JSON.stringify({ charityName: charity_name_input, amount: amount_input, date: date_input }),
     });
     //const data = await response.json(); //do I need these?
     //return data;
