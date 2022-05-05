@@ -42,7 +42,7 @@ async function deleteDonation(charity_name_input, amount_input, date_input) {
   }
   */
 const addrowB = document.getElementById("add_row");
-addrowB.addEventListener('click', () => {
+addrowB.addEventListener('click', async () => {
   let name = document.getElementById("charity").value;
   let amount = document.getElementById("amount").value; 
   let date = document.getElementById("date").value;
@@ -58,7 +58,7 @@ addrowB.addEventListener('click', () => {
 });
 
 const deleteB = document.getElementById("delete_row");
-deleteB.addEventListener('click', () => {
+deleteB.addEventListener('click', async () => {
   let name = document.getElementById("charity").value;
   let amount = document.getElementById("amount").value; 
   let date = document.getElementById("date").value;

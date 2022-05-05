@@ -418,7 +418,8 @@ app.get("/search", async (request, response) => {
 });
 
 app.get("/getDonation", async (request, response) => {
-  const user = db.readUser(0);
+  let user_id = 0; 
+  const user = await db.readUser(user_id);
   const data = user.donations; // await get_fake_donations_arr(user_id);
   try {
     response.status(200).json(data);
@@ -431,11 +432,11 @@ app.get("/getDonation", async (request, response) => {
 app.post("/createDonation", async (request, response) => { //charity name, amount, date
   const options = request.body; // get the charity, amount, date from here
   let user_id = 0; 
-  let updated_donations_arr = db.readUser(user_id).donations.slice();
+  let updated_donations_arr = await db.readUser(user_id).donations.slice();
   try {
 
        updated_donations_arr.push({ charity_name: options.charity_name, amount: options.amount, date: options.date});
-       db.updateUser(user_id, { donations: updated_donations_arr });
+       await db.updateUser(user_id, { donations: updated_donations_arr });
 
     response.status(200).json({ status: "success" });
   } catch (err) {
@@ -448,7 +449,7 @@ app.delete("/deleteDonation", async (request, response) => {
   // extract user id, find account then delete donation from their
   const options = request.body;
   let user_id = 0; 
-  let updated_donations_arr = db.readUser(user_id).donations.slice();
+  let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
 
   let charity = options["charity_name"]; // name of charity user wants to delete
   let amount = options["amount"];
@@ -458,7 +459,7 @@ app.delete("/deleteDonation", async (request, response) => {
     // account's donations array
     for (const [index, donation] of updated_donations_arr) { //interate through donations array
       if (donation.charity_name === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
-        db.updateUser(user_id, { donations: updated_donations_arr.splice(index) }); //delete from donations array, then delete from table
+        await db.updateUser(user_id, { donations: updated_donations_arr.splice(index) }); //delete from donations array, then delete from table
 
       } else {
         response.json({ error: `Donation Not Found` }); //donation doen't exist
