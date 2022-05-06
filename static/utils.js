@@ -13,6 +13,47 @@ let liked_charities = await getLikedCharitiesEins(0);
 export let num_favorited = favorited_charities.length;
 export let num_liked = liked_charities.length;
 
+export async function addReview(charityId, text, stars) {
+  const response = await fetch("/createReview", {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      cid: charityId,
+      stars: stars,
+      text: text,
+    }),
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function add_review_handler() {
+  let charityId = this["charityID"];
+  let text = this["text"].value;
+  let stars = this["stars"];
+  let reviewsList = this["reviewsList"];
+  const new_review = await addReview(charityId, text, stars);
+  try {
+    const reviewItem = document.createElement("li");
+    reviewItem.classList.add("list-group-item");
+    const reviewRating = document.createElement("span");
+    const reviewText = document.createElement("p");
+
+    reviewRating.classList.add("review-rating");
+    reviewRating.innerHTML = `Review rating - ${stars}`;
+    reviewText.innerHTML = text;
+
+    reviewItem.appendChild(reviewRating);
+    reviewItem.appendChild(reviewText);
+
+    reviewsList.appendChild(reviewItem);
+  }
+  catch (error) {
+    console.log("error adding review");
+    console.log(error);
+  }
+}
+
 async function likes_handler() {
   let charity_ein = this["ein"];
   // decide to add or remove charity from favorites
@@ -259,6 +300,12 @@ export async function createCharityCard(charity) {
   const reviewsCreatorSubmit = document.createElement("button");
   reviewsCreatorSubmit.innerHTML = "Submit";
   reviewsCreatorSubmit.classList.add("btn", "btn-primary", "review-submit");
+  reviewsCreatorSubmit.addEventListener("click", add_review_handler);
+  reviewsCreatorSubmit["charityID"] = charity.eid;
+  reviewsCreatorSubmit["text"] = reviewsCreator;
+  reviewsCreatorSubmit["stars"] = 0;
+  reviewsCreatorSubmit["reviewsList"] = reviewsList;
+
 
   reviewCreatorWrapper.appendChild(reviewsCreator);
   reviewCreatorWrapper.appendChild(reviewsCreatorSubmit);

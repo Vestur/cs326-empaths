@@ -7,6 +7,7 @@ import fetch from "node-fetch";
 import { CharitableDatabase } from "./database.js";
 import auth from './auth.js';
 import { response } from "express";
+import { assert } from "console";
 
 // CONSTS
 const APP_ID = process.env.APP_ID;
@@ -390,9 +391,12 @@ app.get("/getLikedCharitiesEins", async (request, response) => {
 });
 
 app.post("/createReview", async (request, response) => {
-  const options = request.query;
+  const options = request.body;
   try {
-    const data = await db.createReview(options.uid, options.cid, options.stars, options.text);
+    if (options.cid === undefined || options.stars === undefined || options.text === undefined) {
+      console.error("one input is undefined");
+    }
+    const data = await db.createReview(request.user.id, options.cid, options.stars, options.text);
     response.status(200).json(data);
   } catch (err) {
     response.status(404).json({ status: err });
