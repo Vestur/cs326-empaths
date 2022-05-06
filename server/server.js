@@ -433,6 +433,7 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
   const options = request.body; // get the charity, amount, date from here
   let user_id = 0; 
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
+  console.log(updated_donations_arr);
   try {
 
        updated_donations_arr.push({ charityName: options.charityName, amount: options.amount, date: options.date});
@@ -450,6 +451,7 @@ app.delete("/deleteDonation", async (request, response) => {
   const options = request.body;
   let user_id = 0; 
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
+  console.log(updated_donations_arr);
 
   let charity = options["charityName"]; // name of charity user wants to delete
   let amount = options["amount"];
@@ -459,7 +461,9 @@ app.delete("/deleteDonation", async (request, response) => {
     // account's donations array
     for (const [index, donation] of updated_donations_arr) { //interate through donations array
       if (donation.charityName === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
-        await db.updateUser(user_id, { donations: updated_donations_arr.splice(index) }); //delete from donations array, then delete from table
+        updated_donations_arr.splice(index, 1);
+        console.log(updated_donations_arr);
+        await db.updateUser(user_id, { donations: updated_donations_arr }); //delete from donations array, then delete from table
 
       } else {
         response.json({ error: `Donation Not Found` }); //donation doen't exist

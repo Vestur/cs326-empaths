@@ -26,6 +26,7 @@ async function deleteDonation(charity_name_input, amount_input, date_input) {
         method: 'GET',
     });
     const data = await response.json();
+    console.log(data);
     return data;
   }
   
