@@ -471,6 +471,7 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
 // donation deletion endpoint
 app.delete("/deleteDonation", async (request, response) => {
   // extract user id, find account then delete donation from their
+  console.log("in delete endpoint");
   const options = request.body;
   let user_id = 0; 
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
