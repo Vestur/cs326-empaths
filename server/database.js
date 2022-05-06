@@ -120,13 +120,14 @@ export class CharitableDatabase {
 		}
 	}
 
-	async createUser(username, password, email, bio, pfp, location) {
+	async createUser(name, username, password, email, bio, pfp, location) {
 		try {
 			const idObj = await this.userCollection.find().sort({ "id": -1 }).limit(1).toArray();
 			const id = idObj[0]['id'] + 1;
 
 			const usrObj = {
 				id: id,
+                name: name,
 				username: username,
 				password: password,
 				email: email,

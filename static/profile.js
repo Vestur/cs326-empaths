@@ -53,7 +53,11 @@ fetchRes.then(res =>
     document.getElementById('email').value = d.email;
     document.getElementById('location').value = d.location;
     const pfp = document.getElementById('main-profile-pic');
-    pfp.setAttribute("src", d.pfp);
+    if (d.pfp.length > 0) {
+        pfp.setAttribute("src", d.pfp);
+    } else {
+        pfp.setAttribute("src", 'images/profile.png')
+    }
     for (let review of d.reviews) {
         let options = {
             method: 'GET',

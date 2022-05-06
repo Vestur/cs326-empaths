@@ -44,9 +44,13 @@ let options = {
         'Content-Type': 'application/json'
     }
 };
-let data = await fetch("/getAccount?account_id=1", options);
+let data = await fetch("/getAccount", options);
 let account = await data.json();
-pfp.setAttribute("src", account.pfp);
+if (account.pfp.length > 0) {
+    pfp.setAttribute("src", account.pfp);
+} else {
+    pfp.setAttribute("src", 'images/profile.png')
+}
 
 //send login info to server
 
