@@ -33,6 +33,7 @@ export class CharitableDatabase {
 				{
 					id: 0,
 					username: 'Test Subject 1',
+                    name: 'Test Subject 1',
 					password: 'pass1',
 					email: 'test1@charitable.org',
 					bio: 'I am test subject one. Commmence with your testing.',
@@ -49,6 +50,7 @@ export class CharitableDatabase {
 				{
 					id: 1,
 					username: 'Test Subject 2',
+                    name: 'Test Subject 2',
 					password: 'pass2',
 					email: 'test2@charitable.org',
 					bio: 'I am test subject two. Commmence with your testing.',
@@ -262,7 +264,7 @@ export class CharitableDatabase {
 
 	async readReview(rid) {
 		try {
-			const res = await this.reviewCollection.findOne({ rid: rid });
+			const res = await this.reviewCollection.findOne({ rid: parseInt(rid) });
 			return res;
 		} catch(err) {
 			return err;

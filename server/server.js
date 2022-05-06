@@ -6,6 +6,7 @@ import { faker } from "@faker-js/faker";
 import fetch from "node-fetch";
 import { CharitableDatabase } from "./database.js";
 import auth from './auth.js';
+import { response } from "express";
 
 // CONSTS
 const APP_ID = process.env.APP_ID;
@@ -195,8 +196,8 @@ async function createClientCharity(serverCharity, user) {
       likes = new_dbCharity.totalLikes;
     }
 
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 
   const reviews = await getReviews(serverCharity.ein);
@@ -227,8 +228,8 @@ async function getReviews(ein) {
         data.push(await db.readReview(rid));
       }
     }
-  } catch(error) {
-    console.log(error);
+  } catch(err) {
+    console.log(err);
   }
   return data;
 }
@@ -267,8 +268,8 @@ async function get_liked_charities(user_id) {
       let charity = await get_charity(ein);
       data.push(charity);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
   //const data = generate_fake_charity_list();
   return data;
@@ -282,8 +283,8 @@ async function get_favorited_charities(user_id) {
       let charity = await get_charity(ein);
       data.push(charity);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
   return data;
 }
@@ -330,8 +331,8 @@ app.get("/getCharity", async (request, response) => {
   try {
     let charity = await get_charity(ein);
     response.status(200).json(charity);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 });
 
@@ -349,8 +350,8 @@ app.post("/createLike", async (request, response) => {
   try {
     const updated_charity = await addLike(0, charity_ein);
     response.status(200).json(updated_charity);
-  } catch (error) {
-    response.status(404).json({ status: error });
+  } catch (err) {
+    response.status(404).json({ status: err });
   }
 });
 
@@ -360,8 +361,8 @@ app.delete("/deleteLike", async (request, response) => {
   try {
     const updated_charity = await removeLike(0, charity_ein);
     response.status(200).json(updated_charity);
-  } catch (error) {
-    response.status(404).json({ status: error });
+  } catch (err) {
+    response.status(404).json({ status: err });
   }
 });
 
@@ -371,7 +372,7 @@ app.get("/getLikedCharities", async (request, response) => {
   const data = await get_liked_charities(user_id);
   try {
     response.status(200).json(data);
-  } catch (error) {
+  } catch (err) {
     response.status(404).json({ status: err });
   }
 });
@@ -383,17 +384,39 @@ app.get("/getLikedCharitiesEins", async (request, response) => {
     const user = await db.readUser(0);
     const data = user.likes;
     response.status(200).json(data);
-  } catch (error) {
+  } catch (err) {
     response.status(404).json({ status: err });
   }
 });
 
 app.post("/createReview", async (request, response) => {
   const options = request.query;
+  try {
+    const data = await db.createReview(options.uid, options.cid, options.stars, options.text);
+    response.status(200).json(data);
+  } catch (err) {
+    response.status(404).json({ status: err });
+  }
+});
+
+app.get("/readReview", async (request, response) => {
+  const options = request.query;
+  try {
+    const data = await db.readReview(options.rid);
+    response.status(200).json(data);
+  } catch (err) {
+    response.status(404).json({ status: err });
+  }
 });
 
 app.delete("/deleteReview", async (request, response) => {
   const options = request.query;
+  try {
+    const data = await db.deleteReview(options.rid);
+    response.status(200).json(data);
+  } catch (err) {
+    response.status(404).json({ status: err });
+  }
 });
 
 app.get("/getReviews", async (request, response) => {
@@ -402,8 +425,8 @@ app.get("/getReviews", async (request, response) => {
   try {
     data = await getReviews(options.ein);
     response.status(200).json(data);
-  } catch (error) {
-    response.status(404).json({ status: error });
+  } catch (err) {
+    response.status(404).json({ status: err });
   }
 });
 
@@ -412,8 +435,8 @@ app.get("/search", async (request, response) => {
   try {
     let results = await search(query["query"]);
     response.status(200).json(results);
-  } catch (error) {
-    response.status(404).json(error);
+  } catch (err) {
+    response.status(404).json(err);
   }
 });
 
@@ -424,7 +447,7 @@ app.get("/getDonation", async (request, response) => {
   try {
     response.status(200).json(data);
   } catch (err) {
-    response.status(404).json(error);
+    response.status(404).json(err);
   }
 });
 
@@ -440,7 +463,7 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
 
     response.status(200).json({ status: "success" });
   } catch (err) {
-    response.status(404).json(error);
+    response.status(404).json(err);
   }
 });
 
@@ -462,12 +485,12 @@ app.delete("/deleteDonation", async (request, response) => {
         await db.updateUser(user_id, { donations: updated_donations_arr.splice(index) }); //delete from donations array, then delete from table
 
       } else {
-        response.json({ error: `Donation Not Found` }); //donation doen't exist
+        response.json({ err: `Donation Not Found` }); //donation doen't exist
       }
     }
     response.status(200).json({ status: "success" });
-  } catch (error) {
-    response.status(404).json(error);
+  } catch (err) {
+    response.status(404).json(err);
   }
 });
 
@@ -503,37 +526,22 @@ app.post("/createAccount", async (request, response) => {
 
 app.get("/getAccount", async (request, response) => {
   const options = request.query;
-  let account_id = options["account_id"]; // user id
   try {
-    let found = false;
-    for (const user_object of accounts) {
-      if (user_object.id === account_id) {
-        response.status(200).json(user_object);
-        found = true;
-        break;
-      }
-    }
-    if (!found) {
-      response.status(404).json({ status: "not found" });
-    }
+    const user = request.user;
+    response.status(200).json(user);
   } catch (err) {
     response.status(404).json(err);
   }
 });
 
 app.put("/updateAccount", async (request, response) => {
-  const options = request.query;
-  let account_id = options["account_id"]; // user id
+  const options = request.body;
+  let account_id = request.user.id;
   try {
-    for (const [index, user_object] of accounts.entries()) {
-      if (user_object.id === account_id) {
-        //update field of user_object here
-        continue;
-      }
-    }
+    await db.updateUser(account_id, options);
     response.status(200).json({ status: "success" });
   } catch (err) {
-    response.status(404).json(error);
+    response.status(404).json(err);
   }
 });
 
@@ -548,7 +556,7 @@ app.delete("/deleteAccount", async (request, response) => {
     }
     response.status(200).json({ status: "success" });
   } catch (err) {
-    response.status(404).json(error);
+    response.status(404).json(err);
   }
 });
 
@@ -560,7 +568,7 @@ app.post("/addFavorite", async (request, response) => {
   try {
     await updateList(user_id, charity_ein)
     response.status(200).json({ status: "success" });
-  } catch (error) {
+  } catch (err) {
     response.status(404).json({ status: err });
   }
 });
@@ -572,7 +580,7 @@ app.delete("/removeFavorite", async (request, response) => {
   try {
     await removeFromList(user_id, charity_ein);
     response.status(200).json({ status: "success" });
-  } catch (error) {
+  } catch (err) {
     response.status(404).json({ status: err });
   }
 });
@@ -583,7 +591,7 @@ app.get("/getFavoritedCharities", async (request, response) => {
   const data = await get_favorited_charities(user_id);
   try {
     response.status(200).json(data);
-  } catch (error) {
+  } catch (err) {
     response.status(404).json({ status: err });
   }
 });
@@ -628,7 +636,7 @@ app.get("/getFavoritedCharitiesEins", async (request, response) => {
     const user = await db.readUser(user_id);
     const data = user.favlist;
     response.status(200).json(data);
-  } catch (error) {
+  } catch (err) {
     response.status(404).json({ status: err });
   }
 });
