@@ -105,6 +105,20 @@ body {
     margin: 8px;
 }
 
+.stars-label {
+    font: bold;
+    font-size: larger;
+    display: flex;
+    align-content: flex-start;
+    align-items: center;
+    width: 10%;
+}
+
+.star-selector {
+    margin-left: 7%;
+    padding-right: 2%;
+}
+
 .review-box {
     margin-bottom: 8px;
 }
