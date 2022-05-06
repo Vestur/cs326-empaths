@@ -14,6 +14,10 @@ async function deleteDonation(charity_name_input, amount_input, date_input) {
     try {
       const response = await fetch(`/deleteDonation`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ charityName: charity_name_input, amount: amount_input, date: date_input }) 
       }); 
       //const data = await response.json();
       //return data;
