@@ -17,6 +17,25 @@ bio.addEventListener('click', async (event) => {
     let fetchRes = await fetch("/updateAccount", options);
 });
 
+const info = document.getElementById("saveInfo");
+info.addEventListener('click', async (event) => {
+    let options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: document.getElementById('name').value,
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value,
+            bio: document.getElementById('bio').value,
+            email: document.getElementById('email').value,
+            location: document.getElementById('location').value
+        })
+    };
+    let fetchRes = await fetch("/updateAccount", options);
+});
+
 let options = {
     method: 'GET',
     headers: {
@@ -29,6 +48,7 @@ fetchRes.then(res =>
     bio.value = d.bio;
     document.getElementById('name').value = d.name;
     document.getElementById('username').value = d.username;
+    document.getElementById('password').value = d.password;
     document.getElementById('bio').value = d.bio;
     document.getElementById('email').value = d.email;
     document.getElementById('location').value = d.location;

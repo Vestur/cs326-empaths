@@ -26,7 +26,7 @@
           defer
         ></script>
 
-       <title>Login Page</title>
+       <title>Sign Up Page</title>
        </head>
        <body class="background-image">
            <form id="loginForm" method="POST" action="/login">
@@ -36,7 +36,13 @@
            </div>
 
            <div class="header">
-               <h1>LOG IN</h1>
+               <h1>Sign Up</h1>
+                 <input type="text" name="name" id="name" placeholder="Enter Name" class="box" required>
+                 <br>
+                 <input type="text" name="email" id="email" placeholder="Enter Email" class="box" required>
+                 <br>
+                 <input type="text" name="zip" id="zip" placeholder="Enter Zip Code" class="box" required>
+                 <br>
                  <!--<label id="username" class="container">Username</label>--> 
                  <input type="text" name="username" id="username" placeholder="Enter Username" class="box" required>
                  <br>
@@ -46,7 +52,6 @@
 
             <div class="text-center">
                 <button type="button" id="signup" class="btn btn-signup">SIGN UP</button>
-                <button type="submit" id="login" class="btn btn_login">LOGIN</button>
             </div>
             </form>
        </body>

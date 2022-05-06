@@ -604,7 +604,7 @@ app.get("/getFavoritedCharities", async (request, response) => {
 app.post('/login', auth.authenticate('local', {
     // use username/password authentication
     successRedirect: '/profileAuth',
-    failureRedirect: '/login.html', // otherwise, back to login
+    failureRedirect: '/login-failed.html', // otherwise, back to login
   })
 );
 
