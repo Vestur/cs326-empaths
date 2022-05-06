@@ -194,7 +194,7 @@ async function createClientCharity(serverCharity, user) {
       // not used
       const new_dbCharity = await db.createCharity(serverCharity.ein)
       // will be 0
-      likes = new_dbCharity.totalLikes;
+      likes = 0;
     }
 
   } catch (err) {

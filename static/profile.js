@@ -76,12 +76,7 @@ fetchRes.then(res =>
         let reviewElement = `
         <form action="submit" class="background-white d-flex flex-column form-inline a-review" id="profile-charity-1">
         <div class="input-group no-border">
-            <textarea placeholder="${charityObj.name}" class="default-cursor button-at-end no-border" name="profile-charity-1-name" id="profile-charity-1-name" cols="30" rows="1" readonly=""></textarea>
-            <span class="input-group-btn">
-                <button class="btn btn-default state-button" type="button">
-                    <i class="bi bi-pencil-fill"></i>
-                </button>
-            </span>
+            <textarea class="default-cursor button-at-end no-border" name="profile-charity-1-name" id="profile-charity-1-name" cols="30" rows="1" readonly="">${charityObj.name}</textarea>
         </div>
         <div class="star-rating">`
         for (let i = 0; i < 5; ++i) {
@@ -94,7 +89,7 @@ fetchRes.then(res =>
             }
         }
         reviewElement += `</div>
-        <textarea placeholder="${reviewObj.text}" class="default-cursor no-border" name="profile-charity-1-review" id="profile-charity-1-review" cols="30" rows="3" readonly=""></textarea>
+        <textarea class="default-cursor no-border" name="profile-charity-1-review" id="profile-charity-1-review" cols="30" rows="3" readonly="">${reviewObj.text}</textarea>
         </form>`;
         document.getElementById('review-list').innerHTML += reviewElement;
 

@@ -233,6 +233,7 @@ export async function createCharityCard(charity) {
 
   const likes = document.createElement("button");
   likes.classList.add(["btn"]);
+
   likes.innerHTML = `${charity.likes} 💛`;
   if(liked_charities.includes(charity.eid)) {
     likes.classList.add("liked");
@@ -320,7 +321,6 @@ export async function createCharityCard(charity) {
   reviewsCreatorSubmit["text"] = reviewsCreator;
   reviewsCreatorSubmit["stars"] = reviewsCreatorStarSelector;
   reviewsCreatorSubmit["reviewsList"] = reviewsList;
-
 
   reviewCreatorWrapper.appendChild(reviewsCreator);
   reviewCreatorWrapper.appendChild(reviewsCreatorStar);
