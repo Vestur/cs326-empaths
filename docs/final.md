@@ -187,10 +187,5 @@ Parsua Atoofi:
 - - - -
 
 # Conclusion
-The Empaths 
-Through the design and implementation processes, we learned a lot
-API endpoint difficulties
-Auth difficulties 
-liked to learn about auth and 
-technical hurdles: 
-A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
+Working on this project, our team experienced a mix of successes and difficulties. We found that we had great communication as a team. Through the design and implementation process, we learned how to work with Boostrap, use interesting HTML tricks, implement frontend and CRUD operations, build a database with MongoDB, Authorization and much more. Working with MongoDB for the databse and Bootstrap for the UI was very straightforward. On the other hand, we encountered a lot of difficulties with Authorization and the API endpoints. Although incredibly satisfying when complete, dealing with the dataflow between the client/server/database was complicated and annoying. When we came upon an error with the endpoints, it was difficult to locate and fix the problem. Authentication was also much more complex than anticipated and caused a technical hurdle when deploying our app to Heroku. Before starting the project, particularly this final phase, it would have helped to know more about Authorization and working with API endpoints.
+
