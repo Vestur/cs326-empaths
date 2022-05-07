@@ -34,6 +34,8 @@ async function deleteDonation(charity, amount, date) {
         },
         body: JSON.stringify({ donations: newDonations })
     });
+
+    await renderDonations();
 }
 
 async function renderDonations() {
@@ -45,8 +47,29 @@ async function renderDonations() {
 
     for (const d of donations) {
         console.log(d);
-        const tr = `<tr><td>${d.charityName}</td><td>${d.amount}</td><td>${d.date}</td><td><button type="button" id="delete_row" class="btn">X</button></td></tr>`;
-        dtable.innerHTML += tr;
+        const new_row = document.createElement("tr");
+        const new_col1 = document.createElement("td");
+        new_col1.textContent = d.charityName;
+        const new_col2 = document.createElement("td");
+        new_col2.textContent = d.amount;
+        const new_col3 = document.createElement("td");
+        new_col3.textContent = d.date;
+        const new_col4 = document.createElement("td");
+        const new_button = document.createElement("button");
+        new_button.id = "delete_row";
+        new_button.classList.add("btn");
+        new_button.textContent = 'X';
+        new_button.addEventListener("click", () => {
+            deleteDonation(d.charityName, d.amount, d.date);
+        })
+        new_col4.appendChild(new_button);
+        new_row.appendChild(new_col1);
+        new_row.appendChild(new_col2);
+        new_row.appendChild(new_col3);
+        new_row.appendChild(new_col4);
+        // const tr = `<tr><td>${d.charityName}</td><td>${d.amount}</td><td>${d.date}</td><td><button type="button" id="delete_row" class="btn">X</button></td></tr>`;
+        // dtable.innerHTML += tr;
+        dtable.appendChild(new_row);
     }
 }
 

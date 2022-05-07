@@ -52,8 +52,10 @@ Parsua Atoofi - @Parsua
  
  ### Likes Page 
  
+
  ### favorites Page 
  
+
  ### Donations Page 
 
 - - - -
@@ -88,6 +90,44 @@ Parsua Atoofi - @Parsua
 
 # Database 
 
+User Collection:
+{
+  id: 0,
+  username: 'Test Subject 1',
+            name: 'Test Subject 1',
+  password: 'pass1',
+  email: 'test1@charitable.org',
+  bio: 'I am test subject one. Commmence with your testing.',
+  pfp: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih0.redbubble.net%2Fimage.193421889.8165%2Fflat%2C1000x1000%2C075%2Cf.jpg&f=1&nofb=1',
+  location: '00000',
+  favlist: ['000000030', '000000144'],
+  likes: ['000000030', '000000144', '000000147'],
+  reviews: [0],
+  donations: [
+    { charityName: 'Fake 1', amount: '100', date: '00/00/00' },
+    { charityName: 'Fake 2', amount: '100', date: '00/00/00' }
+  ]
+}
+
+User Collection:
+{
+  id: 0,
+  username: 'Test Subject 1',
+            name: 'Test Subject 1',
+  password: 'pass1',
+  email: 'test1@charitable.org',
+  bio: 'I am test subject one. Commmence with your testing.',
+  pfp: 'image_link',
+  location: 'zipcode',
+  favlist: [charityIds],
+  likes: [charityIds],
+  reviews: [0],
+  donations: [
+    { charityName: 'Fake 1', amount: '100', date: '00/00/00' },
+    { charityName: 'Fake 2', amount: '100', date: '00/00/00' }
+  ]
+}
+
 - - - -
 
 # URL Routes/Mappings
@@ -107,7 +147,7 @@ Paarth Tandon:
 - Sidebar & Search & Signup HTML, Server Creation, faker.js setup, Profile page frontend/CRUD, Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
 
 Edward Annatone:  
-- Profile & Favorites HTML, Search page frontend/CRUD, Milestone2 writeup, Likes page backend, Favorites page backend, Reviews backend, Code Cleanup. 
+- Profile & Favorites HTML, Search page frontend/CRUD, Search faker setup, Milestone2 writeup, Likes page backend, Favorites page backend, Search Page Likes and Favorites, Reviews backend, Reviews Frontend, Code Cleanup
 
 Parsua Atoofi: 
 - Data Interactions, Wireframes, Login & Donations & Sidebar HTML, Milestone1 writeup, Login page frontend/CRUD, Donations page frontend/CRUD, Sidebar frontend, Donations page backend, Charitable Favicon, Milestone3 and Final writeup.
