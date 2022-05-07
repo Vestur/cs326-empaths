@@ -20,7 +20,22 @@
 
 ### Charity Collection Table 
 
+| Column       | Data Type | Description                |
+|--------------|-----------|----------------------------|
+|      eid     |  String   | id associated with a charity |
+|    reviews   |  [Integer]| list of review IDs (a charity's reviews from users) |
+|   totalLikes |  Integer  | total amount of likes a charity has |
+
+
 ### Review Collection Table
+
+| Column       | Data Type | Description                |
+|--------------|-----------|----------------------------|
+|      rid     |  Integer  | ID of a user's review |
+|      uid     |  Integer  | user's ID number  |
+|     chid     |  String   | charity's ID number |
+|     stars    |  Integer  | number of stars a user gave the charity in the review |
+|     text     |  String   | the actual text body of the review written by the user|
 
 - - - -
 
@@ -28,4 +43,4 @@
 Mathew Han: Search page backend, Likes page backend, Favorites page backend, Utilities. 
 Paarth Tandon: Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
 Edward Annatone: Likes page backend, Likes CRUD/Database, Favorites page backend, Search page Likes & Favorites, Reviews backend, Code Cleanup, Final writeup.
-Parsua Atoofi: Sidebar HTML, Donations page backend, Charitable Favicon & HTML, Milestone3 and Final writeup.
+Parsua Atoofi: Sidebar HTML, Donations page backend, Charitable Favicon & HTML, Milestone3 writeup, Final writeup.
