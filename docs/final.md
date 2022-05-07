@@ -189,3 +189,22 @@ Parsua Atoofi:
 # Conclusion
 Working on this project, our team experienced a mix of successes and difficulties. We found that we had great communication as a team. Through the design and implementation process, we learned how to work with Boostrap, use interesting HTML tricks, implement frontend and CRUD operations, build a database with MongoDB, Authorization and much more. Working with MongoDB for the databse and Bootstrap for the UI was very straightforward. On the other hand, we encountered a lot of difficulties with Authorization and the API endpoints. Although incredibly satisfying when complete, dealing with the dataflow between the client/server/database was complicated and annoying. When we came upon an error with the endpoints, it was difficult to locate and fix the problem. Authentication was also much more complex than anticipated and caused a technical hurdle when deploying our app to Heroku. Before starting the project, particularly this final phase, it would have helped to know more about Authorization and working with API endpoints.
 
+# Grading Rubric 
+
+| Page Breakdown | Description of Features | Possible Points | Awarded Points|
+|----------------|-------------------------|-----------------|---------------|
+| Login Page     | Users should be able to enter their username and password into the respective text boxes and effectively log into their personalized Charitable account using the login button. The sign up button leads to the Sign up Page.  |
+| Sign up Page| New users should be able to enter their full name, email, username, password, and zip code into the respective text boxes and effectively create an account by clicking the sign up button. They can upload a profile picture as well. Once they click sign up, it will lead them to the Login Page.There, they can then log in using their new username and password credentials. |
+| Search Page | Users will be able to search for charities by whatever query they wish. Once given the results they can look through the summaries of charities and like or favorite the charities for one reason or another (save for later, had a good experience with them in the past). Users will also be able to review individual charities here and provide a review rating. This rating will be used to create a total rating for each charity to let other users be aware of how well-regarded one charity or another is or isn’t. |
+| Profile Page | Users should be able to edit their Charitable accounts and save the updates. They can edit their profile pictures, name, username, password, email and location using the respective text boxes. The save button will save the changes. The bio text box is also editable and changes will be saved. A user’s reviews appear under the bio text box and can be viewed. |
+| Likes Page | Here users can see charities they have liked and either review them, look them over again, favorite them, or unlike them. Users can also see how many likes a charity has acquired and see the charity's average rating currently. |
+| Favorites Page | Users can see charities they have saved in the past and either review them, like/unliked them, or delete them from favorites. |
+| Donations Page | Here, users can view and manage a table holding a record of their past donations (charity name, amount, and date). They can add a new donation using the three textboxes at the bottom and the “Add Donation” button. They can also delete a donation using the X button corresponding to that row. |
+| Documentation | The final markdown file is completed. The setup markdown file is completed. The release is completed. |
+| Sidebar  | The sidebar buttons correctly map to the corresponding HTML page when pressed. Settings goes to the Profile Page, Search! goes to the Search Page, My Favorites leads to the Favorites Page, My Likes leads to the Likes Page and My Donations leads to the Donations Page. The sign out button logs the user out and redirects to the Login Page. |
+| Final Video | Video was filmed and edited with all 4 team members. Everyone introduced themselves and said a portion of the video requirements. |
+| Heroku deployment | The project was successfully deployed on Heroku. |
+
+
+
+
