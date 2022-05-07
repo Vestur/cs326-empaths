@@ -40,7 +40,7 @@
 - - - -
 
 # Division of Labor
-Mathew Han: Search page backend, Likes page backend, Favorites page backend, Utilities. 
-Paarth Tandon: Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
-Edward Annatone: Likes page backend, Likes CRUD/Database, Favorites page backend, Search page Likes & Favorites, Reviews backend, Code Cleanup, Final writeup.
-Parsua Atoofi: Sidebar HTML, Donations page backend, Charitable Favicon & HTML, Milestone3 writeup, Final writeup.
+* Mathew Han: Search page backend, Likes page backend, Favorites page backend, Utilities. 
+* Paarth Tandon: Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
+* Edward Annatone: Likes page backend, Likes CRUD/Database, Favorites page backend, Search page Likes & Favorites, Reviews backend, Code Cleanup, Final writeup.
+* Parsua Atoofi: Sidebar HTML, Donations page backend, Charitable Favicon & HTML, Milestone3 writeup, Final writeup.
