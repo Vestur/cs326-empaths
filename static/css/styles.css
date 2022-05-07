@@ -432,3 +432,12 @@ tbody {
 }
 
 /****End Search CSS****/
+
+/****Image Upload****/
+
+#display-image {
+    height: 300px;
+    width: 300px;
+}
+
+/****End Image Upload****/

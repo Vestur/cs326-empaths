@@ -36,6 +36,11 @@ info.addEventListener('click', async (event) => {
     let fetchRes = await fetch("/updateAccount", options);
 });
 
+const changeImg = document.getElementById('changeImage');
+changeImg.addEventListener('click', async () => {
+    window.location.href = '/uploadAuth';
+});
+
 let options = {
     method: 'GET',
     headers: {

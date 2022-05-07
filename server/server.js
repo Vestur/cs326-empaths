@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import expressSession from 'express-session';
 import path from "path";
 import "dotenv/config";
@@ -33,9 +34,12 @@ const sessionConfig = {
 const app = express();
 const port = 3000;
 app.use(expressSession(sessionConfig));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./static"));
+
+//increase payload limit
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 // auth
 auth.configure(app);
@@ -511,7 +515,7 @@ app.delete("/deleteDonation", async (request, response) => {
 app.post("/createAccount", async (request, response) => {
   const options = request.body;
   try {
-    await db.createUser(options.name, options.username, options.password, options.email, '', '', options.location);
+    await db.createUser(options.name, options.username, options.password, options.email, '', options.pfp, options.location);
     response.status(200).json({ status: "success" });
   } catch (err) {
     response.status(404).json(err);
@@ -622,6 +626,10 @@ app.get("/likesAuth", checkLoggedIn, async (request, response) => {
 
 app.get("/profileAuth", checkLoggedIn, async (request, response) => {
   response.redirect("/profile.html");
+});
+
+app.get("/uploadAuth", checkLoggedIn, async (request, response) => {
+  response.redirect("/upload.html");
 });
 
 app.get("/getFavoritedCharitiesEins", async (request, response) => {

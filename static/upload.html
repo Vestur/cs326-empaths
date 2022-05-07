@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <script type="module" src="signup.js" defer></script>
+        <script type="module" src="upload.js" defer></script>
         <link rel="icon" type="image/x-icon" href="/charitable-favicon.ico">
         <!-- Boostrap CSS -->
         <link
@@ -26,35 +26,20 @@
           defer
         ></script>
 
-       <title>Sign Up Page</title>
+       <title>Upload Profile Picture</title>
        </head>
        <body class="background-image">
-           <form id="loginForm" method="POST" action="/login">
-           <div class="imgcontainer">
-            <div class="header">
-            <h1>SELECT IMAGE</h1>
-            </div>
-            <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
-            <img id="display-image" src="">
-           </div>
-
+           <form id="imageForm">
            <div class="header">
-               <h1>SIGN UP</h1>
-                 <input type="text" name="name" id="name" placeholder="Enter Name" class="box" required>
-                 <br>
-                 <input type="text" name="email" id="email" placeholder="Enter Email" class="box" required>
-                 <br>
-                 <input type="text" name="zip" id="zip" placeholder="Enter Zip Code" class="box" required>
-                 <br>
+               <h1>UPLOAD PROFILE PICTURE</h1>
                  <!--<label id="username" class="container">Username</label>--> 
-                 <input type="text" name="username" id="username" placeholder="Enter Username" class="box" required>
-                 <br>
-                 <!--<label id="password" class="container">Password</label>-->
-                 <input type="password" name="password" id="password" placeholder="Enter Password" class="box" required> 
+                 <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+                 <img id="display-image" src="">
            </div>
 
             <div class="text-center">
-                <button type="button" id="signup" class="btn btn-signup">SIGN UP</button>
+                <button type="button" id="save" class="btn btn-signup">SAVE</button>
+                <button type="button" id="back" class="btn btn-signup">BACK TO PROFILE</button>
             </div>
             </form>
        </body>
