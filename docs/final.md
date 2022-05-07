@@ -1,6 +1,6 @@
 # Empaths
 
-* Charitable
+## Charitable
   * Spring 2022
 
 - - - -
@@ -24,6 +24,7 @@ The few charity searchers that do exist are not very personalized. Given this, w
 Important Components:
 Since the main function of this website is to search for charities, we will include a seach bar that will use a charity API to retrieve its results. We will also have other features such as: personalized for you page/recommended, likes, favorites, star and written reviews, badges/verification for charities, charity information profiles, share charities (kinda like a retweet and or share to other platforms, themes for events (like eid).
 
+- - - -
 
 # Team Members 
 Mathew Han - @mathewjhan
@@ -31,15 +32,71 @@ Paarth Tandon - @paarthtandon
 Edward Annatone - @Vestur
 Parsua Atoofi - @Parsua 
 
+- - - -
+
 # User Interface 
+
+
+
+ ### Login Page 
+ - Our application opens up with the Login Page. Here, users are greeted with a background of peaceful blue and hopeful yellow that inspires social justice. From here, a returning user can enter their credentials into the text boxes to log into their existing account. Using the signup button users are redirected to the signup page to create their account. Once logged in, users are redirected to the search page.
+
+### Signup Page
+- Accessible from the Login page, new users can create an account by entering their name, username, email, zip code and password into their respective text boxes.
+
+ ### Search Page 
+ - The search page is the heart of our application. This is where users can search for target charities by entering keywords into the search bar. Here, users are able to examine resulting charities by viewing their mission statement, location, accountability ratings, the reviews of other users, total likes, etc. Users can like or unlike a charity by pressing the little yellow heart icon. Users can favorite or unfavorite a charity by pressing the little star icon. They are also able submit their own review of the charity on this page. 
+ 
+ ### Profile Page 
+ 
+ 
+ ### Likes Page 
+ 
+ ### favorites Page 
+ 
+ ### Donations Page 
+
+- - - -
 
 # APIs
 
+| Endpoint | Description | Response example |
+| -------- | ----------- | --------------- |
+| `/createCharity` | Pass in a charity ein (id), add a charity to our database that can be extracted to a charity object |<pre>{ status: "success" }</pre> |
+| `/getCharity` | Returns a charity object based on the ein passed in | <pre>{<br>  eid: 123123, <br>  name: "Best Charity", <br>  address: "123 Waldo St. Sunderland, MA 01375", <br>  accountability: 54, <br>  mission: "Destroy the world.", <br>  current_rating: 5, <br>  likes: 1001<br>} </pre> | 
+| `/updateCharity` | Update the charity object (may not be necessary) |<pre>{ status: "success" }</pre> |
+| `/deleteCharity` | Remove charity from database (pass in charity id) |<pre>{ status: "success" }</pre> |
+| `/createLike` | Pass in charity id (add like to charity in database) |<pre>{ status: "success" }</pre> |
+| `/deleteLike` | Undo a like (reduce number of likes charity has (add functionality to verify user doing the unliking had actually liked it) |<pre>{ status: "success" }</pre> |
+| `/getLikedCharities` | Gives list of charity objects | <pre>[ CharityObject1, CharityObject2, CharityObject3 ]</pre>| 
+| `/createReview` | Create a review object (add said review object to user and charity) | <pre>{<br>  rid: 234, <br>  uid: "asd3asda", <br>  chid: 123123, <br>  stars: 4,  <br>  text: "Great service!"<br>}</pre> |
+| `/deleteReview` | Remove review from user and charity |<pre>{ status: "success" }</pre> | 
+| `/getReviews` | Gives list of review objects for a user | <pre>[ 321, 234, 656 ]</pre> | 
+| `/search` | Returns list of charity ids (i.e. the result of the search) | <pre>[ 123123, 423412, 5345 ]</pre> | 
+| `/getDonation` | Return list of donations object | <pre>[{charity_name: "Best Charity", amount: 5, date: "4/20/22"}]</pre> | 
+| `/createDonation` | Creates a donation object for a particular user and charity |<pre>{ status: "success" }</pre> | 
+| `/deleteDonation` | Untrack a donation (you can't undo a donation) |<pre>{ status: "success" }</pre> | 
+| `/createAccount` | Creates a user account using username, password, and email at a minimum |<pre>{ status: "success" }</pre> | 
+| `/getAccount` | Returns a user object | <pre>{<br>  id: "as3ads9dsa",<br>  name: "John Roberts",<br>  username: "jroberts",<br>  email: "jroberts@hotmail.com",<br>  bio: "Hi, I'm John.", <br>  pfp: "https://google.com/", <br>  location: Massachusetts, <br>  favlist: [ ein1, ein2, ein3 ],<br>  likes: [ ein4, ein5, ein6 ],<br>  reviews: [ rid1, rid2, rid3 ],<br>  donations: []<br>}</pre> | 
+| `/updateAccount` | Update fields in account/user object | <pre>{ status: "success" }</pre> | 
+| `/deleteAccount` | Delete specified user account |<pre>{ status: "success" }</pre> | 
+| `/addFavorite` | Add a charity to a partiular user's favorites list |<pre>{ status: "success" }</pre> | 
+| `/removeFavorite` | Remove a charity from a particular user's favorite's list |<pre>{ status: "success" }</pre> | 
+| `/getFavoritedCharities` | Get a list of favorited charity objects | <pre> [ CharityObject1, CharityObject2 ]</pre> | 
+
+- - - -
+
 # Database 
+
+- - - -
 
 # URL Routes/Mappings
 
+- - - -
+
 # Authentication/Authorization
+
+- - - -
 
 # Division of Labor
 
@@ -47,12 +104,14 @@ Mathew Han:
 - Data Interactions, Likes & Lists HTML, Favorites page frontend/CRUD, Likes page frontend/CRUD, Heroku deployment, Milestone2 formatting, Search page backend, Likes page backend, Favorites page backend, Utilities. 
 
 Paarth Tandon:  
-- Sidebar & Search HTML, Server Creation, faker.js setup, Profile page frontend/CRUD, Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
+- Sidebar & Search & Signup HTML, Server Creation, faker.js setup, Profile page frontend/CRUD, Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
 
 Edward Annatone:  
 - Profile & Favorites HTML, Search page frontend/CRUD, Milestone2 writeup, Likes page backend, Favorites page backend, Reviews backend, Code Cleanup. 
 
 Parsua Atoofi: 
 - Data Interactions, Wireframes, Login & Donations & Sidebar HTML, Milestone1 writeup, Login page frontend/CRUD, Donations page frontend/CRUD, Sidebar frontend, Donations page backend, Charitable Favicon, Milestone3 and Final writeup.
+
+- - - -
 
 # Conclusion
