@@ -44,9 +44,19 @@ async function renderDonations() {
     dtable.innerHTML = '';
 
     for (const d of donations) {
-        const tr = `<tr><td>${d.charityName}</td><td>${d.amount}</td><td>${d.date}</td></tr>`;
+        console.log(d);
+        const tr = `<tr><td>${d.charityName}</td><td>${d.amount}</td><td>${d.date}</td><td><button type="button" id="delete_row" class="btn">X</button></td></tr>`;
         dtable.innerHTML += tr;
     }
 }
+
+document.getElementById('add_row').addEventListener('click', async () => {
+    const charity = document.getElementById('charity').value;
+    const amount = document.getElementById('amount').value;
+    const date = document.getElementById('date').value;
+
+    await createDonation(charity, amount, date);
+    await renderDonations();
+});
 
 await renderDonations();

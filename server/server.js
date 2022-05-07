@@ -521,7 +521,8 @@ app.post("/createAccount", async (request, response) => {
 app.get("/getAccount", async (request, response) => {
   const options = request.query;
   try {
-    const user = request.user;
+    const userid = request.user.id;
+    const user = await db.readUser(userid);
     response.status(200).json(user);
   } catch (err) {
     response.status(404).json(err);
