@@ -2,20 +2,20 @@ import { createCharityCard, createCharityPlaceholder, num_liked } from "./utils.
 
 async function getLikedCharities() {
   const response = await fetch("/getLikedCharities", {
-      method: 'GET',
+    method: 'GET',
   });
   const data = await response.json();
   return data;
 }
 
 const likesWrapper = document.getElementById("likes-wrapper");
-for(let i = 0; i < num_liked; i++) {
+for (let i = 0; i < num_liked; i++) {
   likesWrapper.appendChild(createCharityPlaceholder());
 }
 
 const charities = await getLikedCharities();
 
 likesWrapper.innerHTML = "";
-for(let charity of charities) {
+for (let charity of charities) {
   likesWrapper.appendChild(await createCharityCard(charity));
 }

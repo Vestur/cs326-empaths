@@ -16,7 +16,7 @@ export let num_liked = liked_charities.length;
 export async function addReview(charityId, text, stars) {
   const response = await fetch("/createReview", {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       cid: charityId,
       stars: stars,
@@ -57,87 +57,87 @@ async function add_review_handler() {
 async function likes_handler() {
   let charity_ein = this["ein"];
   // decide to add or remove charity from favorites
-  if(this.classList.contains("unliked")) {
-      try {
-          let updated_charity = await createLike(charity_ein);
-          // reload in likes information (number of likes)
-          if (updated_charity) {
-              this.innerHTML = `${updated_charity.totalLikes} 💛`;
-              this.classList.remove("unliked");
-              this.classList.add("liked");
-          }
-          else {
-              throw "Error liking charity";
-          }
+  if (this.classList.contains("unliked")) {
+    try {
+      let updated_charity = await createLike(charity_ein);
+      // reload in likes information (number of likes)
+      if (updated_charity) {
+        this.innerHTML = `${updated_charity.totalLikes} 💛`;
+        this.classList.remove("unliked");
+        this.classList.add("liked");
       }
-      catch (error) {
-          console.log("error liking");
-          console.log(error);
+      else {
+        throw "Error liking charity";
       }
+    }
+    catch (error) {
+      console.log("error liking");
+      console.log(error);
+    }
   }
   else {
-      try {
-          let updated_charity = await deleteLike(charity_ein);
-          // reload in likes information (number of likes)
-          if (updated_charity) {
-              this.innerHTML = `${updated_charity.totalLikes} 🤍`;
-              this.classList.remove("liked");
-              this.classList.add("unliked");
-          }
-          else {
-              throw "Error unliking";
-          }
+    try {
+      let updated_charity = await deleteLike(charity_ein);
+      // reload in likes information (number of likes)
+      if (updated_charity) {
+        this.innerHTML = `${updated_charity.totalLikes} 🤍`;
+        this.classList.remove("liked");
+        this.classList.add("unliked");
       }
-      catch (error) {
-          console.log("Error unliking");
-          console.log(error);
+      else {
+        throw "Error unliking";
       }
+    }
+    catch (error) {
+      console.log("Error unliking");
+      console.log(error);
+    }
   }
 }
 
 async function add_remove_listener() {
   let charity_ein = this["ein"];
   // decide to add or remove charity from favorites
-  if(this.classList.contains("not-favorite")) {
-      try {
-          let statis = await addFavorite(charity_ein);
-          if (statis) {
-              this.innerHTML = "⭐";
-              this.classList.remove("not-favorite");
-              this.classList.add("favorited");
-          }
-          else {
-              throw "Error adding charity to favorites";
-          }
+  if (this.classList.contains("not-favorite")) {
+    try {
+      let statis = await addFavorite(charity_ein);
+      if (statis) {
+        this.innerHTML = "⭐";
+        this.classList.remove("not-favorite");
+        this.classList.add("favorited");
       }
-      catch (error) {
-          console.log("error adding charity to favorites");
-          console.log(error);
+      else {
+        throw "Error adding charity to favorites";
       }
+    }
+    catch (error) {
+      console.log("error adding charity to favorites");
+      console.log(error);
+    }
   }
   else {
-      try {
-          let statis = await removeFavorite(charity_ein);
-          if (statis) {
-              this.innerHTML = "➖";
-              this.classList.remove("favorited");
-              this.classList.add("not-favorite");
-          }
-          else {
-              throw "Error deleting charity from favorites";
-          }
+    try {
+      let statis = await removeFavorite(charity_ein);
+      if (statis) {
+        this.innerHTML = "➖";
+        this.classList.remove("favorited");
+        this.classList.add("not-favorite");
       }
-      catch (error) {
-          console.log("error deleting charity from favorites");
-          console.log(error);
+      else {
+        throw "Error deleting charity from favorites";
       }
+    }
+    catch (error) {
+      console.log("error deleting charity from favorites");
+      console.log(error);
+    }
   }
 }
 
-async function getCharity(ein){
+async function getCharity(ein) {
   const response = await fetch("/getCharity", {
     method: 'GET',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     query: {
       "ein": ein,
     },
@@ -212,7 +212,7 @@ export async function createCharityCard(charity) {
   /************ */
   // check if charity is in favorites - if it is add class to-remove make icon star
   // if it is not in favorites - add class to-add and make icon minus sign
-  if(favorited_charities.includes(charity.eid)) {
+  if (favorited_charities.includes(charity.eid)) {
     favorite.classList.add("btn", "favorited");
     // star indicates charity is favorited
     favorite.innerHTML = "⭐";
@@ -235,7 +235,7 @@ export async function createCharityCard(charity) {
   likes.classList.add(["btn"]);
 
   likes.innerHTML = `${charity.likes} 💛`;
-  if(liked_charities.includes(charity.eid)) {
+  if (liked_charities.includes(charity.eid)) {
     likes.classList.add("liked");
     likes.innerHTML = `${charity.likes} 💛`;
   }
@@ -264,7 +264,7 @@ export async function createCharityCard(charity) {
   reviewsButton.classList.add("btn", "btn-outline-primary", "btn-small", "reviews-button");
   reviewsButton.setAttribute("type", "button");
   reviewsButton.setAttribute("data-bs-toggle", "collapse");
-  reviewsButton.setAttribute("data-bs-target", "#"+targetId);
+  reviewsButton.setAttribute("data-bs-target", "#" + targetId);
   reviewsButton.setAttribute("aria-expanded", "false");
   reviewsButton.setAttribute("aria-controls", targetId);
   reviewsButton.innerHTML = "Reviews";
@@ -276,7 +276,7 @@ export async function createCharityCard(charity) {
   const reviewsList = document.createElement("ul");
   reviewsList.classList.add("list-group", "list-group-flush");
 
-  for(let review of reviews) {
+  for (let review of reviews) {
     const reviewItem = document.createElement("li");
     reviewItem.classList.add("list-group-item");
     const reviewRating = document.createElement("span");
@@ -303,7 +303,7 @@ export async function createCharityCard(charity) {
   const reviewsCreatorStarSelector = document.createElement("select");
   reviewsCreatorStarSelector.classList.add("form-control");
   reviewsCreatorStarSelector.classList.add("star-selector");
-  for(let i = 1; i < 6; ++i) {
+  for (let i = 1; i < 6; ++i) {
     let new_option = document.createElement("option");
     new_option.value = i;
     new_option.textContent = i;
@@ -343,7 +343,7 @@ async function createLike(ein) {
   console.log(`adding like for charity: ${ein}`)
   const response = await fetch("/createLike", {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       "ein": ein,
     }),
@@ -356,7 +356,7 @@ async function deleteLike(ein) {
   console.log(`deleting like for charity: ${ein}`)
   const response = await fetch("/deleteLike", {
     method: 'DELETE',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       "ein": ein,
     }),
@@ -366,7 +366,7 @@ async function deleteLike(ein) {
 }
 
 async function getFavoritedCharitiesEins(user_id) {
-  const response = await fetch("/getFavoritedCharitiesEins",  {
+  const response = await fetch("/getFavoritedCharitiesEins", {
     method: "GET",
     query: {
       user_id: user_id
@@ -378,7 +378,7 @@ async function getFavoritedCharitiesEins(user_id) {
 }
 
 async function getLikedCharitiesEins(user_id) {
-  const response = await fetch("/getLikedCharitiesEins",  {
+  const response = await fetch("/getLikedCharitiesEins", {
     method: "GET",
     query: {
       user_id: user_id
@@ -392,7 +392,7 @@ async function getLikedCharitiesEins(user_id) {
 export async function addFavorite(ein) {
   const response = await fetch("/addFavorite", {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       "ein": ein,
     }),
@@ -404,7 +404,7 @@ export async function addFavorite(ein) {
 export async function removeFavorite(ein) {
   const response = await fetch("/removeFavorite", {
     method: 'DELETE',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       "ein": ein,
     }),

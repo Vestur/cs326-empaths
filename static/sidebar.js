@@ -2,68 +2,52 @@
 //window.location.href = "search.html";
 const settingsB = document.getElementById("settings");
 settingsB.addEventListener('click', () => {
-    window.location.href = "/profileAuth";
+  window.location.href = "/profileAuth";
 });
 
 const searchB = document.getElementById("search");
 searchB.addEventListener('click', () => {
-    window.location.href = "/searchAuth";
+  window.location.href = "/searchAuth";
 });
 
 const favoritesB = document.getElementById("my_favorites");
 favoritesB.addEventListener('click', () => {
-    window.location.href = "/favoritesAuth";
+  window.location.href = "/favoritesAuth";
 });
 
 const likesB = document.getElementById("my_likes");
 likesB.addEventListener('click', () => {
-    window.location.href = "/likesAuth";
+  window.location.href = "/likesAuth";
 });
 
 const donationsB = document.getElementById("my_donations");
 donationsB.addEventListener('click', () => {
-    window.location.href = "/donationsAuth";
+  window.location.href = "/donationsAuth";
 });
 
 const signoutB = document.getElementById("signout");
 signoutB.addEventListener('click', async () => {
-    const response = await fetch('/logout', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-    console.log(response);
-    window.location.href = "login.html";
+  const response = await fetch('/logout', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+  console.log(response);
+  window.location.href = "login.html";
 });
 
 const pfp = document.getElementById('profile-pic');
 let options = {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    }
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
 };
 let data = await fetch("/getAccount", options);
 let account = await data.json();
 if (account.pfp.length > 0) {
-    pfp.setAttribute("src", account.pfp);
+  pfp.setAttribute("src", account.pfp);
 } else {
-    pfp.setAttribute("src", 'images/profile.png')
+  pfp.setAttribute("src", 'images/profile.png')
 }
-
-//send login info to server
-
-//dynamically create the page
-//fetch static html page
-//fetch call,
-//call repsonse.text
-//wrap in div?
-//document.body.innerHTML
-//
-//form fetch for you?
-
-///route called login, redirect to user dashboard (better way for login information)
-//redirect denied or go to
-//express app.get(path,)
-//res.redirect

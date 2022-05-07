@@ -163,11 +163,11 @@ async function get_fake_donations_arr(user_id) {
 
 function formatAddress(street, city, state) {
   let address = "";
-  if(state) {
+  if (state) {
     address = state;
-    if(city) {
+    if (city) {
       address = `${city}, ${address}`;
-      if(street) {
+      if (street) {
         address = `${street} ${address}`;
       }
     }
@@ -177,10 +177,10 @@ function formatAddress(street, city, state) {
 
 async function createClientCharity(serverCharity, user) {
   let address = "Not provided";
-  if(serverCharity.mailingAddress) {
+  if (serverCharity.mailingAddress) {
     address = formatAddress(serverCharity.mailingAddress.streetAddress1,
-                                serverCharity.mailingAddress.city,
-                                serverCharity.mailingAddress.stateOrProvince);
+      serverCharity.mailingAddress.city,
+      serverCharity.mailingAddress.stateOrProvince);
 
   }
   let likes = 0;
@@ -189,7 +189,7 @@ async function createClientCharity(serverCharity, user) {
 
   try {
     const dbCharity = await db.readCharity(serverCharity.ein);
-    if(dbCharity != null) {
+    if (dbCharity != null) {
       likes = dbCharity.totalLikes;
     }
     else {
@@ -205,7 +205,7 @@ async function createClientCharity(serverCharity, user) {
 
   const reviews = await getReviews(serverCharity.ein);
   const totalRating = reviews.reduce((a, b) => a + b.stars, 0);
-  current_rating = reviews.length === 0 ? null : Math.round(totalRating/reviews.length * 10)/10;
+  current_rating = reviews.length === 0 ? null : Math.round(totalRating / reviews.length * 10) / 10;
 
   //TODO
   const charity = {
@@ -226,12 +226,12 @@ async function getReviews(ein) {
   try {
     const dbCharity = await db.readCharity(ein);
 
-    if(dbCharity) {
-      for(let rid of dbCharity.reviews) {
+    if (dbCharity) {
+      for (let rid of dbCharity.reviews) {
         data.push(await db.readReview(rid));
       }
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
   return data;
@@ -449,7 +449,7 @@ app.get("/search", async (request, response) => {
 });
 
 app.get("/getDonation", async (request, response) => {
-  let user_id = request.user.id; 
+  let user_id = request.user.id;
   const user = await db.readUser(user_id);
   const data = user.donations; // await get_fake_donations_arr(user_id);
   try {
@@ -462,14 +462,14 @@ app.get("/getDonation", async (request, response) => {
 // donation creation endpoint
 app.post("/createDonation", async (request, response) => { //charity name, amount, date
   const options = request.body; // get the charity, amount, date from here
-  let user_id = request.user.id; 
+  let user_id = request.user.id;
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
   console.log(updated_donations_arr);
   try {
 
-       updated_donations_arr.push({ charityName: options.charityName, amount: options.amount, date: options.date});
-       await db.updateUser(user_id, { donations: updated_donations_arr });
-       console.log((await db.readUser(user_id)).donations);
+    updated_donations_arr.push({ charityName: options.charityName, amount: options.amount, date: options.date });
+    await db.updateUser(user_id, { donations: updated_donations_arr });
+    console.log((await db.readUser(user_id)).donations);
 
     response.status(200).json({ status: "success" });
   } catch (err) {
@@ -484,7 +484,7 @@ app.delete("/deleteDonation", async (request, response) => {
   console.log(request.body);
   const options = request.body;
   console.log("477");
-  let user_id = request.user.id; 
+  let user_id = request.user.id;
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
   console.log(updated_donations_arr, "line 480");
 
@@ -597,10 +597,10 @@ app.get("/getFavoritedCharities", async (request, response) => {
 
 // Auth endpoints
 app.post('/login', auth.authenticate('local', {
-    // use username/password authentication
-    successRedirect: '/profileAuth',
-    failureRedirect: '/login-failed.html', // otherwise, back to login
-  })
+  // use username/password authentication
+  successRedirect: '/profileAuth',
+  failureRedirect: '/login-failed.html', // otherwise, back to login
+})
 );
 
 app.get('/logout', (req, res) => {
