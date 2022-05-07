@@ -5,18 +5,17 @@
 | Column       | Data Type | Description                |
 |--------------|-----------|----------------------------|
 |      id      |  Integer  | The user's id number       |
-|   username   |  String   | user's username for signin |
-|     name     |  String   | user's full, real name     |
-|   password   |  String   | user's password            |
-|     email    |  String   | user's email               |
-|      bio     |  String   | user's biography           |
+|   username   |  String   | user's username for logging in|
+|     name     |  String   | user's real, full, government name     |
+|   password   |  String   | user's password for logging in           |
+|     email    |  String   | user's email (e.g. 'test1@charitable.org') |
+|      bio     |  String   | user's personalized biography |
 |      pfp     |  String   | profile image link         | 
 |   location   |  String   | user's zipcode             |
 |    favlist   | [String]  | list of favorited charity IDs |
 |     likes    | [String]  | list of liked charity IDs     |
 |    reviews   | [Integer] | list of review IDs            |
-|   donations  | [{ charityName: String, amount: String, date: String }] | list of donation objects |
-|--------------|---------------------------------------------------------|--------------------------|
+|   donations  | [{ charityName: String, amount: String, date: String }] | list of donation objects that hold charity name, amount donated and date |
 
 
 ### Charity Collection Table 
