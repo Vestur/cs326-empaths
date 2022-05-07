@@ -67,8 +67,6 @@ async function renderDonations() {
     new_row.appendChild(new_col2);
     new_row.appendChild(new_col3);
     new_row.appendChild(new_col4);
-    // const tr = `<tr><td>${d.charityName}</td><td>${d.amount}</td><td>${d.date}</td><td><button type="button" id="delete_row" class="btn">X</button></td></tr>`;
-    // dtable.innerHTML += tr;
     dtable.appendChild(new_row);
   }
 }

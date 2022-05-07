@@ -1,5 +1,3 @@
-//side-bar buttons & event listeners --> to switch between pages
-//window.location.href = "search.html";
 const settingsB = document.getElementById("settings");
 settingsB.addEventListener('click', () => {
   window.location.href = "/profileAuth";

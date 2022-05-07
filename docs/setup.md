@@ -1,5 +1,8 @@
 # Setup
 
 1. Install packages with `npm install`
-2. Set up `.env` file with API keys
-3. Run `node server.js` to start server
+2. Set up `.env` file
+    * APP_ID
+    * APP_KEY
+    * DBURL
+3. Run `npm start` to start server

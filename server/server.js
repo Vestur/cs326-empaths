@@ -293,29 +293,21 @@ async function get_favorited_charities(user_id) {
 }
 
 async function updateList(user_id, ein) {
-  // update favorites list of account to include charity with ein ein
-  // user id might need to be 0?
   await db.createFavorite(user_id, ein);
   return 0;
 }
 
 async function removeFromList(user_id, ein) {
-  // update favorites list of account to exclude charity with ein ein
-  // user id might need to be 0?
   await db.deleteFavorite(user_id, ein);
   return 0;
 }
 
 async function addLike(user_id, ein) {
-  // update favorites list of account to include charity with ein ein
-  // user id might need to be 0?
   const new_charity = await db.createLike(user_id, ein);
   return new_charity;
 }
 
 async function removeLike(user_id, ein) {
-  // update favorites list of account to exclude charity with ein ein
-  // user id might need to be 0?
   const new_charity = await db.deleteLike(user_id, ein);
   return new_charity;
 }

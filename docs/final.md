@@ -164,6 +164,8 @@ After logging in, the user can navigate between pages using the sidebar shown in
 
 # Authentication/Authorization
 
+Authentication is done in `auth.js` using the `passport` library. A user need to be logged in to view any page on the site, as every page includes user data. If a user tries to access a page without being logged it, it will redirect them to the login page. User accounts are created on a sign up page, which adds them to the database. After logging in, `passport` serializes the user object into each server request, allowing the server to retieve the users's id. This allows the server to display the user's data.
+
 - - - -
 
 # Division of Labor
