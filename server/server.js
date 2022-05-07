@@ -6,8 +6,6 @@ import { faker } from "@faker-js/faker";
 import fetch from "node-fetch";
 import { CharitableDatabase } from "./database.js";
 import auth from './auth.js';
-import { response } from "express";
-import { assert } from "console";
 
 // CONSTS
 const APP_ID = process.env.APP_ID;
@@ -264,7 +262,7 @@ async function get_charity(ein) {
 async function get_liked_charities(user_id) {
   const data = [];
   try {
-    const user = await db.readUser(0);
+    const user = await db.readUser(user_id);
     for (let ein of user.likes) {
       let charity = await get_charity(ein);
       data.push(charity);
@@ -279,7 +277,7 @@ async function get_liked_charities(user_id) {
 async function get_favorited_charities(user_id) {
   const data = [];
   try {
-    const user = await db.readUser(0);
+    const user = await db.readUser(user_id);
     for (let ein of user.favlist) {
       let charity = await get_charity(ein);
       data.push(charity);
@@ -293,28 +291,28 @@ async function get_favorited_charities(user_id) {
 async function updateList(user_id, ein) {
   // update favorites list of account to include charity with ein ein
   // user id might need to be 0?
-  await db.createFavorite(0, ein);
+  await db.createFavorite(user_id, ein);
   return 0;
 }
 
 async function removeFromList(user_id, ein) {
   // update favorites list of account to exclude charity with ein ein
   // user id might need to be 0?
-  await db.deleteFavorite(0, ein);
+  await db.deleteFavorite(user_id, ein);
   return 0;
 }
 
 async function addLike(user_id, ein) {
   // update favorites list of account to include charity with ein ein
   // user id might need to be 0?
-  const new_charity = await db.createLike(0, ein);
+  const new_charity = await db.createLike(user_id, ein);
   return new_charity;
 }
 
 async function removeLike(user_id, ein) {
   // update favorites list of account to exclude charity with ein ein
   // user id might need to be 0?
-  const new_charity = await db.deleteLike(0, ein);
+  const new_charity = await db.deleteLike(user_id, ein);
   return new_charity;
 }
 
@@ -348,8 +346,9 @@ app.delete("/deleteCharity", async (request, response) => {
 app.post("/createLike", async (request, response) => {
   const options = request.body;
   let charity_ein = options["ein"];
+  const user_id = request.user.id;
   try {
-    const updated_charity = await addLike(0, charity_ein);
+    const updated_charity = await addLike(user_id, charity_ein);
     response.status(200).json(updated_charity);
   } catch (err) {
     response.status(404).json({ status: err });
@@ -359,8 +358,9 @@ app.post("/createLike", async (request, response) => {
 app.delete("/deleteLike", async (request, response) => {
   const options = request.body;
   let charity_ein = options["ein"];
+  const user_id = request.user.id;
   try {
-    const updated_charity = await removeLike(0, charity_ein);
+    const updated_charity = await removeLike(user_id, charity_ein);
     response.status(200).json(updated_charity);
   } catch (err) {
     response.status(404).json({ status: err });
@@ -369,7 +369,7 @@ app.delete("/deleteLike", async (request, response) => {
 
 app.get("/getLikedCharities", async (request, response) => {
   const options = request.query;
-  let user_id = null;
+  let user_id = request.user.id;
   const data = await get_liked_charities(user_id);
   try {
     response.status(200).json(data);
@@ -380,9 +380,9 @@ app.get("/getLikedCharities", async (request, response) => {
 
 app.get("/getLikedCharitiesEins", async (request, response) => {
   const options = request.query;
-  let user_id = null;
+  let user_id = request.user.id;
   try {
-    const user = await db.readUser(0);
+    const user = await db.readUser(user_id);
     const data = user.likes;
     response.status(200).json(data);
   } catch (err) {
@@ -445,7 +445,7 @@ app.get("/search", async (request, response) => {
 });
 
 app.get("/getDonation", async (request, response) => {
-  let user_id = 0; 
+  let user_id = request.user.id; 
   const user = await db.readUser(user_id);
   const data = user.donations; // await get_fake_donations_arr(user_id);
   try {
@@ -458,7 +458,7 @@ app.get("/getDonation", async (request, response) => {
 // donation creation endpoint
 app.post("/createDonation", async (request, response) => { //charity name, amount, date
   const options = request.body; // get the charity, amount, date from here
-  let user_id = 0; 
+  let user_id = request.user.id; 
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
   console.log(updated_donations_arr);
   try {
@@ -480,7 +480,7 @@ app.delete("/deleteDonation", async (request, response) => {
   console.log(request.body);
   const options = request.body;
   console.log("477");
-  let user_id = 0; 
+  let user_id = request.user.id; 
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
   console.log(updated_donations_arr, "line 480");
 
@@ -558,7 +558,7 @@ app.delete("/deleteAccount", async (request, response) => {
 // favorite lists
 app.post("/addFavorite", async (request, response) => {
   const options = request.body;
-  let user_id = null;
+  let user_id = request.user.id;
   let charity_ein = options["ein"];
   try {
     await updateList(user_id, charity_ein)
@@ -570,7 +570,7 @@ app.post("/addFavorite", async (request, response) => {
 
 app.delete("/removeFavorite", async (request, response) => {
   const options = request.body;
-  let user_id = null;
+  let user_id = request.user.id;
   let charity_ein = options["ein"];
   try {
     await removeFromList(user_id, charity_ein);
@@ -582,7 +582,7 @@ app.delete("/removeFavorite", async (request, response) => {
 
 app.get("/getFavoritedCharities", async (request, response) => {
   const options = request.query;
-  let user_id = null;
+  let user_id = request.user.id;
   const data = await get_favorited_charities(user_id);
   try {
     response.status(200).json(data);
