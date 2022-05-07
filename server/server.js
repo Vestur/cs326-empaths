@@ -365,9 +365,9 @@ app.delete("/deleteLike", async (request, response) => {
 
 app.get("/getLikedCharities", async (request, response) => {
   const options = request.query;
-  let user_id = request.user.id;
-  const data = await get_liked_charities(user_id);
   try {
+    let user_id = request.user.id;
+    const data = await get_liked_charities(user_id);
     response.status(200).json(data);
   } catch (err) {
     response.status(404).json({ status: err });
@@ -456,12 +456,10 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
   const options = request.body; // get the charity, amount, date from here
   let user_id = request.user.id;
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
-  console.log(updated_donations_arr);
   try {
 
     updated_donations_arr.push({ charityName: options.charityName, amount: options.amount, date: options.date });
     await db.updateUser(user_id, { donations: updated_donations_arr });
-    console.log((await db.readUser(user_id)).donations);
 
     response.status(200).json({ status: "success" });
   } catch (err) {
@@ -472,13 +470,9 @@ app.post("/createDonation", async (request, response) => { //charity name, amoun
 // donation deletion endpoint
 app.delete("/deleteDonation", async (request, response) => {
   // extract user id, find account then delete donation from their
-  console.log("in delete endpoint");
-  console.log(request.body);
   const options = request.body;
-  console.log("477");
   let user_id = request.user.id;
   let updated_donations_arr = (await db.readUser(user_id)).donations.slice();
-  console.log(updated_donations_arr, "line 480");
 
   let charity = options["charityName"]; // name of charity user wants to delete
   let amount = options["amount"];
@@ -486,11 +480,9 @@ app.delete("/deleteDonation", async (request, response) => {
 
   try {
     // account's donations array
-    console.log("in try");
     for (const [index, donation] of updated_donations_arr) { //interate through donations array
       if (donation.charityName === charity && donation.amount === amount && donation.date === date) { //if found charity match, date match and amount match
         updated_donations_arr.splice(index, 1);
-        console.log(updated_donations_arr);
         await db.updateUser(user_id, { donations: updated_donations_arr }); //delete from donations array, then delete from table
 
       } else {
@@ -626,8 +618,8 @@ app.get("/uploadAuth", checkLoggedIn, async (request, response) => {
 
 app.get("/getFavoritedCharitiesEins", async (request, response) => {
   const options = request.query;
-  let user_id = request.user.id;
   try {
+    let user_id = request.user.id;
     const user = await db.readUser(user_id);
     const data = user.favlist;
     response.status(200).json(data);
