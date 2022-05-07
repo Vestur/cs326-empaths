@@ -204,7 +204,7 @@ async function createClientCharity(serverCharity, user) {
   }
 
   const reviews = await getReviews(serverCharity.ein);
-  const totalRating = reviews.reduce((a, b) => a + b.stars, 0);
+  const totalRating = reviews.reduce((a, b) => a + parseInt(b.stars), 0);
   current_rating = reviews.length === 0 ? null : Math.round(totalRating / reviews.length * 10) / 10;
 
   //TODO
