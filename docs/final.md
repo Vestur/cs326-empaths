@@ -1,4 +1,4 @@
-# Empaths
+# Team 02: Empaths
 
 ## Charitable
   * Spring 2022
@@ -36,19 +36,17 @@ Parsua Atoofi - @Parsua
 
 # User Interface 
 
-
-
  ### Login Page 
  - Our application opens up with the Login Page. Here, users are greeted with a background of peaceful blue and hopeful yellow that inspires social justice. From here, a returning user can enter their credentials into the text boxes to log into their existing account. Using the signup button users are redirected to the signup page to create their account. Once logged in, users are redirected to the search page.
 
 ### Signup Page
-- Accessible from the Login page, new users can create an account by entering their name, username, email, zip code and password into their respective text boxes.
+- Accessible from the Login page, new users can create an account by entering their name, username, email, zip code and password into their respective text boxes. After signing up, users can then login. 
 
  ### Search Page 
- - The search page is the heart of our application. This is where users can search for target charities by entering keywords into the search bar. Here, users are able to examine resulting charities by viewing their mission statement, location, accountability ratings, the reviews of other users, total likes, etc. Users can like or unlike a charity by pressing the little yellow heart icon. Users can favorite or unfavorite a charity by pressing the little star icon. They are also able submit their own review of the charity on this page. 
+ - The Search page is the heart of our application. This is where users can search for target charities by entering keywords into the search bar. Here, users are able to examine resulting charities by viewing their mission statement, location, accountability ratings, the reviews of other users, total likes, etc. Users can like or unlike a charity by pressing the little yellow heart icon. Users can favorite or unfavorite a charity by pressing the little star icon. They are also able submit their own review of the charity on this page. 
  
  ### Profile Page 
- 
+ - The Profile page is where a user can personalize and update their account. Users can change their name, username, 
  
  ### Likes Page 
  
