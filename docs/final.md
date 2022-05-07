@@ -7,22 +7,7 @@
 
 # Overview 
 
-The rapid evolution of techonolgy and the internet has connected us 
-As new techonolgies evolve, there are always people who will abuse it. From 
-advantage 
-With the evolution of technology and the internet, scammers 
-Our web application
-Although search engines can be used to find charities, our web application aims to centralize the search and provide users with 
-Instagram charity 
-social justice new generation 
-
-
-Our idea is to construct a charity searching app. There are many search engines that can be used to search for charities (e.g. google) but few of them are specific to only charities. Our site will be specific to charities and therefore have a lot of available information about them immediately available. More specifically, we will provide information regarding how much money the charities take in and spend each year, as well as how long they have existed and other factors to contribute to some sort score regarding how "good" (to be defined) a particular charity is.
-
-The few charity searchers that do exist are not very personalized. Given this, we will include functionality that allows users to favorite charities, creating lists of their prefered charities. We will also add a "for you" type page which based on past searches and favorited charities lists some charities that may appeal to that particular user. We will also try and include local charities (amherst) that may not otherwise get attention.
-
-Important Components:
-Since the main function of this website is to search for charities, we will include a seach bar that will use a charity API to retrieve its results. We will also have other features such as: personalized for you page/recommended, likes, favorites, star and written reviews, badges/verification for charities, charity information profiles, share charities (kinda like a retweet and or share to other platforms, themes for events (like eid).
+Charities are an incredibly important aspect of society and means for social justice. As techonolgy rapidly evolves, the way we interact with charities changes immensely. Now, anyone can donate to charities near or across thr globe. From a store's checkout line to social media, donating has never been more accessible. Unfortunately, along with this powerful technology comes more scammers and system abuse. In the midst of news about problematic charities and Instagram charity scams, people can no longer keep track of which charities are safe and those that have been exposed. People are becoming distrustful and deterred from donating. Finding and vetting charities consumes too much effort and time in this day and age. Using Google is overwhelming and makes the individual do all the research. This is where our web application, Charitable, comes in! Charitable provides users with a centralized hub to search for charities and assesss their reliability. With accountability ratings, reviews and like counts, users can discern whether a charity is trustworthy or not. Our site allows users to have a personalized interaction experience with charities. They can like, favorite and review charities themsleves and keep track of their donations for personal book-keeping or tax season. Our app demystifies the charity searching process and allows users to find good charities to donate to with peace of mind. Charitable makes searching for a charity truly easy and restores people's trust in the process.
 
 - - - -
 
@@ -37,24 +22,51 @@ Since the main function of this website is to search for charities, we will incl
 # User Interface 
 
  ### Login Page 
- - Our application opens up with the Login Page. Here, users are greeted with a background of peaceful blue and hopeful yellow that inspires social justice. From here, a returning user can enter their credentials into the text boxes to log into their existing account. Using the signup button users are redirected to the signup page to create their account. Once logged in, users are redirected to the search page.
+ - Our application opens up with the Login Page. Here, users are greeted with a background of peaceful blue and hopeful yellow that inspires social justice. From here, a returning user can enter their credentials into the text boxes to log into their existing account. Using the signup button users are redirected to the signup page to create their account. Once logged in, users are redirected to their profile/settings page.
+
+ ![](https://i.imgur.com/ewFoUOp.jpg)
+
 
 ### Signup Page
 - Accessible from the Login page, new users can create an account by entering their name, username, email, zip code and password into their respective text boxes. After signing up, users can then login. 
 
+![](https://i.imgur.com/O4ZL10k.jpg)
+
+
  ### Search Page 
  - The Search page is the heart of our application. This is where users can search for target charities by entering keywords into the search bar. Here, users are able to examine resulting charities by viewing their mission statement, location, accountability ratings, the reviews of other users, total likes, etc. Users can like or unlike a charity by pressing the little yellow heart icon. Users can favorite or unfavorite a charity by pressing the little star icon. They are also able submit their own review of the charity on this page. 
+
+![](https://i.imgur.com/yye2idG.jpg)
+
+![](https://i.imgur.com/i3UWQDm.jpg)
+
  
  ### Profile Page 
- - The Profile page is where a user can personalize and update their account. Users can change their name, username, 
+ - The Profile page is where a user can personalize and update their account. Users can make changes to their profile picture, name, username, password, email, and location and save these changes. They can also edit a bio and view all the reviews they have written. From here, users can access the search page.
  
+ ![](https://i.imgur.com/Df2womb.jpg)
+
  ### Likes Page 
  
+ - The Likes page is where a user's liked charities are localized. Here, users can easily sift through their liked charities to revisit and re-evaluate them, review them, or remove them from their likes. 
 
- ### favorites Page 
+![](https://i.imgur.com/M2plQ5q.jpg)
+
  
+ ### favorites Page 
+ - The favorites page is where a user's favorite charities are held. Favoriting acts as a book-marking mechanism for charity results. Here, users can easily access their top charities to check up on mission statements, accountability rating, reviews, etc. They are also able to remove charities from their favorites here. 
+ 
+ ![](https://i.imgur.com/rn3gAbj.jpg)
+
 
  ### Donations Page 
+ - The Donations page is where a user's donations are recorded and displayed. It has an embedded table that a user can edit and manually keep track of their donations for tax purposes. The user can add or remove rows and scroll through their donations. 
+
+![](https://i.imgur.com/ZClCiQT.jpg)
+
+
+### Sidebar
+- The sidebar, which is present on plenty of our pages, connects all of the pages together and allows users to seamlessly navigate between them. from here, users can also sign out of their accounts.
 
 - - - -
 
@@ -138,17 +150,17 @@ User Collection:
 
 # Division of Labor
 
-Mathew Han:  
+Mathew Han: 
 - Data Interactions, Likes & Lists HTML, Favorites page frontend/CRUD, Likes page frontend/CRUD, Heroku deployment, Milestone2 formatting, Search page backend, Likes page backend, Favorites page backend, Utilities. 
 
-Paarth Tandon:  
+Paarth Tandon: 
 - Sidebar & Search & Signup HTML, Server Creation, faker.js setup, Profile page frontend/CRUD, Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
 
-Edward Annatone:  
-- Profile & Favorites HTML, Search page frontend/CRUD, Search faker setup, Milestone2 writeup, Likes page backend, Favorites page backend, Search Page Likes and Favorites, Reviews backend, Reviews Frontend, Code Cleanup
+Edward Annatone: 
+- Profile & Favorites HTML, Search page frontend/CRUD, Search faker setup, Milestone2 writeup, Likes page backend, Favorites page backend, Search page & Likes & Favorites, Reviews backend, Reviews Frontend, Code Cleanup, Final writeup.
 
 Parsua Atoofi: 
-- Data Interactions, Wireframes, Login & Donations & Sidebar HTML, Milestone1 writeup, Login page frontend/CRUD, Donations page frontend/CRUD, Sidebar frontend, Donations page backend, Charitable Favicon, Milestone3 and Final writeup.
+- Data Interactions, Wireframes & Background Image, Login & Donations & Sidebar HTML, Milestone1 writeup, Login page frontend/CRUD, Donations page frontend/CRUD, Sidebar frontend, Donations page backend, Charitable Favicon, Milestone3 and Final writeup.
 
 - - - -
 
