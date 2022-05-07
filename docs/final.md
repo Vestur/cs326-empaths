@@ -53,7 +53,7 @@ Charities are an incredibly important aspect of society and means for social jus
 ![](https://i.imgur.com/M2plQ5q.jpg)
 
  
- ### favorites Page 
+ ### Favorites Page 
  - The favorites page is where a user's favorite charities are held. Favoriting acts as a book-marking mechanism for charity results. Here, users can easily access their top charities to check up on mission statements, accountability rating, reviews, etc. They are also able to remove charities from their favorites here. 
  
  ![](https://i.imgur.com/rn3gAbj.jpg)
@@ -65,7 +65,7 @@ Charities are an incredibly important aspect of society and means for social jus
 ![](https://i.imgur.com/ZClCiQT.jpg)
 
 
-### Sidebar
+### The Sidebar
 - The sidebar, which is present on plenty of our pages, connects all of the pages together and allows users to seamlessly navigate between them. from here, users can also sign out of their accounts.
 
 - - - -
