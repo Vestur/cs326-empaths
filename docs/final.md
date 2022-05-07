@@ -7,7 +7,7 @@
 
 # Overview 
 
-Charities are an incredibly important aspect of society and means for social justice. As techonolgy rapidly evolves, the way we interact with charities changes immensely. Now, anyone can donate to charities near or across thr globe. From a store's checkout line to social media, donating has never been more accessible. Unfortunately, along with this powerful technology comes more scammers and system abuse. In the midst of news about problematic charities and Instagram charity scams, people can no longer keep track of which charities are safe and those that have been exposed. People are becoming distrustful and deterred from donating. Finding and vetting charities consumes too much effort and time in this day and age. Using Google is overwhelming and makes the individual do all the research. This is where our web application, Charitable, comes in! Charitable provides users with a centralized hub to search for charities and assesss their reliability. With accountability ratings, reviews and like counts, users can discern whether a charity is trustworthy or not. Our site allows users to have a personalized interaction experience with charities. They can like, favorite and review charities themsleves and keep track of their donations for personal book-keeping or tax season. Our app demystifies the charity searching process and allows users to find good charities to donate to with peace of mind. Charitable makes searching for a charity truly easy and restores people's trust in the process.
+Charities are an incredibly important aspect of society and means for social justice. As techonolgy rapidly evolves, the way we interact with charities changes immensely. Now, anyone can donate to charities near or across thr globe. From a store's checkout line to social media, donating has never been more accessible. Unfortunately, along with this powerful technology comes more scammers and system abuse. In the midst of news about problematic charities and Instagram charity scams, people can no longer keep track of which charities are safe and those that have been exposed. People are becoming distrustful and deterred from donating. Finding and vetting charities consumes too much effort and time in this day and age. Using Google is overwhelming and makes the individual do all the research. This is where our web application, Charitable, comes in! Charitable provides users with a centralized hub to search for charities and assesss their reliability. With accountability ratings, reviews and like counts, users can discern whether a charity is trustworthy or not. Our site allows users to have a personalized interaction experience with charities. They can like, favorite and review charities themsleves and keep track of their donations for personal book-keeping or tax season. Our app demystifies the charity searching process and allows users to find good charities to donate to with peace of mind. Charitable makes searching for a charity truly easy and restores people's trust in the process. 
 
 - - - -
 
@@ -65,7 +65,7 @@ Charities are an incredibly important aspect of society and means for social jus
 ![](https://i.imgur.com/ZClCiQT.jpg)
 
 
-### The Sidebar
+### Sidebar
 - The sidebar, which is present on plenty of our pages, connects all of the pages together and allows users to seamlessly navigate between them. from here, users can also sign out of their accounts.
 
 - - - -
@@ -100,47 +100,65 @@ Charities are an incredibly important aspect of society and means for social jus
 
 # Database 
 
+We utilized mongodb to construct our database. Below are example implementations of the collection objects our database implements.
+
 User Collection:
+```
 {
-  id: 0,
-  username: 'Test Subject 1',
-            name: 'Test Subject 1',
-  password: 'pass1',
-  email: 'test1@charitable.org',
-  bio: 'I am test subject one. Commmence with your testing.',
-  pfp: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fih0.redbubble.net%2Fimage.193421889.8165%2Fflat%2C1000x1000%2C075%2Cf.jpg&f=1&nofb=1',
-  location: '00000',
-  favlist: ['000000030', '000000144'],
-  likes: ['000000030', '000000144', '000000147'],
-  reviews: [0],
+  id: int, //user's id
+  username: String, //user's username used to sign in
+  name: String, //user's real name
+  password: String, //user password
+  email: String, //user email (e.g. 'test1@charitable.org')
+  bio: String, //user bio
+  pfp: String, //profile image link
+  location: String, //zipcode
+  favlist: [String], //list of charity IDs of favorited charities
+  likes: [String], //list of charity IDs of liked charities
+  reviews: [int], //list of review ids
   donations: [
     { charityName: 'Fake 1', amount: '100', date: '00/00/00' },
     { charityName: 'Fake 2', amount: '100', date: '00/00/00' }
-  ]
+  ] //list of donation objects of the form shown
 }
+```
 
-User Collection:
+Charity Collection:
+
+```
 {
-  id: 0,
-  username: 'Test Subject 1',
-            name: 'Test Subject 1',
-  password: 'pass1',
-  email: 'test1@charitable.org',
-  bio: 'I am test subject one. Commmence with your testing.',
-  pfp: 'image_link',
-  location: 'zipcode',
-  favlist: [charityIds],
-  likes: [charityIds],
-  reviews: [0],
-  donations: [
-    { charityName: 'Fake 1', amount: '100', date: '00/00/00' },
-    { charityName: 'Fake 2', amount: '100', date: '00/00/00' }
-  ]
+    eid: string, //charityId
+    reviews: [int] //list of review IDs
+    totalLikes: int //total likes a charity has
 }
+```
 
+Review Collection:
+
+```
+{
+    rid: int, //reviewId
+    uid: int, //userId
+    chid: String, //charityID
+    stars: int, // num of stars a reviewer gave this review
+    text: String //review text body
+}
+```
+The collection objects interact as follows. The user database object holds lists of charities that particular user has liked and favorited. It simply stores the ids of those charities and uses those to retrieve the actual charity databse objects. The user object also stores a list of review IDs, which allow the user to uniquely identify all reviews it has written (since the review ids identify a unique review database object). The charity database object stores information about itself, similar to the user (just less extensive), and a list of review IDs to again uniquely identify any reviews made about that particular charity. The final database object, the Review object stores the userId of the user who made it, the charityId of the charity it was made for and its various personal properties as defined above. In short, the objects are created such that the user can keep track of which charities it has reviewed, liked, and favorited. In addition, the charity has access to all of its reviews. And the reviews have a mapping to the user who made them and the charity they are for. This is useful when displaying information like favorites and likes for an individual user, as well as reviews for an individual charity.
 - - - -
 
 # URL Routes/Mappings
+After logging in, the user can navigate between pages using the sidebar shown in the search page description screenshot above. The sidebar is present on every page excexpt the profile/settings page. There, to leave one must signout, at which point they are redirected to the login page, or one must first navigate to the search page from which they can access other pages.
+| URL | Description | Outgoing Links |
+| -------- | ----------- | -----------|
+| `/index.html` | This is the default page, all it does is automatically redirect to the login page. | login.html
+| `/login.html` | This is the login page. Here the user can sign in or create a new account. In general if a person is not logged in, the pages will redirect here until the user logs in. | after signin -> search.html; after signup -> signup.html
+| `/signup.html` | After filling in the appropriate information, the user is directed back to the login page to sign in. | login.html
+| `/search.html` | Here the user can search for charities by query. The results appear in card form. The user can like, favorite, and review the different charities that appear. From this page the user can navigate to any other page using the sidebar. | Sidebar
+| `/profile.html` | Here the user can edit their profile information (name, location, bio, username, password, etc..). The user can also view all their reviews. When they are done the user can naviaget to signout or go back to the search page. | search.html, login.html
+| `/likes.html` | The user can view the charities they have liked, and or update said likings by unliking. The user can also navigate to any other page using the sidebar. | Sidebar
+| `/favorites.html` | The user can view the charities they have favorited, and or update said favorites by unfavoriting them. The user can also navigate to any other page using the sidebar. | Sidebar
+| `/donations.html` | Here the user can log the donations they have made to various charities by using the form functionality at the bottom of the page. They can also delete previous donations or donations entered in error. The sidebar is again present and the user can use it to navigate to the listed pages. | Sidebar
 
 - - - -
 
@@ -157,10 +175,10 @@ Paarth Tandon:
 - Sidebar & Search & Signup HTML, Server Creation, faker.js setup, Profile page frontend/CRUD, Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
 
 Edward Annatone: 
-- Profile & Favorites HTML, Search page frontend/CRUD, Search faker setup, Milestone2 writeup, Likes page backend, Favorites page backend, Search page & Likes & Favorites, Reviews backend, Reviews Frontend, Code Cleanup, Final writeup.
+- Profile & Favorites HTML, Search page frontend/CRUD, Search faker setup, Milestone2 writeup, Likes page backend, Likes CRUD/Database, Favorites page backend, Search page Likes & Favorites, Reviews backend, Code Cleanup, Final writeup.
 
 Parsua Atoofi: 
-- Data Interactions, Wireframes & Background Image, Login & Donations & Sidebar HTML, Milestone1 writeup, Login page frontend/CRUD, Donations page frontend/CRUD, Sidebar frontend, Donations page backend, Charitable Favicon, Milestone3 and Final writeup.
+- Data Interactions, Wireframes & Background Image, Login & Donations & Sidebar HTML, Milestone1 writeup, Login page frontend/CRUD, Donations page frontend/CRUD, Sidebar frontend, Donations page backend, Charitable Favicon & HTML, Milestone3 and Final writeup.
 
 - - - -
 
