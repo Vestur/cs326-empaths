@@ -148,7 +148,7 @@ The collection objects interact as follows. The user database object holds lists
 - - - -
 
 # URL Routes/Mappings
-After logging in, the user can navigate between pages using the sidebar shown in the search page description screenshot above. The sidebar is present on every page excexpt the profile/settings page. There, to leave one must signout, at which point they are redirected to the login page, or one must first navigate to the search page from which they can access other pages.
+After logging in, the user can navigate between pages using the sidebar shown in the search page description screenshot above. The sidebar is present on every page excexpt the profile/settings page. There, to leave one must signout, at which point they are redirected to the login page, or one must first navigate to the search page from which they can access other pages. Regarding authentication, inorder to access any page (other than login and signup) the user must be signed in. Thus upon traveling to any page, if the user is not authenticated (as described in authentication below) they will be redirected to the login page where they can either login or signup and then login. Once logged in they will be taken by default to the profile page where they can view their reviews and personal settings. From there they can travel to the search page. The search page and all other pages (besides profile, signup, and signin) have a sidebar which allows the user to navigate to any page (they are clealy identified).
 | URL | Description | Outgoing Links |
 | -------- | ----------- | -----------|
 | `/index.html` | This is the default page, all it does is automatically redirect to the login page. | login.html
