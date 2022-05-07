@@ -376,8 +376,8 @@ app.get("/getLikedCharities", async (request, response) => {
 
 app.get("/getLikedCharitiesEins", async (request, response) => {
   const options = request.query;
-  let user_id = request.user.id;
   try {
+  let user_id = request.user.id;
     const user = await db.readUser(user_id);
     const data = user.likes;
     response.status(200).json(data);
@@ -570,9 +570,9 @@ app.delete("/removeFavorite", async (request, response) => {
 
 app.get("/getFavoritedCharities", async (request, response) => {
   const options = request.query;
-  let user_id = request.user.id;
-  const data = await get_favorited_charities(user_id);
   try {
+    let user_id = request.user.id;
+    const data = await get_favorited_charities(user_id);
     response.status(200).json(data);
   } catch (err) {
     response.status(404).json({ status: err });
