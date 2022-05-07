@@ -9,7 +9,7 @@ https://cs326-charitable.herokuapp.com/
 
 # Overview 
 
-Charities are an incredibly important aspect of society and means for social justice. As techonolgy rapidly evolves, the way we interact with charities changes immensely. Now, anyone can donate to charities near or across thr globe. From a store's checkout line to social media, donating has never been more accessible. Unfortunately, along with this powerful technology comes more scammers and system abuse. In the midst of news about problematic charities and Instagram charity scams, people can no longer keep track of which charities are safe and those that have been exposed. People are becoming distrustful and deterred from donating. Finding and vetting charities consumes too much effort and time in this day and age. Using Google is overwhelming and makes the individual do all the research. This is where our web application, Charitable, comes in! Charitable provides users with a centralized hub to search for charities and assesss their reliability. With accountability ratings, reviews and like counts, users can discern whether a charity is trustworthy or not. Our site allows users to have a personalized interaction experience with charities. They can like, favorite and review charities themsleves and keep track of their donations for personal book-keeping or tax season. Our app demystifies the charity searching process and allows users to find good charities to donate to with peace of mind. Charitable makes searching for a charity truly easy and restores people's trust in the process. 
+Charities are an incredibly important aspect of society and means for social justice. As technology rapidly evolves, the way we interact with charities changes immensely. Now, anyone can donate to charities near or across the globe. From a store's checkout line to social media, donating has never been more accessible. Unfortunately, along with this powerful technology comes more scammers and system abuse. In the midst of news about problematic charities and Instagram charity scams, people can no longer keep track of which charities are safe and those that have been exposed. People are becoming distrustful and deterred from donating. Finding and vetting charities consumes too much effort and time in this day and age. Using Google is overwhelming and makes the individual do all the research. This is where our web application, Charitable, comes in! Charitable provides users with a centralized hub to search for charities and assess their reliability. With accountability ratings, written reviews and like counts, users can discern whether a charity is trustworthy or not. Our site allows users to have a personalized interaction experience with charities. They can like, favorite and review charities themselves and keep track of their donations for personal book-keeping or tax season. Our app demystifies the charity searching process and allows users to find good charities to donate to with peace of mind. Charitable makes searching for a charity truly easy and restores people's trust in the process. 
 
 - - - -
 
@@ -187,3 +187,10 @@ Parsua Atoofi:
 - - - -
 
 # Conclusion
+The Empaths 
+Through the design and implementation processes, we learned a lot
+API endpoint difficulties
+Auth difficulties 
+liked to learn about auth and 
+technical hurdles: 
+A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
