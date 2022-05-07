@@ -10,7 +10,7 @@
 |   password   |  String   | user's password for logging in           |
 |     email    |  String   | user's email (e.g. 'test1@charitable.org') |
 |      bio     |  String   | user's personalized biography |
-|      pfp     |  String   | profile image link         | 
+|      pfp     |  String   | profile picture image link         | 
 |   location   |  String   | user's zipcode             |
 |    favlist   | [String]  | list of favorited charity IDs |
 |     likes    | [String]  | list of liked charity IDs     |
@@ -43,4 +43,4 @@
 * Mathew Han: Search page backend, Likes page backend, Favorites page backend, Utilities. 
 * Paarth Tandon: Database Implementation, Authentication/Login/Signup, Profile page backend, Review endpoints, PFP hosting, Donations page backend. 
 * Edward Annatone: Likes page backend, Likes CRUD/Database, Favorites page backend, Search page Likes & Favorites, Reviews backend, Code Cleanup, Final writeup.
-* Parsua Atoofi: Sidebar HTML, Donations page backend, Charitable Favicon & HTML, Milestone3 writeup, Final writeup.
+* Parsua Atoofi: Sidebar HTML consistent, Donations page backend, Charitable Favicon & HTML, Milestone3 writeup, Final writeup.
