@@ -27,10 +27,10 @@ Since the main function of this website is to search for charities, we will incl
 - - - -
 
 # Team Members 
-Mathew Han - @mathewjhan
-Paarth Tandon - @paarthtandon
-Edward Annatone - @Vestur
-Parsua Atoofi - @Parsua 
+* Mathew Han - @mathewjhan
+* Paarth Tandon - @paarthtandon
+* Edward Annatone - @Vestur
+* Parsua Atoofi - @Parsua 
 
 - - - -
 
